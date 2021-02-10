@@ -1,0 +1,23 @@
+.nav-img {
+    width: 120px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.nav-menu {
+    border-bottom: 1px solid black;
+    /* opacity: 1; */
+}
+
+.second-nav {
+    background-color: #51c2d5;
+}
+
+.navbar-item {
+    color: white !important;
+}
+
+#collasible-nav-dropdown {
+    color: white !important;
+}
+

@@ -1,0 +1,15 @@
+.details-button {
+    background-color: #0B98D5;
+}
+
+.details-button:hover {
+    background-color: #45bff3;
+}
+
+.details-button:focus {
+    background-color: #0B98D5;
+}
+
+.hr {
+    background-color: rgba(163, 158, 158, 0.582);
+}

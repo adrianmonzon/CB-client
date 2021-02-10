@@ -1,0 +1,10 @@
+.login-link {
+    color: black;
+}
+
+.login-hr {
+    background-color: rgba(24, 22, 22, 0.109);
+    width: 50%;
+    margin: 0;
+    margin-bottom: 15px;
+}
