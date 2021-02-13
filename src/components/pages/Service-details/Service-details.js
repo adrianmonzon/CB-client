@@ -16,7 +16,7 @@ class ServiceDetails extends Component {
         super()
         this.state = {
             service: undefined,
-            // user: undefined,
+            user: undefined,
         }
         this.servicesService = new ServicesService()
         this.usersService = new UsersService()
@@ -31,12 +31,12 @@ class ServiceDetails extends Component {
             .then(res => this.setState({ service: res.data }))
             .catch(err => console.log(err))
         
-        // const user_id = this.props.match.params.user_id
+        const user_id = this.props.match.params.user_id
 
-        // this.usersService
-        //     .getUser(user_id)
-        //     .then(res => this.setState({ user: res.data }))
-        //     .catch(err => console.log(err))
+        this.usersService
+            .getUser(user_id)
+            .then(res => this.setState({ user: res.data }))
+            .catch(err => console.log(err))
     }
 
     render() {
@@ -53,7 +53,7 @@ class ServiceDetails extends Component {
                                 </Col> */}
                                 <Col md={6}>
                                     <h3>{this.state.service.name}</h3>
-                                    <p>Por: {this.state.service.owner.name}</p>
+                                    <p><small>Por: {<Link to={`/usuarios/${this.state.service.owner._id}`}>{this.state.service.owner.name}</Link>}</small></p>
                                     <hr className="hr" />
                                     <p>{this.state.service.description}</p>
                                     <p>Recompensa: {this.state.service.reward}</p>
@@ -65,7 +65,7 @@ class ServiceDetails extends Component {
                             </Row>
                             <Row className="contact-row">
                                 <Col md={{ span: 6, offset: 3 }}>
-                                    {this.props.loggedUser && <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service} />}
+                                    {this.props.loggedUser && <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service.owner} />}
                                 </Col>
                             </Row>
                             {/* <Row className="map-row">

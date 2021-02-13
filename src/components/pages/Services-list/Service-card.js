@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import arrow from './arrow.ico'
 
 
-const ServiceCard = ({ name, _id, reward, owner }) => {
+const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
 
     return (
         <Col className="text-center" lg={12}>
@@ -21,16 +21,23 @@ const ServiceCard = ({ name, _id, reward, owner }) => {
                     </Col>
                     <Col md="8">
 
+                        {console.log(loggedUser)}
                         <Card.Body>
                             <Card.Title>{name}</Card.Title>
-                            <div className="button-position">
-                                <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}><img
-                                    alt="Imagen de usuario"
-                                    src={arrow}
-                                    style={{height: '20px', textAlign: 'center', width: '15px'}}
-                                    className="button-card-img"
-                                /></Link>
-                            </div>
+                            {
+                                loggedUser && owner === loggedUser._id
+                                    ?
+                                    <Link className="btn btn-dark btn-block btn-sm" to="/editar-perfil">Editar</Link>
+                                    :
+                                    <div className="button-position">
+                                        <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}><img
+                                            alt="Imagen de usuario"
+                                            src={arrow}
+                                            style={{ height: '20px', textAlign: 'center', width: '15px' }}
+                                            className="button-card-img"
+                                        /></Link>
+                                    </div>
+                            }
                             <hr />
                             <Card.Text>Recompensa: {reward}</Card.Text>
                             {/* <Accordion>

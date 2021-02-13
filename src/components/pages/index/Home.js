@@ -15,7 +15,7 @@ const Home = () => {
                         <source src={video} />
                     </video>
                     <article id="firstMessage">
-                        <p>Pida el servicio que necesite...</p>
+                        <p>Pida lo que necesite...</p>
                     </article>
                     <article id="secondMessage">
                         <p>...y alguien acudirá en su ayuda</p>

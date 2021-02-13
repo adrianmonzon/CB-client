@@ -6,7 +6,10 @@ import Home from './pages/index/Home'
 import Signup from './pages/Signup/Signup'
 import Login from './pages/Login/Login'
 import Navigation from './layout/Navbar/Navbar'
-import { Switch, Route } from 'react-router-dom'
+import UserDetails from './pages/User-details/User-details'
+import EditForm from './pages/Profile/Edit-user/Edit-profile'
+import OwnedServices from './pages/Profile/Owned-services/Owned-services'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthServices from './../services/auth.service'
 
 import './App.css'
@@ -42,8 +45,9 @@ class App extends Component {
           <Route path="/servicios/:service_id" render={props => <ServiceDetails {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
           <Route path="/iniciar-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
-          {/* <Route path="/editar-perfil" render={props => this.state.loggedInUser ? <EditForm {...props} storeUser={this.setTheUser} user={this.state.loggedInUser} /> : <Redirect to="/iniciar-sesion" />} /> */}
-
+          <Route path="/usuarios/:user_id" render={props => <UserDetails {...props} loggedUser={this.state.loggedInUser} />} />
+          <Route path="/editar-perfil" render={props => this.state.loggedInUser ? <EditForm {...props} storeUser={this.setTheUser} user={this.state.loggedInUser} /> : <Redirect to="/iniciar-sesion" />} />
+          <Route path="/mis-servicios" render={props => this.state.loggedInUser ? <OwnedServices loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
         </Switch>
       </>
     )

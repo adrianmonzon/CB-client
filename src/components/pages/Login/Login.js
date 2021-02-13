@@ -58,7 +58,7 @@ class Login extends Component {
                                         :
                                         null
                                 }
-                                <Button className="loginButton details-button" variant="info" type="submit">Iniciar sesión</Button>
+                                <Button className="edit-button" type="submit">Iniciar sesión</Button>
                             </Form>
                             <small>¿No registrad@? Hazlo <Link to="/registro" className="login-link">aquí</Link></small>
                         </Col>

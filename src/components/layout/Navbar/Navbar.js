@@ -80,9 +80,14 @@ const Navigation = (props) => {
                     {props.loggedUser ? (
                         <NavDropdown title={`Hola, ${props.loggedUser.username}`} id="collasible-nav-dropdown">
                             <NavDropdown.Item>
+                                <Link to="/mis-servicios" style={{ textDecoration: "none", color: "black" }}>
+                                    Mis servicios
+                                </Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item>
                                 <Link to="/editar-perfil" style={{ textDecoration: "none", color: "black" }}>
                                     Editar perfil
-                    </Link>
+                                </Link>
                             </NavDropdown.Item>
                             <Link className="navbar-item" to="/" style={{ textDecoration: "none" }}>
                                 <NavDropdown.Item
@@ -90,7 +95,7 @@ const Navigation = (props) => {
                                     onClick={logOut}
                                 >
                                     Cerrar sesión
-                  </NavDropdown.Item>
+                        </NavDropdown.Item>
                             </Link>
                             <NavDropdown.Divider />
                             <NavDropdown.Item
@@ -99,7 +104,7 @@ const Navigation = (props) => {
                                 style={{ textDecoration: "none" }}
                             >
                                 Eliminar perfil
-                </NavDropdown.Item>
+                        </NavDropdown.Item>
                         </NavDropdown>
                     ) : (
                             <>

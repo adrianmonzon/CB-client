@@ -1,107 +1,68 @@
-import React, { Component } from "react";
-import AuthService from "./../../../services/auth.service";
-import FilesService from "./../../../services/upload.service"
-import Alert from './../../shared/Alert/Alert'
+import React, { Component } from "react"
+import UsersService from "../../../../services/users.service"
 
-// import "./Signup.css";
+
+import "./Edit-profile.css";
 
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
-// import LocationSearchInput from "./Autocomplete";
 
-class Signup extends Component {
+class EditForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {
-                username: "",
-                name: "",
-                password: "",
-                rating: "",
-                age: "",
-                image: "",
-                email: "",
-                province: "",
-                location: { type: "Point", coordinates: [] }
-            },
-            uploadingActive: false,
-            showToast: false,
-            toastText: ''
+            username: this.props.user.username,
+            name: this.props.user.name,
+            // description: this.props.user.description,
+            province: this.props.user.province,
+            age: this.props.user.age,
+            email: this.props.user.email,
         };
-        this.authService = new AuthService();
-        this.filesService = new FilesService();
+        this.usersService = new UsersService();
     }
 
-    handleInputChange = (e) =>
-        this.setState({
-            user: { ...this.state.user, [e.target.name]: e.target.value },
-        });
+    handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
 
     handleSubmit = (e) => {
         e.preventDefault();
 
-        this.authService
-            .signup(this.state.user)
+        this.usersService
+            .updateUser(this.props.user._id, this.state)
             .then((theLoggedInUser) => {
                 this.props.storeUser(theLoggedInUser.data);
-                this.props.history.push("/servicios");
+                this.props.history.push("/editar-perfil");
             })
-            .catch((err) => this.setState({ showToast: true, toastText: err.response.data.message }))
+            .catch((err) => console.log("Error", err));
     };
 
-    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
-    handleImageUpload = (e) => {
-        const uploadData = new FormData();
-        uploadData.append("image", e.target.files[0]);
-        console.log("ESTO ES UNA IMAGEN EN MEMORIA:", e.target.files[0]);
-
-        this.setState({ uploadingActive: true });
-
-        this.filesService
-            .uploadImage(uploadData)
-            .then((response) => {
-                console.log(response)
-                this.setState({
-                    user: { ...this.state.user, image: response.data.secure_url },
-                    uploadingActive: false,
-                });
-            })
-            .catch((err) => console.log("ERRORRR!", err));
-    };
-
-    // setLocation = (newCoordinates) => {
-    //     const newLocation = { type: "Point", coordinates: newCoordinates }
-    //     this.setState({ user: { ...this.state.user, location: newLocation } })
-    // }
 
     render() {
         return (
-            <section className="signup">
+            <section className="edit">
                 <Container>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
-                            <h1>Registro de usuario</h1>
+                            <h1>Editar perfil</h1>
                             <hr className="hr" />
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="username">
                                     <Form.Label>Nombre de usuario</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Ej. usuario2021"
+                                        placeholder="Ej. amadeus1756"
                                         name="username"
                                         value={this.state.username}
                                         onChange={this.handleInputChange}
-                                        required
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="name">
                                     <Form.Label>Nombre y apellidos</Form.Label>
                                     <Form.Control
                                         type="text"
+                                        placeholder="Ej. Wolfgang Amadeus Mozart"
                                         name="name"
                                         value={this.state.name}
                                         onChange={this.handleInputChange}
-                                        required
                                     />
                                 </Form.Group>
                                 <Form.Group controlId="email">
@@ -111,20 +72,9 @@ class Signup extends Component {
                                         name="email"
                                         value={this.state.email}
                                         onChange={this.handleInputChange}
-                                        required
                                     />
                                 </Form.Group>
-                                <Form.Group controlId="password">
-                                    <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        name="password"
-                                        value={this.state.password}
-                                        onChange={this.handleInputChange}
-                                        required
-                                    />
-                                    <small>Debe contener al menos 5 caracteres</small>
-                                </Form.Group>
+
                                 {/* <Form.Group controlId="description">
                                     <Form.Label>Descripción</Form.Label>
                                     <Form.Control
@@ -134,24 +84,11 @@ class Signup extends Component {
                                         name="description"
                                         value={this.state.description}
                                         onChange={this.handleInputChange}
-                                        required
                                     />
                                 </Form.Group> */}
-                                <Form.Group controlId="age">
-                                    <Form.Label>Edad</Form.Label>
-                                    <Form.Control
-                                        type="number"
-                                        name="age"
-                                        value={this.state.age}
-                                        onChange={this.handleInputChange}
-                                        required
-                                    />
-                                    <small>Mínimo 18 años</small>
-                                </Form.Group>
                                 <Form.Group controlId="province">
                                     <Form.Label>Provincia</Form.Label>
                                     <Form.Control
-                                        required
                                         as="select"
                                         name="province"
                                         value={this.state.province}
@@ -212,25 +149,25 @@ class Signup extends Component {
                                         <option value="Zaragoza">Zaragoza</option>
                                     </Form.Control>
                                 </Form.Group>
-                                {/* <Form.Group>
-                                    <Form.Label> Ubicación</Form.Label>
-                                    <LocationSearchInput setLocation={this.setLocation} />
-                                </Form.Group> */}
-                                <Form.Group>
-                                    <Form.Label>
-                                        Imagen {this.state.uploadingActive && <Spinner />}
-                                    </Form.Label>
-                                    <Form.Control type="file" onChange={this.handleImageUpload} />
+                                <Form.Group controlId="age">
+                                    <Form.Label>Edad</Form.Label> <small>(Mínimo 16 años)</small>
+                                    <Form.Control
+                                        type="number"
+                                        name="age"
+                                        value={this.state.age}
+                                        onChange={this.handleInputChange}
+                                    />
                                 </Form.Group>
-                                <Button className="edit-button" type="submit" disabled={this.state.uploadingActive}> {this.state.uploadingActive ? "Subiendo imagen..." : "Registrarme"}</Button>
+                                <Button type="submit" className="btn-sm edit-button">
+                                    Guardar
+                                </Button>
                             </Form>
                         </Col>
                     </Row>
                 </Container>
-                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </section>
         );
     }
 }
 
-export default Signup;
+export default EditForm;

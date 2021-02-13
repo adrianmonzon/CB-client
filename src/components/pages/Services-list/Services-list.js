@@ -62,14 +62,14 @@ class ServicesList extends Component {
             <section className="services-list">
                 <Container>
                     <Filter filterByOwnerProvince={this.filterByProvince} />
-                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info details-button list-button">Crear servicio</Link>}
+                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Crear servicio</Link>}
 
-                    {this.props.loggedUser && <Button className="details-button list-button" onClick={() => this.handleModal(true)} size="sm">Crear servicio</Button>}
+                    {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Crear servicio</Button>}
 
                     {this.state.services.length > 0
                         ?
                         <Row>
-                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} />)}
+                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser}/>)}
                         </Row>
                         :
                         <Row>
