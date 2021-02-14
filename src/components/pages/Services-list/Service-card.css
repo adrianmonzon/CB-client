@@ -1,8 +1,8 @@
 .service-card {
     margin-top: 30px;
     color: black;
-    height: 130px;
-    width: 600px;
+    height: 92%;
+    width: 60%;
     /* border: 1px solid black; */
 }
 
@@ -15,6 +15,11 @@
     background-color:  #ffe227;
     color: black;
     height: 30px;
+}
+
+.card-style {
+    /* background-color: red; */
+    height: 100%;
 }
 
 .card-button {
@@ -32,10 +37,24 @@
 }
 
 .button-position {
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .button-card-img {
     padding-right: 2px;
     object-fit: cover;
+}
+
+.card-edit-button {
+    background-color: #0B98D5;
+    /* width: 50%; */
+    width: 60px; 
+    border-radius: 80%; 
+    text-align: center; 
+    float: right;
+    height: 30px;
+}
+
+.image-div {
+    background-color: red;
 }

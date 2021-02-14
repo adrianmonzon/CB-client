@@ -9,6 +9,7 @@ import Navigation from './layout/Navbar/Navbar'
 import UserDetails from './pages/User-details/User-details'
 import EditForm from './pages/Profile/Edit-user/Edit-profile'
 import OwnedServices from './pages/Profile/Owned-services/Owned-services'
+import EditService from './pages/Profile/Edit-service/Edit-service'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthServices from './../services/auth.service'
 
@@ -48,6 +49,8 @@ class App extends Component {
           <Route path="/usuarios/:user_id" render={props => <UserDetails {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/editar-perfil" render={props => this.state.loggedInUser ? <EditForm {...props} storeUser={this.setTheUser} user={this.state.loggedInUser} /> : <Redirect to="/iniciar-sesion" />} />
           <Route path="/mis-servicios" render={props => this.state.loggedInUser ? <OwnedServices loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
+          <Route path="/editar-servicio/:service_id" render={props => this.state.loggedInUser ? <EditService loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/inicio-sesion" />} />
+        
         </Switch>
       </>
     )

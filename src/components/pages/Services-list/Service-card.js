@@ -21,13 +21,20 @@ const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
                     </Col>
                     <Col md="8">
 
-                        {console.log(loggedUser)}
-                        <Card.Body>
+                        <Card.Body className="card-style">
                             <Card.Title>{name}</Card.Title>
                             {
-                                loggedUser && owner === loggedUser._id
+                               loggedUser && loggedUser._id === owner._id
                                     ?
-                                    <Link className="btn btn-dark btn-block btn-sm" to="/editar-perfil">Editar</Link>
+                                    // <Link className="btn btn-dark btn-block btn-sm" to="/editar-perfil">Editar</Link>
+                                    <div className="button-position">
+                                        <Link className="btn btn-info btn-sm card-edit-button" to={`/editar-servicio/${_id}`}>{/*<img
+                                            alt="Imagen de usuario"
+                                            src={arrow}
+                                            style={{ height: '20px', textAlign: 'center', width: '15px' }}
+                                            className="button-card-img"
+                                        />*/}Editar</Link>
+                                    </div>
                                     :
                                     <div className="button-position">
                                         <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}><img

@@ -50,7 +50,7 @@ class OwnedServices extends Component {
                 <Row className="align-items-center profile-list">
 
                     {this.state.owned.map(elm =>
-                        <ServiceCard key={elm._id} {...elm} />
+                        <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser}/>
                     )}
                 </Row>
                 {/* <hr />
