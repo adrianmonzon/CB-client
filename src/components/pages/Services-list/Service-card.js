@@ -1,10 +1,46 @@
 import { Col, Card, Button, Accordion, Row } from 'react-bootstrap'
 import './Service-card.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import arrow from './arrow.ico'
+import swal from 'sweetalert'
+import ServicesService from "./../../../services/services.service"
 
 
 const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
+
+    const servicesService = new ServicesService();
+    const history = useHistory()
+
+    
+      const deleteTheService = () => {
+
+            servicesService
+                .deleteService(_id)
+                .then(() => {
+                    // this(res => this.setState({ service: res.data }))
+                    history.push('/servicios')
+                    history.go('/servicios')})
+                .catch(err => console.log(err))
+        }
+
+       const confirmDelete = () => {
+            swal({
+                title: "Mensaje de confirmación",
+                text: "¿Estás segur@ de que quieres eliminar este servicio?",
+                icon: "warning",
+                buttons: ["No", "Sí"]
+            })
+                .then(answer => {
+
+                    if (answer) {
+                        deleteTheService()
+                        swal({
+                            text: "El servicio se ha eliminado con éxito",
+                            icon: "success"
+                        })
+                    }
+                })
+        }
 
     return (
         <Col className="text-center" lg={12}>
@@ -24,17 +60,26 @@ const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
                         <Card.Body className="card-style">
                             <Card.Title>{name}</Card.Title>
                             {
-                               loggedUser && loggedUser._id === owner._id
+                                loggedUser && loggedUser._id === owner._id
                                     ?
                                     // <Link className="btn btn-dark btn-block btn-sm" to="/editar-perfil">Editar</Link>
-                                    <div className="button-position">
-                                        <Link className="btn btn-info btn-sm card-edit-button" to={`/editar-servicio/${_id}`}>{/*<img
+                                    <>
+                                        <div className="button-position">
+                                            <Link className="btn btn-info btn-sm card-edit-button" to={`/editar-servicio/${_id}`}>{/*<img
                                             alt="Imagen de usuario"
                                             src={arrow}
                                             style={{ height: '20px', textAlign: 'center', width: '15px' }}
                                             className="button-card-img"
                                         />*/}Editar</Link>
-                                    </div>
+
+                                            <Button className="btn btn-info btn-sm card-delete-button" onClick={() => confirmDelete()}>{/*<img
+                                            alt="Imagen de usuario"
+                                            src={arrow}
+                                            style={{ height: '20px', textAlign: 'center', width: '15px' }}
+                                            className="button-card-img"
+                                            />*/}Eliminar</Button>
+                                        </div>
+                                    </>
                                     :
                                     <div className="button-position">
                                         <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}><img
@@ -64,61 +109,3 @@ const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
 }
 
 export default ServiceCard
-
-// import React from 'react';
-// import { MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
-
-// const ServiceCard = ({ name, _id, reward, owner }) => {
-//     return (
-//         <MDBRow>
-//             <MDBCol md="4">
-//                 <MDBCard cascade>
-//                     <div className="div-card-button">
-//                     <MDBCardImage
-//                         cascade
-//                         className='img-fluid card-img'
-//                         overlay="white-light"
-//                         hover
-//                         src='https://mdbootstrap.com/img/Photos/Others/food.jpg'
-//                     />
-//                         <Link className="btn btn-info btn-circle btn-sm card-button" to={`/servicios/${_id}`}>Go</Link>
-//                     </div>
-//                     <MDBCardBody cascade>
-//                         <MDBCardTitle>{name}</MDBCardTitle>
-//                         {owner ? <small> Por {owner.username}</small> : <p></p>}
-//                         <hr />
-//                         <MDBCardText>
-//                             Recompensa: {reward}
-//                         </MDBCardText>
-//                     </MDBCardBody>
-//                     <div className='rounded-bottom mdb-color lighten-3 text-center pt-3' style={{ backgroundColor: "grey" }}>
-//                         <ul className='list-unstyled list-inline font-small'>
-//                             <li className='list-inline-item pr-2 white-text'>
-//                                 <MDBIcon far icon='clock' /> 05/10/2015
-//               </li>
-//                             <li className='list-inline-item pr-2'>
-//                                 <a href='#!' className='white-text'>
-//                                     <MDBIcon far icon='comments' className='mr-1' />
-//                   12
-//                 </a>
-//                             </li>
-//                             <li className='list-inline-item pr-2' >
-//                                 <a href='#!' className='white-text'>
-//                                     <MDBIcon fab icon='facebook-f' className='mr-1' />
-//                   21
-//                 </a>
-//                             </li>
-//                             <li className='list-inline-item'>
-//                                 <a href='#!' className='white-text'>
-//                                     <MDBIcon fab icon='twitter' className='mr-1' />5
-//                 </a>
-//                             </li>
-//                         </ul>
-//                     </div>
-//                 </MDBCard>
-//             </MDBCol>
-//         </MDBRow>
-//     )
-// }
-
-// export default ServiceCard;

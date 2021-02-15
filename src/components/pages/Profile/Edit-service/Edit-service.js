@@ -45,6 +45,8 @@ class EditService extends Component {
                 <Container>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
+                             <h1>Editar servicio</h1>
+                            <hr  />
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="title">
                                     <Form.Label>Nombre</Form.Label>

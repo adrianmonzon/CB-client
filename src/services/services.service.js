@@ -13,6 +13,6 @@ export default class ServiceService {
     saveService = (serviceInfo) => this.apiHandler.post(`/newService/`, serviceInfo);
     updateService = (serviceId, serviceInfo) => this.apiHandler.put(`/editService/${serviceId}`, serviceInfo)
     filterByProvince = province => this.apiHandler.get(`/filterByProvince/${province}`);
-    // deleteService = (serviceId) => this.apiHandler.delete(`/deleteService/${serviceId}`);
+    deleteService = (serviceId) => this.apiHandler.delete(`/deleteService/${serviceId}`);
     getAllServicesFromUser = userId => this.apiHandler.get(`/getAllServicesFromUser/${userId}`)
 }

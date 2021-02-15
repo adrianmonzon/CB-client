@@ -28,15 +28,6 @@ class ServicesList extends Component {
         this.refreshServices()
     };
 
-    // getAllServices = () => {
-    //     this.servicesService
-    //         .getServices()
-    //         .then((res) => this.setState({ services: res.data }))
-    //         .catch((err) => console.log(err));
-    // }
-
-    // componentDidMount = () => this.refreshServices()
-
     refreshServices = () => {
         this.servicesService
             .getServices()
@@ -61,25 +52,26 @@ class ServicesList extends Component {
         return (
             <section className="services-list">
                 <Container>
-                    <Filter filterByOwnerProvince={this.filterByProvince} />
-                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Crear servicio</Link>}
+                    <Col md={{ span: 8, offset: 2 }}>
+                        <Filter filterByOwnerProvince={this.filterByProvince} />
+                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Crear servicio</Link>}
 
-                    {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Crear servicio</Button>}
+                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Crear servicio</Button>}
 
-                    {this.state.services.length > 0
-                        ?
-                        <Row>
-                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser}/>)}
-                        </Row>
-                        :
-                        <Row>
-                            {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col><p>No hay resultados para esta búsqueda</p></Col>
+                        {this.state.services.length > 0
+                            ?
+                            <Row>
+                                {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} />)}
+                            </Row>
                             :
-                            <Spinner animation="border" />
-                            }
-                        </Row>
-                    }
-
+                            <Row>
+                                {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col><p>No hay resultados para esta búsqueda</p></Col>
+                                    :
+                                    <Spinner animation="border" />
+                                }
+                            </Row>
+                        }
+                    </Col>
                 </Container>
 
                 <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nuevo servicio">

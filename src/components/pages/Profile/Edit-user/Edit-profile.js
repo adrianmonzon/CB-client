@@ -43,7 +43,7 @@ class EditForm extends Component {
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <h1>Editar perfil</h1>
-                            <hr className="hr" />
+                            <hr />
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="username">
                                     <Form.Label>Nombre de usuario</Form.Label>

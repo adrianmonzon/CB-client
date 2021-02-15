@@ -1,8 +1,8 @@
 .service-card {
     margin-top: 30px;
     color: black;
-    height: 92%;
-    width: 60%;
+    height: 90%;
+    width: 100%;
     /* border: 1px solid black; */
 }
 
@@ -55,6 +55,25 @@
     height: 30px;
 }
 
+.card-edit-button:hover {
+    background-color: #45bff3;
+}
+
+.card-delete-button {
+    background-color: #0B98D5;
+    /* width: 50%; */
+    width: 70px; 
+    border-radius: 80%; 
+    text-align: center; 
+    float: left;
+    height: 30px;
+}
+
+.card-delete-button:hover {
+        background-color: #45bff3;
+}
+
 .image-div {
     background-color: red;
 }
+
