@@ -17,9 +17,9 @@ const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
             servicesService
                 .deleteService(_id)
                 .then(() => {
-                    // this(res => this.setState({ service: res.data }))
-                    history.push('/servicios')
-                    history.go('/servicios')})
+                    // history.push('/servicios')
+                    setTimeout(function () { history.go() }, 800) //history.go() refreshes the current page
+                })
                 .catch(err => console.log(err))
         }
 

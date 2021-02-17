@@ -48,7 +48,7 @@ class UserDetails extends Component {
                                     <hr className="hr" />
                                     {/* <p>Instrumento: {this.state.user.instrument}</p> */}
                                     <p>Edad: {this.state.user.age} años</p>
-                                    <Link to="/servicios" className="btn btn-md btn-light">Volver</Link>
+                                    <Link to="/servicios" className="btn btn-md btn-info edit-button">Volver</Link>
                                     {/* {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-md btn-light details-button">Contactar</Link>} */}
                                 </Col>
                             </Row>

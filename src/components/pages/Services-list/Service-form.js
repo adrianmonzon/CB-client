@@ -31,7 +31,7 @@ class ServiceForm extends Component {
             .then(res => {
                 this.props.updateList()
                 this.props.closeModal()
-                this.props.handleToast(true, 'Servicio creado')
+                this.props.handleToast(true, '¡Servicio creado!')
             })
             .catch(err => console.log(err))
     }
@@ -63,19 +63,19 @@ class ServiceForm extends Component {
             <>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="title">
-                    <Form.Label>Nombre</Form.Label>
-                    <Form.Control required type="text" name="name" value={this.state.service.name} onChange={this.handleInputChange} />
+                    <Form.Label>¿Qué necesita?</Form.Label>
+                    <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                 </Form.Group>
                 <Form.Group controlId="description">
                     <Form.Label>Descripción</Form.Label>
-                        <Form.Control as="textarea" required rows={3} type="text" name="description" value={this.state.service.description} onChange={this.handleInputChange} />
+                        <Form.Control as="textarea" required rows={3} type="text" placeholder="Ej.: No puedo cargar peso y las bolsas pesan demasiado para mí." name="description" value={this.state.service.description} onChange={this.handleInputChange} />
                 </Form.Group>
                 <Form.Group controlId="reward">
                     <Form.Label>Recompensa</Form.Label>
-                        <Form.Control required type="text" name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
+                        <Form.Control required type="text" placeholder="Ej.: Pastel casero." name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
                 </Form.Group>
                
-                <Button className="edit-button" size="sm" variant="dark" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Crear servicio'}</Button>
+                <Button className="edit-button" size="sm" variant="dark" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Publicar'}</Button>
             </Form>
             </>
         )

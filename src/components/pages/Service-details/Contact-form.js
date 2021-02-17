@@ -12,7 +12,7 @@ class ContactForm extends Component {
             contactEmail: this.props.contactUser.email,
             contactName: this.props.contactUser.name,
             name: this.props.loggedUser.name,
-            subject: `${this.props.loggedUser.name} quiere contactar contigo`,
+            subject: `${this.props.loggedUser.name} quiere ayudarle con: ${this.props.serviceName}`,
             message: ''
         }
         // this.mailService = new MailService()
@@ -53,11 +53,11 @@ class ContactForm extends Component {
     render() {
         return (
             <section>
-                <Row>
+                {/* <Row>
                     <Col md={{ span: 6, offset: 3 }}>
                         <h3>Contacta con {this.state.contactName}</h3>
                     </Col>
-                </Row>
+                </Row> */}
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridName">
@@ -80,11 +80,7 @@ class ContactForm extends Component {
                         <Form.Label>Mensaje</Form.Label>
                         <Form.Control as="textarea" rows={3} name="message" value={this.state.message} onChange={this.handleInputChange} />
                     </Form.Group>
-                    <Row>
-                        <Col md={{ span: 4, offset: 5 }}>
-                            <Button className="btn btn-sm btn-info details-button" type="submit" onClick={this.confirmMessage}>Contactar</Button>
-                        </Col>
-                    </Row>
+                    <Button className="btn btn-sm btn-light" type="submit" onClick={this.confirmMessage}>Contactar</Button>
                 </Form>
             </section>
         )

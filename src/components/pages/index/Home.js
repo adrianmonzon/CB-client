@@ -22,7 +22,7 @@ const Home = () => {
                     </article>
                     <article id="thirdMessage">
                         <p>Comenzar</p>
-                        <Link className="btn btn-outline-light btn-sm home-button" to={`/servicios`}>Ver servicios</Link>
+                        <Link className="btn btn-outline-light btn-sm home-button" to={`/servicios`}>Acceder</Link>
                     </article>
                 </Col >
             </section>

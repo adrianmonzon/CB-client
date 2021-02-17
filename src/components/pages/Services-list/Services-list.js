@@ -54,9 +54,9 @@ class ServicesList extends Component {
                 <Container>
                     <Col md={{ span: 8, offset: 2 }}>
                         <Filter filterByOwnerProvince={this.filterByProvince} />
-                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Crear servicio</Link>}
+                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Pedir ayuda</Link>}
 
-                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Crear servicio</Button>}
+                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
 
                         {this.state.services.length > 0
                             ?
@@ -74,7 +74,7 @@ class ServicesList extends Component {
                     </Col>
                 </Container>
 
-                <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nuevo servicio">
+                <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nueva petición">
                     <ServiceForm handleToast={this.handleToast} closeModal={() => this.handleModal(false)} updateList={this.refreshServices} loggedUser={this.props.loggedUser} />
                 </Popup>
 

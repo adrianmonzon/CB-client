@@ -71,12 +71,30 @@ const Navigation = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                    <Link style={{ textDecoration: 'none' }} to="/">
+                    <Link style={{ textDecoration: 'none' }} to="/servicios">
                         <Nav.Link className="navbar-item" as="div">Inicio</Nav.Link>
                     </Link>
-                    <Link style={{ textDecoration: 'none' }} to="/servicios">
+                    {/* <Link style={{ textDecoration: 'none' }} to="/servicios">
                         <Nav.Link className="navbar-item" as="div">Servicios</Nav.Link>
-                    </Link>
+                    </Link> */}
+                    <NavDropdown title={`¿Qué necesita?`} id="collasible-nav-dropdown">
+                        <NavDropdown.Item>
+                            { props.loggedUser ?
+                            <Link to="/crear-servicio" style={{ textDecoration: "none", color: "black" }}>
+                               Pedir ayuda
+                                </Link>
+                                :
+                                <Link to="/iniciar-sesion" style={{ textDecoration: "none", color: "black" }}>
+                                    Pedir ayuda
+                                </Link>
+}
+                        </NavDropdown.Item>
+                        <NavDropdown.Item>
+                            <Link to="/servicios" style={{ textDecoration: "none", color: "black" }}>
+                                Vengo a ayudar
+                                </Link>
+                        </NavDropdown.Item>
+                    </NavDropdown>
                     {props.loggedUser ? (
                         <NavDropdown title={`Hola, ${props.loggedUser.username}`} id="collasible-nav-dropdown">
                             <NavDropdown.Item>

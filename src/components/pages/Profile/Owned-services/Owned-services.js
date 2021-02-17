@@ -4,6 +4,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import ServiceService from '../../../../services/services.service';
 import ServiceCard from '../../Services-list/Service-card'
+import './Owned-services.css'
 
 
 class OwnedServices extends Component {
@@ -48,10 +49,9 @@ class OwnedServices extends Component {
                     </Col>
                 </Row>
                 <hr /> */}
-                <Col>
-                    <Row>
-                        <h4 className="description">Mis servicios creados</h4>
-                    </Row>
+                <Col md={{ span: 8, offset: 2 }}>
+
+                    <h4 className="owned-title text-center">Mis servicios creados</h4>
                     {
                         this.state.owned.length > 0
                             ?
@@ -60,7 +60,7 @@ class OwnedServices extends Component {
                             </Row>
                             :
                             <Row>
-                                <p>No has creado ningún servicio</p>
+                                <p style={{ backgroundColor: 'red' }}>No has creado ningún servicio</p>
                             </Row>
                     }
                     {/* <hr />

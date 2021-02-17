@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import ServicesService from "./../../../../services/services.service"
 import { Container, Row, Col, Form, Button } from "react-bootstrap"
+import Alert from './../../../shared/Alert/Alert'
 
 // import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
 
@@ -15,6 +16,8 @@ class EditService extends Component {
                 owner: this.props.loggedUser._id,
             },
             uploadingActive: false,
+            showToast: false,
+            toastText: "",
         }
 
         this.serviceService = new ServicesService()
@@ -25,14 +28,18 @@ class EditService extends Component {
             .getService(service_id)
             .then(res => this.setState({ service: res.data }))
             .catch(err => console.log(err))
-
-
     }
+    
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
+
     handleSubmit = e => {
         e.preventDefault()
         this.serviceService
             .updateService(this.state.service._id, this.state.service)
-            .then(res => this.props.history.push(`/mis-servicios/${res.data._id}`))
+            .then(res => {
+                this.handleToast(true, '¡Cambios guardados!')
+                // this.props.history.push(`/mis-servicios/${res.data._id}`)
+            })
             .catch(err => console.log(err))
     }
 
@@ -45,8 +52,8 @@ class EditService extends Component {
                 <Container>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
-                             <h1>Editar servicio</h1>
-                            <hr  />
+                            <h1>Editar publicación</h1>
+                            <hr />
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="title">
                                     <Form.Label>Nombre</Form.Label>
@@ -66,6 +73,7 @@ class EditService extends Component {
                         </Col>
                     </Row>
                 </Container>
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </>
         )
     }

@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import UsersService from "../../../../services/users.service"
+import Alert from './../../../shared/Alert/Alert'
+import FilesService from "./../../../../services/upload.service"
 
 
 import "./Edit-profile.css";
@@ -16,11 +18,18 @@ class EditForm extends Component {
             province: this.props.user.province,
             age: this.props.user.age,
             email: this.props.user.email,
+            image: this.props.user.image,
+            showToast: false,
+            toastText: "",
+            uploadingActive: false
         };
         this.usersService = new UsersService();
+        this.filesService = new FilesService();
     }
 
-    handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value });
+    handleInputChange = (e) => this.setState({ [e.target.name]: e.target.value })
+
+    handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -30,11 +39,29 @@ class EditForm extends Component {
             .then((theLoggedInUser) => {
                 this.props.storeUser(theLoggedInUser.data);
                 this.props.history.push("/editar-perfil");
+                this.handleToast(true, '¡Cambios guardados!')
             })
             .catch((err) => console.log("Error", err));
     };
 
+    handleImageUpload = (e) => {
+        const uploadData = new FormData();
+        uploadData.append("image", e.target.files[0]);
+        console.log("ESTO ES UNA IMAGEN EN MEMORIA:", e.target.files[0]);
 
+        this.setState({ uploadingActive: true });
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then((response) => {
+                console.log(response)
+                this.setState({
+                    ...this.state.user, image: response.data.secure_url, uploadingActive: false, },
+                   
+                );
+            })
+            .catch((err) => console.log("ERRORRR!", err));
+    };
 
     render() {
         return (
@@ -49,7 +76,6 @@ class EditForm extends Component {
                                     <Form.Label>Nombre de usuario</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Ej. amadeus1756"
                                         name="username"
                                         value={this.state.username}
                                         onChange={this.handleInputChange}
@@ -59,7 +85,6 @@ class EditForm extends Component {
                                     <Form.Label>Nombre y apellidos</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        placeholder="Ej. Wolfgang Amadeus Mozart"
                                         name="name"
                                         value={this.state.name}
                                         onChange={this.handleInputChange}
@@ -158,13 +183,21 @@ class EditForm extends Component {
                                         onChange={this.handleInputChange}
                                     />
                                 </Form.Group>
-                                <Button type="submit" className="btn-sm edit-button">
-                                    Guardar
+                                <Form.Group>
+                                    <Form.Label>
+                                        Imagen {this.state.uploadingActive && <Spinner />}
+                                    </Form.Label>
+                                    <Form.Control type="file" onChange={this.handleImageUpload} />
+                                </Form.Group>
+
+                                <Button type="submit" className="btn-sm edit-button" disabled={this.state.uploadingActive}>
+                                    {this.state.uploadingActive ? "Subiendo imagen..." : "Guardar cambios"}
                                 </Button>
                             </Form>
                         </Col>
                     </Row>
                 </Container>
+                <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
             </section>
         );
     }

@@ -5,3 +5,7 @@
 .card-row {
     margin-bottom: 200px;
 }
+
+.service-added {
+    background-color: green;
+}
