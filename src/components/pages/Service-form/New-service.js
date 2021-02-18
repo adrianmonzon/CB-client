@@ -71,7 +71,7 @@ class CreateService extends Component {
         return (
             <>
                 <Container>
-                    <h1>Pedir ayuda</h1>
+                    <h2>Pedir ayuda</h2>
                     <hr />
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="title">

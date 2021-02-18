@@ -13,6 +13,7 @@ class EditService extends Component {
                 name: "",
                 description: "",
                 reward: "",
+                situation: "",
                 owner: this.props.loggedUser._id,
             },
             uploadingActive: false,
@@ -66,6 +67,20 @@ class EditService extends Component {
                                 <Form.Group controlId="reward">
                                     <Form.Label>Recompensa</Form.Label>
                                     <Form.Control required type="text" name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
+                                </Form.Group>
+                                <Form.Group controlId="situation">
+                                    <Form.Label>Estado</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name="situation"
+                                        value={this.state.service.situation}
+                                        onChange={this.handleInputChange}
+                                    >
+                                        <option value="">Seleccionar</option>
+                                        <option value="Pendiente de ayuda">Pendiente de ayuda</option>
+                                        <option value="En conversaciones">En conversaciones</option>
+                                        <option value="Ayuda recibida">Ayuda recibida</option>
+                                    </Form.Control>
                                 </Form.Group>
 
                                 <Button className="edit-button" size="sm" variant="dark" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Guardar cambios'}</Button>

@@ -39,16 +39,17 @@ class UserDetails extends Component {
                         ?
                         <>
                             <Row>
-                                <Col md={6} >
+                                <Col md={4} >
                                     <img src={this.state.user.image} alt={this.state.user.username} />
                                 </Col>
-                                <Col md={6}>
+                                <Col md={4}>
                                     <h3>{this.state.user.name}</h3>
                                     {/* <p>{this.state.user.description}</p> */}
                                     <hr className="hr" />
                                     {/* <p>Instrumento: {this.state.user.instrument}</p> */}
+                                    <p>Ubicación: {this.state.user.province}</p>
                                     <p>Edad: {this.state.user.age} años</p>
-                                    <Link to="/servicios" className="btn btn-md btn-info edit-button">Volver</Link>
+                                    <Link to="/servicios" className="btn btn-sm btn-info edit-button">Volver</Link>
                                     {/* {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-md btn-light details-button">Contactar</Link>} */}
                                 </Col>
                             </Row>

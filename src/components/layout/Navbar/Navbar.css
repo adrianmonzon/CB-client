@@ -1,5 +1,5 @@
 .nav-img {
-    width: 120px;
+    width: 160px;
     height: 30px;
     object-fit: cover;
 }
@@ -15,9 +15,13 @@
 
 .navbar-item {
     color: white !important;
+    font-size: 20px;
 }
 
 #collasible-nav-dropdown {
     color: white !important;
 }
 
+.dropdown-item {
+    font-size: 20px;
+}

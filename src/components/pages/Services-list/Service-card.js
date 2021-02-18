@@ -6,41 +6,41 @@ import swal from 'sweetalert'
 import ServicesService from "./../../../services/services.service"
 
 
-const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
+const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser }) => {
 
     const servicesService = new ServicesService();
     const history = useHistory()
 
-    
-      const deleteTheService = () => {
 
-            servicesService
-                .deleteService(_id)
-                .then(() => {
-                    // history.push('/servicios')
-                    setTimeout(function () { history.go() }, 800) //history.go() refreshes the current page
-                })
-                .catch(err => console.log(err))
-        }
+    const deleteTheService = () => {
 
-       const confirmDelete = () => {
-            swal({
-                title: "Mensaje de confirmación",
-                text: "¿Estás segur@ de que quieres eliminar este servicio?",
-                icon: "warning",
-                buttons: ["No", "Sí"]
+        servicesService
+            .deleteService(_id)
+            .then(() => {
+                // history.push('/servicios')
+                setTimeout(function () { history.go() }, 800) //history.go() refreshes the current page
             })
-                .then(answer => {
+            .catch(err => console.log(err))
+    }
 
-                    if (answer) {
-                        deleteTheService()
-                        swal({
-                            text: "El servicio se ha eliminado con éxito",
-                            icon: "success"
-                        })
-                    }
-                })
-        }
+    const confirmDelete = () => {
+        swal({
+            title: "Mensaje de confirmación",
+            text: "¿Estás segur@ de que quieres eliminar este servicio?",
+            icon: "warning",
+            buttons: ["No", "Sí"]
+        })
+            .then(answer => {
+
+                if (answer) {
+                    deleteTheService()
+                    swal({
+                        text: "El servicio se ha eliminado con éxito",
+                        icon: "success"
+                    })
+                }
+            })
+    }
 
     return (
         <Col className="text-center" lg={12}>
@@ -50,7 +50,10 @@ const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
                     <Col md="4">
                         <Card.Img top variant="top" src={owner ? owner.image : <></>} />
                         {owner ? //esto se pone porque como tengo algunos creados del seed sin owner, para que separarlos de los que sí tienen
-                            <Card.Text className="card-name">{owner.username}, {owner.province}</Card.Text>
+                            <>
+                                <Card.Text className="card-name">{owner.username}, {owner.province}</Card.Text>
+                                <Card.Text className={situation === 'Pendiente de ayuda' ? "card-situation" : situation === 'En conversaciones' ? "card-situation3" : situation === 'Ayuda recibida' ? "card-situation2" : null}>{situation}</Card.Text>
+                            </>
                             :
                             <><p>nombre</p></>
                         }
@@ -85,7 +88,7 @@ const ServiceCard = ({ name, _id, reward, owner, loggedUser }) => {
                                         <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}><img
                                             alt="Imagen de usuario"
                                             src={arrow}
-                                            style={{ height: '20px', textAlign: 'center', width: '15px' }}
+                                            style={{ height: '25px', textAlign: 'center', width: '20px' }}
                                             className="button-card-img"
                                         /></Link>
                                     </div>

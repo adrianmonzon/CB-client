@@ -53,7 +53,7 @@ class ServicesList extends Component {
             <section className="services-list">
                 <Container>
                     <Col md={{ span: 8, offset: 2 }}>
-                        <Filter filterByOwnerProvince={this.filterByProvince} />
+                        {/* <Filter filterByOwnerProvince={this.filterByProvince} /> */}
                         {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Pedir ayuda</Link>}
 
                         {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}

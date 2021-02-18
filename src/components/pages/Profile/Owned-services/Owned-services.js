@@ -49,20 +49,27 @@ class OwnedServices extends Component {
                     </Col>
                 </Row>
                 <hr /> */}
-                <Col md={{ span: 8, offset: 2 }}>
+                <Row>
+                    <Col md={{ span: 8, offset: 2 }}>
 
-                    <h4 className="owned-title text-center">Mis servicios creados</h4>
-                    {
-                        this.state.owned.length > 0
-                            ?
-                            <Row className="align-items-center profile-list">
-                                {this.state.owned.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)} {/*<Button onClick={this.confirmDelete()}>Eliminar</Button>*/}
-                            </Row>
-                            :
-                            <Row>
-                                <p style={{ backgroundColor: 'red' }}>No has creado ningún servicio</p>
-                            </Row>
-                    }
+                        <h2 className="owned-title text-center">Mis publicaciones</h2>
+                        <hr />
+                        {
+                            this.state.owned.length > 0
+                                ?
+                                <Row>
+                                    <Col>
+                                        {this.state.owned.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)} {/*<Button onClick={this.confirmDelete()}>Eliminar</Button>*/}
+                                    </Col>
+                                </Row>
+                                :
+                                <Row>
+                                    <Col className="text-center">
+                                        <p>No has creado ningún servicio</p>
+                                    </Col>
+                                </Row>
+                        }
+                    </Col>
                     {/* <hr />
                 <h4 className="description">Mis itinerarios guardados</h4>
                 <Row className="align-items-center profile-list">
@@ -71,7 +78,7 @@ class OwnedServices extends Component {
                         <ItinerariesCard key={elm._id} itinerary={elm} />
                     )}
                 </Row> */}
-                </Col>
+                </Row>
             </Container>
         )
     }

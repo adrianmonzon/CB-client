@@ -77,38 +77,39 @@ const Navigation = (props) => {
                     {/* <Link style={{ textDecoration: 'none' }} to="/servicios">
                         <Nav.Link className="navbar-item" as="div">Servicios</Nav.Link>
                     </Link> */}
-                    <NavDropdown title={`¿Qué necesita?`} id="collasible-nav-dropdown">
-                        <NavDropdown.Item>
-                            { props.loggedUser ?
-                            <Link to="/crear-servicio" style={{ textDecoration: "none", color: "black" }}>
-                               Pedir ayuda
+                    <NavDropdown className="navbar-item" title={`¿Qué necesita?`} id="collasible-nav-dropdown">
+                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white' }}>
+                            {props.loggedUser ?
+                                <Link to="/crear-servicio" style={{ textDecoration: "none", color: "black" }}>
+                                    Pedir ayuda
                                 </Link>
                                 :
                                 <Link to="/iniciar-sesion" style={{ textDecoration: "none", color: "black" }}>
                                     Pedir ayuda
                                 </Link>
-}
+                            }
                         </NavDropdown.Item>
-                        <NavDropdown.Item>
+                        <NavDropdown.Item style={{ backgroundColor: 'white' }}>
                             <Link to="/servicios" style={{ textDecoration: "none", color: "black" }}>
                                 Vengo a ayudar
                                 </Link>
                         </NavDropdown.Item>
                     </NavDropdown>
                     {props.loggedUser ? (
-                        <NavDropdown title={`Hola, ${props.loggedUser.username}`} id="collasible-nav-dropdown">
-                            <NavDropdown.Item>
-                                <Link to="/mis-servicios" style={{ textDecoration: "none", color: "black" }}>
-                                    Mis servicios
+                        <NavDropdown alignRight title={`Hola, ${props.loggedUser.username}`} id="collasible-nav-dropdown">
+                            <NavDropdown.Item style={{ backgroundColor: 'white' }} >
+                                <Link to="/mis-servicios" style={{ textDecoration: "none", color: "black", outline: 'none' }}>
+                                    Mis publicaciones
                                 </Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item>
+                            <NavDropdown.Item style={{ backgroundColor: 'white' }} >
                                 <Link to="/editar-perfil" style={{ textDecoration: "none", color: "black" }}>
                                     Editar perfil
                                 </Link>
                             </NavDropdown.Item>
                             <Link className="navbar-item" to="/" style={{ textDecoration: "none" }}>
                                 <NavDropdown.Item
+                                    style={{ backgroundColor: 'white' }}
                                     className="nav-dropdown"
                                     onClick={logOut}
                                 >
@@ -119,7 +120,7 @@ const Navigation = (props) => {
                             <NavDropdown.Item
                                 className="nav-dropdown"
                                 onClick={confirmDelete}
-                                style={{ textDecoration: "none" }}
+                                style={{ textDecoration: "none", backgroundColor: 'white' }}
                             >
                                 Eliminar perfil
                         </NavDropdown.Item>
@@ -130,7 +131,7 @@ const Navigation = (props) => {
                                     <Nav.Link className="navbar-item" as="div">Registro</Nav.Link>
                                 </Link>
                                 <Link style={{ textDecoration: 'none' }} className="text-nowrap" to="/iniciar-sesion">
-                                    <Nav.Link className="navbar-item" as="div">Iniciar sesión</Nav.Link>
+                                    <Nav.Link className="navbar-item navbar-button" as="div">Iniciar sesión</Nav.Link>
                                 </Link>
 
                             </>

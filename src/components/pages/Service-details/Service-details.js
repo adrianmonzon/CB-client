@@ -58,22 +58,22 @@ class ServiceDetails extends Component {
                                     <p>{this.state.service.description}</p>
                                     <p>Recompensa: {this.state.service.reward}</p>
                                     <Link to="/servicios" className="btn btn-sm btn-info edit-button">Volver</Link>
-                                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info details-button">Contactar con {this.state.service.owner.name}</Link>}
-                                    <Button className="btn btn-sm edit-button" style={{marginLeft: '10px'}}>
-                                        {
+                                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info edit-button" style={{marginLeft: '10px'}}>Contactar con {this.state.service.owner.name}</Link>}
+                                    {
                                         this.props.loggedUser &&
-                                        <>
+                                        <Button className="btn btn-sm edit-button" style={{ marginLeft: '10px' }}>
+                                            <>
                                                 <Accordion>
                                                     <Accordion.Toggle as={Link} variant="link" eventKey="0" style={{ textDecoration: 'none', color: 'white' }}>
                                                         Contactar con {this.state.service.owner.name}
-                                                </Accordion.Toggle>
-                                                <Accordion.Collapse eventKey="0" style={{marginTop: '10px'}}>
-                                                    <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service.owner} serviceName={this.state.service.name} />
-                                                </Accordion.Collapse>
-                                            </Accordion>
-                                        </>
-                                    }    
-                                    </Button>
+                                                    </Accordion.Toggle>
+                                                    <Accordion.Collapse eventKey="0" style={{ marginTop: '10px' }}>
+                                                        <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service.owner} serviceName={this.state.service.name} />
+                                                    </Accordion.Collapse>
+                                                </Accordion>
+                                            </>
+                                        </Button>
+                                    }
                                 </Col>
                             </Row>
                             {/* <Row className="map-row">

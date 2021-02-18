@@ -13,6 +13,7 @@ const Filter = (props) => {
                 custom
                 size="sm"
                 onChange={(e) => props.filterByOwnerProvince(e.target.value)}
+                style={{fontSize: '20px'}}
             >
                 <option value="all">Cualquier provincia</option>
                 <option value="Álava">Álava</option>
