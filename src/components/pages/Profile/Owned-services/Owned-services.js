@@ -65,7 +65,7 @@ class OwnedServices extends Component {
                                 :
                                 <Row>
                                     <Col className="text-center">
-                                        <p>No has creado ningún servicio</p>
+                                        <p>Ninguna petición de ayuda publicada</p>
                                     </Col>
                                 </Row>
                         }

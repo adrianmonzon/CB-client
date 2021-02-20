@@ -9,3 +9,8 @@
 .service-added {
     background-color: green;
 }
+
+.filter-button {
+    display: inline-block;
+    margin-left: 10px;
+}

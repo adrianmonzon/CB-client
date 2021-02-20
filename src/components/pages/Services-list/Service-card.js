@@ -85,12 +85,19 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser }) => {
                                     </>
                                     :
                                     <div className="button-position">
-                                        <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}><img
-                                            alt="Imagen de usuario"
-                                            src={arrow}
-                                            style={{ height: '25px', textAlign: 'center', width: '20px' }}
-                                            className="button-card-img"
-                                        /></Link>
+                                        {
+                                            situation === "Ayuda recibida"
+                                                ?
+                                                null
+                                                :
+                                                <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}>
+                                                    <img
+                                                    alt="Imagen de usuario"
+                                                    src={arrow}
+                                                    style={{ height: '25px', textAlign: 'center', width: '20px' }}
+                                                    className="button-card-img"
+                                                /></Link>
+                                        }
                                     </div>
                             }
                             <hr />

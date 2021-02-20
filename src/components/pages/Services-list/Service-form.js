@@ -14,6 +14,7 @@ class ServiceForm extends Component {
                 name: '',
                 description: '',
                 reward: '',
+                province: this.props.loggedUser.province,
                 owner: this.props.loggedUser ? this.props.loggedUser._id : ''
             },
             uploadingActive: false
@@ -31,7 +32,7 @@ class ServiceForm extends Component {
             .then(res => {
                 this.props.updateList()
                 this.props.closeModal()
-                this.props.handleToast(true, '¡Servicio creado!')
+                this.props.handleToast(true, '¡Petición de ayuda creada!')
             })
             .catch(err => console.log(err))
     }

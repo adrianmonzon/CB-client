@@ -15,4 +15,6 @@ export default class ServiceService {
     filterByProvince = province => this.apiHandler.get(`/filterByProvince/${province}`);
     deleteService = (serviceId) => this.apiHandler.delete(`/deleteService/${serviceId}`);
     getAllServicesFromUser = userId => this.apiHandler.get(`/getAllServicesFromUser/${userId}`)
+    filterBySituation = situation => this.apiHandler.get(`/filterBySituation/${situation}`);
+
 }

@@ -38,7 +38,7 @@ class CreateService extends Component {
         this.servicesService
             .saveService(this.state.service)
             .then(res => {
-                this.handleToast(true, '¡Servicio creado!')
+                this.handleToast(true, '¡Petición de ayuda creada!')
                 // this.props.history.push('/servicios')
                 setTimeout(() => this.redirectToServices() , 800)
             })

@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import ServicesService from "./../../../services/services.service"
 // import UsersService from './../../../services/users.service'
-import { Container, Row, Button, Modal, Toast, Spinner, Col } from "react-bootstrap"
+import { Container, Row, Button, Spinner, Col, Accordion, AccordionCollapse } from "react-bootstrap"
 import Alert from './../../shared/Alert/Alert'
 import Popup from './../../shared/Popup/Popup'
 import ServiceCard from './Service-card'
@@ -9,6 +9,7 @@ import ServiceForm from './Service-form'
 import './Services-list.css'
 import { Link } from 'react-router-dom'
 import Filter from './Filter'
+import SituationFilter from './SituationFilter'
 
 class ServicesList extends Component {
     constructor() {
@@ -48,16 +49,35 @@ class ServicesList extends Component {
         }
     };
 
+    filterBySituation = (situation) => {
+        if (situation === 'all') this.refreshServices()
+        else {
+            this.servicesService
+                .filterBySituation(situation)
+                .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+                .catch((err) => console.log(err))
+        }
+    };
+
     render() {
         return (
             <section className="services-list">
                 <Container>
                     <Col md={{ span: 8, offset: 2 }}>
-                        {/* <Filter filterByOwnerProvince={this.filterByProvince} /> */}
+
                         {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Pedir ayuda</Link>}
-
-                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
-
+                            {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
+                            <Accordion className="filter-button">
+                                <Accordion.Toggle as={Button} className="edit-button btn-sm list-button" eventKey="0">
+                                    Filtro
+                                </Accordion.Toggle>
+                                <AccordionCollapse eventKey="0">
+                                    <Filter filterByOwnerProvince={this.filterByProvince} /> 
+                                </AccordionCollapse>
+                                <AccordionCollapse eventKey="0">
+                                    <SituationFilter filterBySituation={this.filterBySituation} />
+                                </AccordionCollapse>
+                            </Accordion>
                         {this.state.services.length > 0
                             ?
                             <Row>

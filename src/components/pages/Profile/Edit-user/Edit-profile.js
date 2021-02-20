@@ -185,7 +185,8 @@ class EditForm extends Component {
                                 </Form.Group>
                                 <Form.Group>
                                     <Form.Label>
-                                        Imagen {this.state.uploadingActive && <Spinner />}
+                                        Imagen {this.state.uploadingActive && <Spinner />} <br />
+                                        <img src={this.state.image} style={{height: '200px', objectFit: 'cover'}}/>
                                     </Form.Label>
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>

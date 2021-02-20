@@ -3,9 +3,6 @@ import { Form } from "react-bootstrap";
 const Filter = (props) => {
     return (
         <Form inline>
-            <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
-                Filtrar:
-      </Form.Label>
             <Form.Control
                 as="select"
                 className="my-1 mr-sm-2"
