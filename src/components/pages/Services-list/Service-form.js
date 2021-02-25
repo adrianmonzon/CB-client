@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ServicesService from './../../../services/services.service'
 // import FilesService from './../../../service/upload.service'
-// import Dictaphone from './../../shared/Dictaphone/Dictaphone'
+import Dictaphone from './../../shared/Dictaphone/Dictaphone'
 
 import { Form, Button, Spinner } from 'react-bootstrap'
 
@@ -65,7 +65,7 @@ class ServiceForm extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="title">
                     <Form.Label>¿Qué necesita?</Form.Label>
-                    <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
+                        <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                 </Form.Group>
                 <Form.Group controlId="description">
                     <Form.Label>Descripción</Form.Label>
@@ -75,7 +75,6 @@ class ServiceForm extends Component {
                     <Form.Label>Recompensa</Form.Label>
                         <Form.Control required type="text" placeholder="Ej.: Pastel casero." name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
                 </Form.Group>
-               
                 <Button className="edit-button" size="sm" variant="dark" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Publicar'}</Button>
             </Form>
             </>

@@ -19,7 +19,7 @@ class ServicesList extends Component {
             showModal: false,
             showToast: false,
             toastText: '',
-            isServiceLoaded: false
+            isServiceLoaded: false,
         };
         this.servicesService = new ServicesService();
         // this.usersService = new UsersService();
@@ -27,12 +27,13 @@ class ServicesList extends Component {
 
     componentDidMount = () => {
         this.refreshServices()
-    };
-
+    }
     refreshServices = () => {
         this.servicesService
             .getServices()
-            .then(res => this.setState({ services: res.data }))
+            .then(res => {
+                console.log(res)
+                this.setState({ services: res.data })})
             .catch(err => console.log(err))
     }
 
@@ -66,18 +67,18 @@ class ServicesList extends Component {
                     <Col md={{ span: 8, offset: 2 }}>
 
                         {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Pedir ayuda</Link>}
-                            {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
-                            <Accordion className="filter-button">
-                                <Accordion.Toggle as={Button} className="edit-button btn-sm list-button" eventKey="0">
-                                    Filtro
+                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
+                        <Accordion className="filter-button">
+                            <Accordion.Toggle as={Button} className="edit-button btn-sm list-button" eventKey="0">
+                                Filtro
                                 </Accordion.Toggle>
-                                <AccordionCollapse eventKey="0">
-                                    <Filter filterByOwnerProvince={this.filterByProvince} /> 
-                                </AccordionCollapse>
-                                <AccordionCollapse eventKey="0">
-                                    <SituationFilter filterBySituation={this.filterBySituation} />
-                                </AccordionCollapse>
-                            </Accordion>
+                            <AccordionCollapse eventKey="0">
+                                <Filter filterByOwnerProvince={this.filterByProvince} />
+                            </AccordionCollapse>
+                            <AccordionCollapse eventKey="0">
+                                <SituationFilter filterBySituation={this.filterBySituation} />
+                            </AccordionCollapse>
+                        </Accordion>
                         {this.state.services.length > 0
                             ?
                             <Row>
@@ -93,7 +94,7 @@ class ServicesList extends Component {
                         }
                     </Col>
                 </Container>
-
+                  
                 <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nueva petición">
                     <ServiceForm handleToast={this.handleToast} closeModal={() => this.handleModal(false)} updateList={this.refreshServices} loggedUser={this.props.loggedUser} />
                 </Popup>

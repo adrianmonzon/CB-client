@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import ServicesService from '../../../services/services.service'
 // import FilesService from './../../../service/upload.service'
-// import Dictaphone from './../../shared/Dictaphone/Dictaphone'
+import Dictaphone from './../../shared/Dictaphone/Dictaphone'
 import { useHistory } from 'react-router-dom'
 import { Form, Button, Spinner, Container } from 'react-bootstrap'
 import Alert from './../../shared/Alert/Alert'
+
 
 class CreateService extends Component {
 
@@ -30,7 +31,7 @@ class CreateService extends Component {
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     redirectToServices = () => {
-        {this.props.history.push('/servicios')}
+        { this.props.history.push('/servicios') }
     }
 
     handleSubmit = e => {
@@ -40,7 +41,7 @@ class CreateService extends Component {
             .then(res => {
                 this.handleToast(true, '¡Petición de ayuda creada!')
                 // this.props.history.push('/servicios')
-                setTimeout(() => this.redirectToServices() , 800)
+                setTimeout(() => this.redirectToServices(), 800)
             })
             .catch(err => console.log(err))
     }
@@ -75,6 +76,7 @@ class CreateService extends Component {
                     <hr />
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="title">
+<Dictaphone />
                             <Form.Label>¿Qué necesita?</Form.Label>
                             <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                         </Form.Group>
@@ -91,8 +93,6 @@ class CreateService extends Component {
                     </Form>
                     <Alert className="service-added" show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
                 </Container>
-
-
             </>
         )
     }

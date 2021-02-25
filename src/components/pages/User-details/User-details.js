@@ -49,7 +49,7 @@ class UserDetails extends Component {
                                     {/* <p>Instrumento: {this.state.user.instrument}</p> */}
                                     <p>Ubicación: {this.state.user.province}</p>
                                     <p>Edad: {this.state.user.age} años</p>
-                                    <Link to="/servicios" className="btn btn-sm btn-info edit-button">Volver</Link>
+                                    {/* <Link to={`servicios/${_id}`} className="btn btn-sm btn-info edit-button">Volver</Link> */}
                                     {/* {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-md btn-light details-button">Contactar</Link>} */}
                                 </Col>
                             </Row>

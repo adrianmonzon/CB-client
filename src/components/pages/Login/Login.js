@@ -26,7 +26,15 @@ class Login extends Component {
             .login(this.state)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.goBack()      // redirección a la página anterior JS
+                const accessToCreateService = localStorage.getItem('ruta')
+
+                if (accessToCreateService) {
+                    this.props.history.push('/crear-servicio')
+                    localStorage.removeItem('ruta')
+                } else {
+                    this.props.history.goBack()
+                }
+
             })
             .catch(err => this.setState({ credentialsError: err.response.data.message }))
     }

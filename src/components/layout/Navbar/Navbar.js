@@ -27,6 +27,9 @@ const Navigation = (props) => {
             .catch((err) => console.log(err));
     }
 
+    const redirectToCreateService = () => {
+        localStorage.setItem('ruta', '/crear-servicio')
+    }
 
     const deleteTheUser = () => {
         userService
@@ -84,7 +87,7 @@ const Navigation = (props) => {
                                     Pedir ayuda
                                 </Link>
                                 :
-                                <Link to="/iniciar-sesion" style={{ textDecoration: "none", color: "black" }}>
+                                <Link to="/iniciar-sesion" onClick={() => redirectToCreateService()} style={{ textDecoration: "none", color: "black" }}>
                                     Pedir ayuda
                                 </Link>
                             }

@@ -12,7 +12,7 @@ class OwnedServices extends Component {
         super(props)
         this.state = {
             owned: [],
-            // favs: []
+            favs: []
         }
         this.servicesService = new ServiceService()
     }
@@ -22,7 +22,7 @@ class OwnedServices extends Component {
             .getAllServicesFromUser(this.props.loggedUser._id)
             .then(res => {
                 console.log(res)
-                this.setState({ owned: res.data.owned/*, favs: res.data.favs*/ })
+                this.setState({ owned: res.data.owned, favs: res.data.favs })
             })
             .catch(err => console.log(err))
     }
@@ -50,7 +50,8 @@ class OwnedServices extends Component {
                 </Row>
                 <hr /> */}
                 <Row>
-                    <Col md={{ span: 8, offset: 2 }}>
+                    {/* <Col md={{ span: 8, offset: 2 }}> */}
+                    <Col md={6}>
 
                         <h2 className="owned-title text-center">Mis publicaciones</h2>
                         <hr />
@@ -70,14 +71,26 @@ class OwnedServices extends Component {
                                 </Row>
                         }
                     </Col>
-                    {/* <hr />
-                <h4 className="description">Mis itinerarios guardados</h4>
-                <Row className="align-items-center profile-list">
 
-                    {this.state.favs.map(elm =>
-                        <ItinerariesCard key={elm._id} itinerary={elm} />
-                    )}
-                </Row> */}
+                    <Col md={6}>
+                        <h2 className="owned-title text-center">Mis favoritos</h2>
+                        <hr />
+                        {
+                            this.state.favs.length > 0
+                                ?
+                                <Row>
+                                    <Col>
+                                        {this.state.favs.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)}
+                                    </Col>
+                                </Row>
+                                :
+                                <Row>
+                                    <Col className="text-center">
+                                        <p>Ningún elemento guardado</p>
+                                    </Col>
+                                </Row>
+                        }
+                    </Col>
                 </Row>
             </Container>
         )

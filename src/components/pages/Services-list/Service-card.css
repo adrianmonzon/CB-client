@@ -97,3 +97,11 @@
     margin-top: -20px;
     color: white;
 }
+
+.white-button {
+    background-color: white;
+}
+
+.red-button {
+    background-color: red;
+}

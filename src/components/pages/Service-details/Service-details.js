@@ -17,6 +17,7 @@ class ServiceDetails extends Component {
         this.state = {
             service: undefined,
             user: undefined,
+            favs: []
         }
         this.servicesService = new ServicesService()
         this.usersService = new UsersService()
@@ -39,6 +40,8 @@ class ServiceDetails extends Component {
             .catch(err => console.log(err))
     }
 
+
+
     render() {
 
         return (
@@ -58,7 +61,7 @@ class ServiceDetails extends Component {
                                     <p>{this.state.service.description}</p>
                                     <p>Recompensa: {this.state.service.reward}</p>
                                     <Link to="/servicios" className="btn btn-sm btn-info edit-button">Volver</Link>
-                                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info edit-button" style={{marginLeft: '10px'}}>Contactar con {this.state.service.owner.name}</Link>}
+                                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info edit-button" style={{ marginLeft: '10px' }}>Contactar con {this.state.service.owner.name}</Link>}
                                     {
                                         this.props.loggedUser &&
                                         <Button className="btn btn-sm edit-button" style={{ marginLeft: '10px' }}>
