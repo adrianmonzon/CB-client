@@ -14,3 +14,20 @@
     background-color: rgba(163, 158, 158, 0.582);
 }
 
+.detailsImage {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: 0 0 5px black;
+}
+
+.descript-box {
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+    height: 400px;
+    padding: 10px 10px;
+}
+
+.details-h3 {
+    margin-bottom: 20px;
+}

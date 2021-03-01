@@ -32,8 +32,9 @@ class ServicesList extends Component {
         this.servicesService
             .getServices()
             .then(res => {
-                console.log(res)
-                this.setState({ services: res.data })})
+                // console.log(res)
+                this.setState({ services: res.data })
+            })
             .catch(err => console.log(err))
     }
 
@@ -63,8 +64,8 @@ class ServicesList extends Component {
     render() {
         return (
             <section className="services-list">
-                <Container>
-                    <Col md={{ span: 8, offset: 2 }}>
+                <Container className="list-container">
+                    <Col className="text-center">
 
                         {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Pedir ayuda</Link>}
                         {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
@@ -79,22 +80,24 @@ class ServicesList extends Component {
                                 <SituationFilter filterBySituation={this.filterBySituation} />
                             </AccordionCollapse>
                         </Accordion>
-                        {this.state.services.length > 0
-                            ?
-                            <Row>
-                                {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} />)}
-                            </Row>
-                            :
-                            <Row>
-                                {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col><p>No hay resultados para esta búsqueda</p></Col>
+                    </Col>
+                    {this.state.services.length > 0
+                        ?
+                        <Row>
+                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} /*refreshPage={this.refreshServices}*/ />)}
+                        </Row>
+                        :
+                        <Row>
+                            <Col className="text-center">
+                                {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col><p style={{marginTop: '20px'}}>No hay resultados para esta búsqueda</p></Col>
                                     :
                                     <Spinner animation="border" />
                                 }
-                            </Row>
-                        }
-                    </Col>
+                            </Col>
+                        </Row>
+                    }
                 </Container>
-                  
+
                 <Popup show={this.state.showModal} handleModal={this.handleModal} title="Nueva petición">
                     <ServiceForm handleToast={this.handleToast} closeModal={() => this.handleModal(false)} updateList={this.refreshServices} loggedUser={this.props.loggedUser} />
                 </Popup>

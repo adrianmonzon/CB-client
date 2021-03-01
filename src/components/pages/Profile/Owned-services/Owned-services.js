@@ -30,31 +30,12 @@ class OwnedServices extends Component {
 
     render() {
         return (
-            <Container className="profile">
-                {/* <Row className="align-items-center">
-                    <Col md={{ span: 7 }}>
-                        <h1>¡Bienvenid@, {this.props.loggedUser.username} !</h1>
-                        <h4 className="description">Descripción:</h4>
-                        <p>{this.props.loggedUser.description} </p>
-                        <Link className="btn btn-dark btn-sm" to={`/crear-itinerario`}>Crear Itinerario</Link>
-                        {
-                            this.props.loggedUser.role === 'ADMIN'
-                                ?
-                                <Link className="btn btn-dark btn-sm" to={`/listado-usuarios`}>Usuarios</Link>
-                                : null
-                        }
-                    </Col>
-                    <Col md={{ span: 5 }}>
-                        <img className="profile" src={this.props.loggedUser.profileImage} alt={this.props.loggedUser.username} />
-                    </Col>
-                </Row>
-                <hr /> */}
+            <Container>
                 <Row>
                     {/* <Col md={{ span: 8, offset: 2 }}> */}
-                    <Col md={6}>
+                    <Col md={12}>
 
-                        <h2 className="owned-title text-center">Mis publicaciones</h2>
-                        <hr />
+                        <h2 className="owned-title text-center">Mis publicaciones creadas</h2>
                         {
                             this.state.owned.length > 0
                                 ?
@@ -70,11 +51,11 @@ class OwnedServices extends Component {
                                     </Col>
                                 </Row>
                         }
+                        <hr />
                     </Col>
 
-                    <Col md={6}>
-                        <h2 className="owned-title text-center">Mis favoritos</h2>
-                        <hr />
+                    <Col md={12}>
+                        <h2 className="owned-title text-center">Mis favoritas</h2>
                         {
                             this.state.favs.length > 0
                                 ?

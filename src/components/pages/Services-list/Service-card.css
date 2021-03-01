@@ -1,68 +1,81 @@
 .service-card {
     margin-top: 30px;
     color: black;
-    height: 90%;
     width: 100%;
-    /* border: 1px solid black; */
+    border: 1px solid black;
+    border-radius: 10px;
+    box-shadow: 0 0 20px black;
+}
+
+.card-div {
+    margin-bottom: 20px;
 }
 
 .card img {
     height: 120px;
     object-fit: cover;
+    border-top-left-radius: 10px;
+
 }
 
 .card-name {
-    background-color:  #ffe227;
+    background-color:  #94ebcd;
     color: black;
-}
-
-.card-style {
-    /* background-color: red; */
-    height: 100%;
+    margin-bottom: 0;
 }
 
 .card-button {
-    background-color: #0B98D5;
-    /* width: 50%; */
-    width: 35px; 
+    background-color: white;
+    width: 40px; 
     border-radius: 80%; 
-    text-align: center; 
     float: right;
-    height: 35px;
+    height: 40px;
+    margin-top: -15px;
+    border-color: black;
 }
-
 .card-button:hover {
-    background-color: #45bff3;
+    background-color: white;
+    border-color: black;
+       
+}
+.card-button img {
+    height: 25px;
+    width: 20px;
+    padding-top: 5px;
+    -webkit-transition: transform 0.3s ease-out;
+    -moz-transition: transform 0.3s ease-out;
+    -ms-transition: transform 0.3s ease-out;
+    -o-transition: transform 0.3s ease-out;
+    transition: transform 0.3s ease-out;
 }
 
-.button-position {
-    margin-bottom: 28px;
+.card-button img:hover {
+ -webkit-transform: translateX(4px);
+    -moz-transform: translateX(4px);
+    -ms-transform: translateX(4px);
+    -o-transform: translateX(4px);
+    transform: translateX(4px);
 }
 
-.button-card-img {
-    padding-right: 2px;
-    height: 10px;
-    object-fit: cover;
-}
+/* .button-position {
+    margin-bottom: 30px;
+} */
 
-.card-edit-button {
+/* .card-edit-button {
     background-color: #0B98D5;
-    /* width: 50%; */
     width: 80px; 
     border-radius: 80%; 
     text-align: center; 
     float: right;
     height: 40px;
     font-size: 20px;
-}
+} */
 
-.card-edit-button:hover {
+/* .card-edit-button:hover {
     background-color: #45bff3;
-}
+} */
 
-.card-delete-button {
-    background-color: #0B98D5;
-    /* width: 50%; */
+/* .card-delete-button {
     width: 100px; 
     border-radius: 80%; 
     text-align: center; 
@@ -70,38 +83,35 @@
     height: 40px;
     font-size: 20px;
 
-}
+} */
 
-.card-delete-button:hover {
+/* .card-delete-button:hover {
         background-color: #45bff3;
-}
+} */
 
 .image-div {
     background-color: red;
 }
 
 .card-situation {
-    background-color: red;
-    margin-top: -15px;
-    color: white;
+    background-color: rgba(246, 84, 84, 0.5) ;
+    border-bottom-left-radius: 10px;
 }
 
 .card-situation2 {
-    background-color: green;
-    margin-top: -20px;
-    color: white;
+    background-color: #c4fb6d;
+    border-bottom-left-radius: 10px;
 }
 
 .card-situation3 {
-    background-color: #eb5e0b;
-    margin-top: -20px;
-    color: white;
+    background-color: #f4d160;
+    border-bottom-left-radius: 10px;
 }
 
-.white-button {
-    background-color: white;
+.fav-button {
+   float: left;
 }
 
-.red-button {
-    background-color: red;
+.rewardWord {
+    font-weight: bold ;
 }

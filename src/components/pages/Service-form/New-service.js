@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import ServicesService from '../../../services/services.service'
-// import FilesService from './../../../service/upload.service'
-import Dictaphone from './../../shared/Dictaphone/Dictaphone'
-import { useHistory } from 'react-router-dom'
-import { Form, Button, Spinner, Container } from 'react-bootstrap'
+import FilesService from './../../../services/upload.service'
+// import Dictaphone from './../../shared/Dictaphone/Dictaphone'
+// import { useHistory } from 'react-router-dom'
+import { Form, Button, Container, Spinner } from 'react-bootstrap'
 import Alert from './../../shared/Alert/Alert'
 
 
@@ -16,6 +16,7 @@ class CreateService extends Component {
                 name: '',
                 description: '',
                 reward: '',
+                rewardImage: '',
                 owner: this.props.loggedUser ? this.props.loggedUser._id : ''
             },
             uploadingActive: false,
@@ -23,7 +24,7 @@ class CreateService extends Component {
             toastText: ""
         }
         this.servicesService = new ServicesService()
-        // this.filesService = new FilesService()
+        this.filesService = new FilesService()
     }
 
     handleInputChange = e => this.setState({ service: { ...this.state.service, [e.target.name]: e.target.value } })
@@ -47,24 +48,24 @@ class CreateService extends Component {
     }
 
 
-    // handleImageUpload = e => {
+    handleImageUpload = e => {
 
-    //     const uploadData = new FormData()
-    //     uploadData.append('imageUrl', e.target.files[0])
-    //     console.log('ESTO ES UNA IMAGEN EN MEMORIA:', e.target.files[0])
+        const uploadData = new FormData()
+        uploadData.append('image', e.target.files[0])
+        console.log('ESTO ES UNA IMAGEN EN MEMORIA:', e.target.files[0])
 
-    //     this.setState({ uploadingActive: true })
+        this.setState({ uploadingActive: true })
 
-    //     this.filesService
-    //         .uploadImage(uploadData)
-    //         .then(response => {
-    //             this.setState({
-    //                 service: { ...this.state.service, imageUrl: response.data.secure_url },
-    //                 uploadingActive: false
-    //             })
-    //         })
-    //         .catch(err => console.log('ERRORRR!', err))
-    // }
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+                this.setState({
+                    service: { ...this.state.service, rewardImage: response.data.secure_url },
+                    uploadingActive: false
+                })
+            })
+            .catch(err => console.log('ERRORRR!', err))
+    }
 
 
     render() {
@@ -76,7 +77,7 @@ class CreateService extends Component {
                     <hr />
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="title">
-<Dictaphone />
+                            {/* <Dictaphone /> */}
                             <Form.Label>¿Qué necesita?</Form.Label>
                             <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                         </Form.Group>
@@ -88,8 +89,11 @@ class CreateService extends Component {
                             <Form.Label>Recompensa</Form.Label>
                             <Form.Control required type="text" placeholder="Ej.: Pastel casero." name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
                         </Form.Group>
-
-                        <Button className="edit-button" size="sm" variant="dark" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Publicar'}</Button>
+                        <Form.Group>
+                            <Form.Label>Imagen de la recompensa {this.state.uploadingActive && <Spinner />}</Form.Label>
+                            <Form.Control required type="file" onChange={this.handleImageUpload} />
+                        </Form.Group>
+                        <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Publicar'}</Button>
                     </Form>
                     <Alert className="service-added" show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
                 </Container>
