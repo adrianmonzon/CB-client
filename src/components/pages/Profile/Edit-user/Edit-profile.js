@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import UsersService from "../../../../services/users.service"
 import Alert from './../../../shared/Alert/Alert'
 import FilesService from "./../../../../services/upload.service"
+import LocationSearchInput from "./../../Signup/Autocomplete";
+
 
 
 import "./Edit-profile.css";
@@ -19,6 +21,7 @@ class EditForm extends Component {
             age: this.props.user.age,
             email: this.props.user.email,
             image: this.props.user.image,
+            location: this.props.user.location,
             showToast: false,
             toastText: "",
             uploadingActive: false
@@ -56,12 +59,18 @@ class EditForm extends Component {
             .then((response) => {
                 console.log(response)
                 this.setState({
-                    ...this.state.user, image: response.data.secure_url, uploadingActive: false, },
-                   
+                    ...this.state.user, image: response.data.secure_url, uploadingActive: false,
+                },
+
                 );
             })
             .catch((err) => console.log("ERRORRR!", err));
     };
+
+    setLocation = (newCoordinates) => {
+        const newLocation = { type: "Point", coordinates: newCoordinates }
+        this.setState({ user: { ...this.state.user, location: newLocation } })
+    }
 
     render() {
         return (
@@ -174,6 +183,10 @@ class EditForm extends Component {
                                         <option value="Zaragoza">Zaragoza</option>
                                     </Form.Control>
                                 </Form.Group>
+                                {/* <Form.Group>
+                                    <Form.Label>Localidad</Form.Label>
+                                    <LocationSearchInput setLocation={this.setLocation} />
+                                </Form.Group> */}
                                 <Form.Group controlId="age">
                                     <Form.Label>Edad</Form.Label> <small>(Mínimo 16 años)</small>
                                     <Form.Control
@@ -186,13 +199,13 @@ class EditForm extends Component {
                                 <Form.Group>
                                     <Form.Label>
                                         Imagen {this.state.uploadingActive && <Spinner />} <br />
-                                        <img src={this.state.image} style={{height: '200px', objectFit: 'cover'}}/>
+                                        <img src={this.state.image} style={{ height: '200px', objectFit: 'cover' }} />
                                     </Form.Label>
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
 
                                 <Button type="submit" className="btn-sm edit-button" disabled={this.state.uploadingActive}>
-                                    {this.state.uploadingActive ? "Subiendo imagen..." : "Guardar cambios"}
+                                    {this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : "Guardar cambios"}
                                 </Button>
                             </Form>
                         </Col>

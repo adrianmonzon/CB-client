@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthService from '../../../services/auth.service'
 import './Login.css'
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 class Login extends Component {
@@ -66,7 +66,7 @@ class Login extends Component {
                                         :
                                         null
                                 }
-                                <Button className="edit-button" type="submit">Iniciar sesión</Button>
+                                <Button className="edit-button" type="submit">{!this.props.loggedUser ? 'Iniciar sesión' : <><p style={{ margin: '0 auto' }}>Iniciando sesión  <Spinner variant="light" size="sm" animation="border" style={{marginBottom: '2px'}}/></p> </>}</Button>
                             </Form>
                             <small>¿No registrad@? Hazlo <Link to="/registro" className="login-link">aquí</Link></small>
                         </Col>

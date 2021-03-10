@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
 import UsersService from './../../../services/users.service'
-// import UserMap from './User-Map'
-
+// import Rating from 'react-rating'
+import UserMap from './User-Map'
 
 import './User-details.css'
 
 import { Container, Row, Col, Spinner } from 'react-bootstrap'
 
-import { Link } from 'react-router-dom'
-// import ContactForm from './ContactForm'
 
 class UserDetails extends Component {
 
@@ -39,30 +37,24 @@ class UserDetails extends Component {
                         ?
                         <>
                             <Row>
-                                <Col md={4} >
+                                <Col md={{span: 6, offset: 3}} >
                                     <img src={this.state.user.image} alt={this.state.user.username} />
                                 </Col>
                                 <Col md={4}>
-                                    <h3>{this.state.user.name}</h3>
-                                    {/* <p>{this.state.user.description}</p> */}
+                                    <h3 className="text-center">Información</h3>
                                     <hr className="hr" />
-                                    {/* <p>Instrumento: {this.state.user.instrument}</p> */}
+                                    <p>Nombre: {this.state.user.name}</p>
                                     <p>Ubicación: {this.state.user.province}</p>
                                     <p>Edad: {this.state.user.age} años</p>
-                                    {/* <Link to={`servicios/${_id}`} className="btn btn-sm btn-info edit-button">Volver</Link> */}
-                                    {/* {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-md btn-light details-button">Contactar</Link>} */}
+                                    <p>Valoración: </p>
                                 </Col>
-                            </Row>
-                            {/* <Row className="contact-row">
-                                <Col md={{ span: 6, offset: 3 }}>
-                                    {this.props.loggedUser && <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.user} />}
-                                </Col>
-                            </Row>
-                            <Row className="map-row">
-                                <Col md={{ span: 6, offset: 3 }}>
+                               
+                                <Col md={8}>
+                                    <h3 className="text-center">Mapa</h3>
+                                    <hr className="hr" />
                                     <UserMap user={this.state.user} />
                                 </Col>
-                            </Row> */}
+                            </Row>
                         </>
                         :
                         <Spinner animation="border" />

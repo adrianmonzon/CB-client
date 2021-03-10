@@ -1,22 +1,33 @@
-.nav-img {
+.white-img {
+    width: 180px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.black-img {
     width: 160px;
-    height: 30px;
+    height: 40px;
     object-fit: cover;
 }
 
 .nav-menu {
     border-bottom: 1px solid black;
-    /* opacity: 1; */
 }
 
 .second-nav {
-    background-color: #51c2d5;
+    background-color: white /*#EAECEC*/;
+    border-bottom: 1px solid black;
+    /* position: sticky;
+    top: 0; */
 }
 
 .navbar-item {
-    color: white !important;
+    /* color: white !important; */
     font-size: 20px;
 }
+
+.navbar-button /*esto lo tengo para que las flechitas del dropdown se vean*/
+
 
 #collasible-nav-dropdown {
     color: white !important;

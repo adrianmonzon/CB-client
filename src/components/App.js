@@ -47,7 +47,7 @@ class App extends Component {
           <Route path="/servicios/:service_id" render={props => <ServiceDetails {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/crear-servicio" render={props => <CreateService {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
-          <Route path="/iniciar-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
+          <Route path="/iniciar-sesion" render={props => <Login storeUser={this.setTheUser} {...props} loggedUser={this.state.loggedInUser}/>} />
           <Route path="/usuarios/:user_id" render={props => <UserDetails {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/editar-perfil" render={props => this.state.loggedInUser ? <EditForm {...props} storeUser={this.setTheUser} user={this.state.loggedInUser} /> : <Redirect to="/editar-perfil" />} />
           <Route path="/mis-servicios" render={props => this.state.loggedInUser ? <OwnedServices loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/mis-servicios" />} />

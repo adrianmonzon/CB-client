@@ -13,7 +13,7 @@ import bin from './eliminar.png'
 import trophy from './trophy.png'
 
 
-const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshPage }) => {
+const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshPage, classCard }) => {
 
     const servicesService = new ServicesService();
     const usersService = new UsersService()
@@ -84,6 +84,14 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
             .catch(err => console.log(err))
     }
 
+
+    const deleteServiceWithoutOwner = () => {
+        servicesService
+            .deleteService(_id)
+            .then((res) => {
+                history.go()
+            })
+    }
     // const saveRemove = () => {
     //     removeService()
     //     setisAdded(!isAdded)
@@ -91,19 +99,19 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
     // }
 
     return (
-        <Col className="card-div text-center" md={{span: 8, offset: 2}}>
+        <Col className={classCard} md={{ span: 8, offset: 2 }}>
             {/* {console.log(owner)} */}
             <Card className="service-card text-center">
                 <Row className="no-gutters">
                     <Col md="4">
                         <div className="img-div">
-                        <Card.Img top variant="top" src={owner ? owner.image : <></>} />
-                        {/* {owner ? //esto se pone porque como tengo algunos creados del seed sin owner, para que separarlos de los que sí tienen */}
-                        <>
-                        </>
-                        <Card.Text className="card-name">{owner.username}, {owner.province}</Card.Text>
-                        <Card.Text className={situation === 'Pendiente de ayuda' ? "card-situation" : situation === 'En conversaciones' ? "card-situation3" : situation === 'Ayuda recibida' ? "card-situation2" : null}>{situation}</Card.Text>
-                        {/* :
+                            <Card.Img top variant="top" src={owner ? owner.image : <></>} />
+                            {/* {owner ? //esto se pone porque como tengo algunos creados del seed sin owner, para que separarlos de los que sí tienen */}
+                            <>
+                            </>
+                            <Card.Text className="card-name">{owner ? owner.username : deleteServiceWithoutOwner()}, {owner && owner.province}</Card.Text>
+                            <Card.Text className={situation === 'Pendiente de ayuda' ? "card-situation" : situation === 'En conversaciones' ? "card-situation3" : situation === 'Ayuda recibida' ? "card-situation2" : null}>{situation}</Card.Text>
+                            {/* :
                             <><p>nombre</p></>
                         } */}
                         </div>
@@ -123,13 +131,13 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
                                                 className="button-card-img"
                                             /></Link>
 
-                                            <Link /*className="btn btn-info btn-sm card-delete-button"*/ style={{ float: 'right'}} onClick={() => confirmDelete()}><img
+                                            <Link /*className="btn btn-info btn-sm card-delete-button"*/ style={{ float: 'right' }} onClick={() => confirmDelete()}><img
                                                 alt="Icono de eliminar publicación"
                                                 src={bin}
                                                 style={{ height: '25px', width: '25px' }}
-                                                // className="button-card-img"
+                                            // className="button-card-img"
                                             /></Link>
-                                      </>
+                                        </>
                                         :
                                         !loggedUser
                                             ?
@@ -154,7 +162,7 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
                                                 ?
                                                 null
                                                 :
-                                                <Link className="btn btn-info btn-sm card-button" to={`/servicios/${_id}`}>
+                                                <Link className="btn btn-light btn-sm card-button" to={`/servicios/${_id}`}>
                                                     <img
                                                         alt="Imagen de usuario"
                                                         src={arrow}

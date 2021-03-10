@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import ServicesService from '../../../services/services.service'
 import FilesService from './../../../services/upload.service'
-// import Dictaphone from './../../shared/Dictaphone/Dictaphone'
+import Dictaphone from './../../shared/Dictaphone/Dictaphone'
 // import { useHistory } from 'react-router-dom'
 import { Form, Button, Container, Spinner } from 'react-bootstrap'
 import Alert from './../../shared/Alert/Alert'
+import './New-service.css'
 
 
 class CreateService extends Component {
@@ -71,14 +72,14 @@ class CreateService extends Component {
     render() {
 
         return (
-            <>
+            <section className="newService-bg">
                 <Container>
                     <h2>Pedir ayuda</h2>
                     <hr />
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="title">
-                            {/* <Dictaphone /> */}
                             <Form.Label>¿Qué necesita?</Form.Label>
+                        {/* <Dictaphone transcript={<input value={this.state.service.name}></input>}/> */}
                             <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                         </Form.Group>
                         <Form.Group controlId="description">
@@ -93,11 +94,11 @@ class CreateService extends Component {
                             <Form.Label>Imagen de la recompensa {this.state.uploadingActive && <Spinner />}</Form.Label>
                             <Form.Control required type="file" onChange={this.handleImageUpload} />
                         </Form.Group>
-                        <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Publicar'}</Button>
+                        <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Publicar'}</Button>
                     </Form>
                     <Alert className="service-added" show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
                 </Container>
-            </>
+            </section>
         )
     }
 }

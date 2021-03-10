@@ -1,27 +1,25 @@
-// import React, { Component } from 'react'
-// import SpeechRecognition from 'react-speech-recognition'
+// import React from 'react'
+// import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 
-// class Dictaphone extends Component {
-//     render() {
-//         const { transcript, resetTranscript, browserSupportsSpeechRecognition } = this.props
+// const Dictaphone = (props) => {
+//     const { transcript, resetTranscript } = useSpeechRecognition()
 
-//         if (!browserSupportsSpeechRecognition) {
-//             return null
-//         }
-
-//         return (
-//             <div>
-//                 <button onClick={resetTranscript}>Reset</button>
-//                 <span>{transcript}</span>
-//             </div>
-//         )
+//     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+//         return null
 //     }
-// }
 
-// export default SpeechRecognition(Dictaphone)
+//     return (
+//         <div>
+//             <button onClick={SpeechRecognition.startListening}>Start</button>
+//             <button onClick={SpeechRecognition.stopListening}>Stop</button>
+//             <button onClick={resetTranscript}>Reset</button>
+//             <p>{props.transcript}</p>
+//         </div>
+//     )
+// }
+// export default Dictaphone
 
 import React, { useState, useEffect } from 'react'
-// import './App.css'
 
 const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition

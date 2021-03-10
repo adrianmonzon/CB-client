@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import Filter from './Filter'
 import SituationFilter from './SituationFilter'
 
+
 class ServicesList extends Component {
     constructor() {
         super();
@@ -20,6 +21,7 @@ class ServicesList extends Component {
             showToast: false,
             toastText: '',
             isServiceLoaded: false,
+            classCard: /*'hidden'*/ 'card-div'
         };
         this.servicesService = new ServicesService();
         // this.usersService = new UsersService();
@@ -27,6 +29,7 @@ class ServicesList extends Component {
 
     componentDidMount = () => {
         this.refreshServices()
+        window.onscroll = () => this.handleAnimation();
     }
     refreshServices = () => {
         this.servicesService
@@ -61,16 +64,27 @@ class ServicesList extends Component {
         }
     };
 
+    handleAnimation = () => {
+        if (document.documentElement.scrollTop > 50) {
+            this.setState({ classCard: 'card-div' });
+        };
+    }
+
     render() {
         return (
             <section className="services-list">
+                {/* <Parallax strength={300}>
+                    <Background className="custom-bg">
+                        <img src={bgImage} alt="fill murray" />
+                    </Background>
+                </Parallax> */}
                 <Container className="list-container">
                     <Col className="text-center">
 
-                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-info btn-sm edit-button list-button">Pedir ayuda</Link>}
-                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} size="sm">Pedir ayuda</Button>}
+                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn main-button btn-light list-button">Pedir ayuda</Link>}
+                        {this.props.loggedUser && <Button className="main-button btn-light list-button" onClick={() => this.handleModal(true)} >Pedir ayuda</Button>}
                         <Accordion className="filter-button">
-                            <Accordion.Toggle as={Button} className="edit-button btn-sm list-button" eventKey="0">
+                            <Accordion.Toggle as={Button} className="main-button btn-light list-button" eventKey="0">
                                 Filtro
                                 </Accordion.Toggle>
                             <AccordionCollapse eventKey="0">
@@ -84,14 +98,14 @@ class ServicesList extends Component {
                     {this.state.services.length > 0
                         ?
                         <Row>
-                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} /*refreshPage={this.refreshServices}*/ />)}
+                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard}/*refreshPage={this.refreshServices}*/ />)}
                         </Row>
                         :
                         <Row>
                             <Col className="text-center">
-                                {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col><p style={{marginTop: '20px'}}>No hay resultados para esta búsqueda</p></Col>
+                                {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col md={{ span: 5, offset: 4 }}><p style={{ marginTop: '20px', color: 'black', border: '1px solid', backgroundColor: 'white', borderRadius: '5px' }}>No hay resultados para esta búsqueda</p></Col>
                                     :
-                                    <Spinner animation="border" />
+                                    <Spinner animation="border" variant="light" style={{ marginTop: '20px' }} />
                                 }
                             </Col>
                         </Row>

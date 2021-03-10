@@ -80,7 +80,7 @@ class ContactForm extends Component {
                         <Form.Label>Mensaje</Form.Label>
                         <Form.Control as="textarea" rows={3} name="message" value={this.state.message} onChange={this.handleInputChange} />
                     </Form.Group>
-                    <Button className="btn btn-sm btn-light" type="submit" onClick={this.confirmMessage}>Contactar</Button>
+                    <Button className="main-button btn-light" type="submit" onClick={this.confirmMessage}>Contactar</Button>
                 </Form>
             </section>
         )

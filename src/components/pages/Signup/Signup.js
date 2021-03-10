@@ -6,7 +6,7 @@ import Alert from './../../shared/Alert/Alert'
 // import "./Signup.css";
 
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
-// import LocationSearchInput from "./Autocomplete";
+import LocationSearchInput from "./Autocomplete";
 
 class Signup extends Component {
     constructor(props) {
@@ -69,10 +69,10 @@ class Signup extends Component {
             .catch((err) => console.log("ERRORRR!", err));
     };
 
-    // setLocation = (newCoordinates) => {
-    //     const newLocation = { type: "Point", coordinates: newCoordinates }
-    //     this.setState({ user: { ...this.state.user, location: newLocation } })
-    // }
+    setLocation = (newCoordinates) => {
+        const newLocation = { type: "Point", coordinates: newCoordinates }
+        this.setState({ user: { ...this.state.user, location: newLocation } })
+    }
 
     render() {
         return (
@@ -212,17 +212,17 @@ class Signup extends Component {
                                         <option value="Zaragoza">Zaragoza</option>
                                     </Form.Control>
                                 </Form.Group>
-                                {/* <Form.Group>
-                                    <Form.Label> Ubicación</Form.Label>
+                                <Form.Group>
+                                    <Form.Label>Localidad</Form.Label>
                                     <LocationSearchInput setLocation={this.setLocation} />
-                                </Form.Group> */}
+                                </Form.Group>
                                 <Form.Group>
                                     <Form.Label>
                                         Imagen {this.state.uploadingActive && <Spinner />}
                                     </Form.Label>
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
-                                <Button className="edit-button" type="submit" disabled={this.state.uploadingActive}> {this.state.uploadingActive ? "Subiendo imagen..." : "Registrarme"}</Button>
+                                <Button className="edit-button" type="submit" disabled={this.state.uploadingActive}> {this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : "Registrarme"}</Button>
                             </Form>
                         </Col>
                     </Row>

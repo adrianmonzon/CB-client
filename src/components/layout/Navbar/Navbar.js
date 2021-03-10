@@ -1,9 +1,10 @@
 // import React, { Component } from "react";
 import { Navbar, Nav, NavDropdown, /*Toast, Button*/ } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import logo from "./caixabank.png"
+import blackLogo from "./caixabank.png"
 import swal from 'sweetalert'
 import { withRouter } from 'react-router-dom'
+import whiteLogo from './logo.png'
 
 import AuthService from "../../../services/auth.service";
 // import ServiceService from "../../../services/services.service";
@@ -61,27 +62,27 @@ const Navigation = (props) => {
     }
 
     return (
-        <Navbar variant="dark" expand="md" /*sticky="top"*/ className={props.location.pathname !== "/" ? "second-nav" : "nav-menu"} >
+        <Navbar variant={props.location.pathname !== "/" ? "light" : "dark"} expand="md" /*sticky="top"*/ className={props.location.pathname !== "/" ? "second-nav" : "nav-menu navbar-item"} >
             <Link to="/">
                 <Navbar.Brand>
                     <img
                         alt="Logotipo"
-                        src={logo}
-                        className="d-inline-block align-top nav-img"
-                    />{" "}
+                        src={props.location.pathname !== "/" ? whiteLogo : blackLogo}
+                        className={props.location.pathname !== "/" ? 'black-img' : 'white-img'}
+                    />
                 </Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
                     <Link style={{ textDecoration: 'none' }} to="/servicios">
-                        <Nav.Link className="navbar-item" as="div">Inicio</Nav.Link>
+                        <Nav.Link className="navbar-item" as="div" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Inicio</Nav.Link>
                     </Link>
                     {/* <Link style={{ textDecoration: 'none' }} to="/servicios">
                         <Nav.Link className="navbar-item" as="div">Servicios</Nav.Link>
                     </Link> */}
-                    <NavDropdown className="navbar-item" title={`¿Qué necesita?`} id="collasible-nav-dropdown">
-                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white' }}>
+                    <NavDropdown className="navbar-item" title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>¿Qué necesita?</span>} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white', color: props.location.pathname !== "/" ? 'black': 'white' }}>
                             {props.loggedUser ?
                                 <Link to="/crear-servicio" style={{ textDecoration: "none", color: "black" }}>
                                     Pedir ayuda
@@ -99,7 +100,7 @@ const Navigation = (props) => {
                         </NavDropdown.Item>
                     </NavDropdown>
                     {props.loggedUser ? (
-                        <NavDropdown alignRight title={`Hola, ${props.loggedUser.username}`} id="collasible-nav-dropdown">
+                        <NavDropdown alignRight title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Hola, {props.loggedUser.username}</span>} id="collasible-nav-dropdown">
                             <NavDropdown.Item style={{ backgroundColor: 'white' }} >
                                 <Link to="/mis-servicios" style={{ textDecoration: "none", color: "black", outline: 'none' }}>
                                     Mis publicaciones
@@ -131,10 +132,10 @@ const Navigation = (props) => {
                     ) : (
                             <>
                                 <Link style={{ textDecoration: 'none' }} to="/registro">
-                                    <Nav.Link className="navbar-item" as="div">Registro</Nav.Link>
+                                    <Nav.Link className="navbar-item" as="div" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Registro</Nav.Link>
                                 </Link>
                                 <Link style={{ textDecoration: 'none' }} className="text-nowrap" to="/iniciar-sesion">
-                                    <Nav.Link className="navbar-item navbar-button" as="div">Iniciar sesión</Nav.Link>
+                                    <Nav.Link className="navbar-item navbar-button" as="div" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Iniciar sesión</Nav.Link>
                                 </Link>
 
                             </>

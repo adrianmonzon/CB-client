@@ -3,7 +3,7 @@ import ServicesService from "./../../../../services/services.service"
 import FilesService from "./../../../../services/upload.service"
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap"
 import Alert from './../../../shared/Alert/Alert'
-
+import './Edit-service.css'
 // import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
 
 class EditService extends Component {
@@ -34,7 +34,7 @@ class EditService extends Component {
             .then(res => this.setState({ service: res.data }))
             .catch(err => console.log(err))
     }
-    
+
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     handleSubmit = e => {
@@ -70,6 +70,10 @@ class EditService extends Component {
             .catch((err) => console.log("ERRORRR!", err));
     };
 
+    // handleImagePosition = () => {
+    //     <p></p>
+    // }
+
     render() {
 
         return (
@@ -82,7 +86,7 @@ class EditService extends Component {
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="title">
                                     <Form.Label>Nombre</Form.Label>
-                                    <Form.Control required type="text" name="name" value={this.state.service.name} onChange={this.handleInputChange} />
+                                    <Form.Control required type="text" /*size="lg"*/ name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group controlId="description">
                                     <Form.Label>Descripción</Form.Label>
@@ -109,11 +113,18 @@ class EditService extends Component {
                                 <Form.Group>
                                     <Form.Label>
                                         Imagen de la recompensa {this.state.uploadingActive && <Spinner />} <br />
-                                        <img src={this.state.service.rewardImage} alt="Imagen de la recompensa" style={{ height: '300px', width: '400px', objectFit: 'cover' }} />
+                                        <img src={this.state.service.rewardImage} alt="Imagen de la recompensa" className="edit-img"/>
                                     </Form.Label>
+                                    {/* <div>
+                                        <p>Posición de la imagen</p>
+                                        <Button className="edit-button" size="sm">Centrar</Button>
+                                        <Button className="edit-button" size="sm">Enfoque izquierda</Button>
+                                        <Button className="edit-button" size="sm">Enfoque derecha</Button>
+                                        <Button className="edit-button" size="sm">Abajo</Button>
+                                    </div> */}
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
-                                <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? 'Subiendo imagen...' : 'Guardar cambios'}</Button>
+                                <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Guardar cambios'}</Button>
                             </Form>
                         </Col>
                     </Row>

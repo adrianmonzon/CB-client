@@ -7,8 +7,64 @@
     box-shadow: 0 0 20px black;
 }
 
+/* .hidden {
+    display: none;
+} */
+
+/* .visible {
+  width: 315px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute; 
+  z-index: 3;
+  left: 20%;
+   animation-name: visible;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+.visible img {
+  border: 3px solid #f0ff54;
+  border-radius: 50%;
+}
+.visible div {
+  width: 220px;
+  height: 50px;
+  background-color: white;
+  opacity: 0.7;
+  clip-path: polygon(10% 0%, 100% 1%, 100% 100%, 10% 100%, 0% 50%);
+  border-right: 8px solid #f0ff54;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.visible p {
+  font-family: 'Inconsolata', monospace;
+  font-size: 15px;
+  padding-left: 10px;
+} */
+
 .card-div {
     margin-bottom: 20px;
+    animation-name: visible;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes visible {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
 }
 
 .card img {
@@ -19,7 +75,7 @@
 }
 
 .card-name {
-    background-color:  #94ebcd;
+    background-color:  #93EBEA /*#e8efeb*/;
     color: black;
     margin-bottom: 0;
 }
@@ -94,17 +150,17 @@
 }
 
 .card-situation {
-    background-color: rgba(246, 84, 84, 0.5) ;
+    background-color: rgba(235, 147, 149, 0.8) ;
     border-bottom-left-radius: 10px;
 }
 
 .card-situation2 {
-    background-color: #c4fb6d;
+    background-color: #95EB93;
     border-bottom-left-radius: 10px;
 }
 
 .card-situation3 {
-    background-color: #f4d160;
+    background-color: #EBCC93;
     border-bottom-left-radius: 10px;
 }
 
