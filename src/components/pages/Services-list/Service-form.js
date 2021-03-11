@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ServicesService from './../../../services/services.service'
 import FilesService from './../../../services/upload.service'
 // import Dictaphone from './../../shared/Dictaphone/Dictaphone'
-
+import unknownReward from './../Service-form/unknown-reward.png'
 import { Form, Button, Spinner } from 'react-bootstrap'
 
 class ServiceForm extends Component {
@@ -14,7 +14,7 @@ class ServiceForm extends Component {
                 name: '',
                 description: '',
                 reward: '',
-                rewardImage: '',
+                rewardImage: unknownReward,
                 province: this.props.loggedUser.province,
                 owner: this.props.loggedUser ? this.props.loggedUser._id : ''
             },
@@ -78,7 +78,7 @@ class ServiceForm extends Component {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Imagen de la recompensa {this.state.uploadingActive && <Spinner />}</Form.Label>
-                        <Form.Control required type="file" onChange={this.handleImageUpload} />
+                        <Form.Control type="file" onChange={this.handleImageUpload} />
                     </Form.Group>
                     <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Publicar'}</Button>
                 </Form>

@@ -90,9 +90,9 @@ class ServicesList extends Component {
                             <AccordionCollapse eventKey="0">
                                 <Filter filterByOwnerProvince={this.filterByProvince} />
                             </AccordionCollapse>
-                            <AccordionCollapse eventKey="0">
+                            {/* <AccordionCollapse eventKey="0">
                                 <SituationFilter filterBySituation={this.filterBySituation} />
-                            </AccordionCollapse>
+                            </AccordionCollapse> */}
                         </Accordion>
                     </Col>
                     {this.state.services.length > 0

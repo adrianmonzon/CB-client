@@ -18,7 +18,7 @@ class Signup extends Component {
                 password: "",
                 rating: "",
                 age: "",
-                image: "",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/925px-Unknown_person.jpg",
                 email: "",
                 province: "",
                 location: { type: "Point", coordinates: [] }

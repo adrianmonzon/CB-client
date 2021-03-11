@@ -6,6 +6,7 @@ import Dictaphone from './../../shared/Dictaphone/Dictaphone'
 import { Form, Button, Container, Spinner } from 'react-bootstrap'
 import Alert from './../../shared/Alert/Alert'
 import './New-service.css'
+import unknownReward from './unknown-reward.png'
 
 
 class CreateService extends Component {
@@ -17,7 +18,7 @@ class CreateService extends Component {
                 name: '',
                 description: '',
                 reward: '',
-                rewardImage: '',
+                rewardImage: unknownReward,
                 owner: this.props.loggedUser ? this.props.loggedUser._id : ''
             },
             uploadingActive: false,
@@ -92,7 +93,7 @@ class CreateService extends Component {
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Imagen de la recompensa {this.state.uploadingActive && <Spinner />}</Form.Label>
-                            <Form.Control required type="file" onChange={this.handleImageUpload} />
+                            <Form.Control type="file" onChange={this.handleImageUpload} />
                         </Form.Group>
                         <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Publicar'}</Button>
                     </Form>
