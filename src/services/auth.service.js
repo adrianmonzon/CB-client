@@ -9,8 +9,8 @@ export default class AuthService {
         })
     }
 
-    signup = credentials => this.apiHandler.post('/signup', credentials)
-    login = credentials => this.apiHandler.post('/login', credentials)
-    logout = () => this.apiHandler.post('/logout')
-    isLoggedIn = () => this.apiHandler.get('/loggedin')
+    signup = credentials => this.apiHandler.post('/auth/signup', credentials)
+    login = credentials => this.apiHandler.post('/auth/login', credentials)
+    logout = () => this.apiHandler.post('/auth/logout')
+    isLoggedIn = () => this.apiHandler.get('/auth/loggedin')
 }

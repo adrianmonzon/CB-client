@@ -8,5 +8,5 @@ export default class FilesService {
         });
     }
 
-    uploadImage = (imageForm) => this.apiHandler.post("/upload", imageForm);
+    uploadImage = (imageForm) => this.apiHandler.post("/files/upload", imageForm);
 }
