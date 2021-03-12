@@ -3,7 +3,7 @@ import AuthService from "./../../../services/auth.service";
 import FilesService from "./../../../services/upload.service"
 import Alert from './../../shared/Alert/Alert'
 
-// import "./Signup.css";
+import "./Signup.css";
 
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import LocationSearchInput from "./Autocomplete";

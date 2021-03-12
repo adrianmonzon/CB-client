@@ -14,6 +14,10 @@
     background-color: rgba(163, 158, 158, 0.582);
 }
 
+.details-bg {
+    height: 100vh;
+}
+
 .detailsImage {
     height: 400px;
     width: 100%;

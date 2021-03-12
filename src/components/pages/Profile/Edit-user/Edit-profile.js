@@ -74,7 +74,7 @@ class EditForm extends Component {
 
     render() {
         return (
-            <section className="edit">
+            <section className="edit-profile-bg">
                 <Container>
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>

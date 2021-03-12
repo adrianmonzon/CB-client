@@ -78,7 +78,7 @@ class EditService extends Component {
 
         return (
             <>
-                <Container>
+                <Container className="edit-service-bg">
                     <Row>
                         <Col md={{ span: 6, offset: 3 }}>
                             <h1>Editar publicación</h1>

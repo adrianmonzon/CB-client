@@ -30,7 +30,7 @@ class OwnedServices extends Component {
 
     render() {
         return (
-            <Container>
+            <Container className="owned-bg">
                 <Row>
                     {/* <Col md={{ span: 8, offset: 2 }}> */}
                     <Col md={12}>

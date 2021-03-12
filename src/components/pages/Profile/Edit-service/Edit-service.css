@@ -3,3 +3,7 @@
     width: 400px; 
     object-fit: cover;
 }
+
+.edit-service-bg {
+    height: 100vh;
+}
