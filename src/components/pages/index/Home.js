@@ -1,6 +1,6 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import video from './../index/video-mezclado-2.mp4'
+import video from './../index/video-mezclado3.mp4'
 
 import './Home.css'
 

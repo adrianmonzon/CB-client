@@ -13,6 +13,8 @@ import OwnedServices from './pages/Profile/Owned-services/Owned-services'
 import EditService from './pages/Profile/Edit-service/Edit-service'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthServices from './../services/auth.service'
+import FooterPagePro from './layout/Footer/Footer';
+
 
 import './App.css'
 
@@ -54,6 +56,7 @@ class App extends Component {
           <Route path="/editar-servicio/:service_id" render={props => this.state.loggedInUser ? <EditService loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="//editar-servicio/:service_id" />} />
         
         </Switch>
+        <FooterPagePro location={this.pathname}/>
       </>
     )
   }

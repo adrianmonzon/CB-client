@@ -1,0 +1,14 @@
+.footer {
+    background-color: black;
+    color: #C7C3BA;
+}
+
+.index-footer {
+    background-color: black;
+    color: #C7C3BA;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-bottom: 0px;
+}
