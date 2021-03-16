@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Col, Button, Row } from 'react-bootstrap'
-// import MailService from './../../../service/mail.service'
+import MailService from './../../../services/mail.service'
 import swal from 'sweetalert'
 // import { useHistory } from 'react-router-dom'
 
@@ -15,22 +15,18 @@ class ContactForm extends Component {
             subject: `${this.props.loggedUser.name} quiere ayudarle con: ${this.props.serviceName}`,
             message: ''
         }
-        // this.mailService = new MailService()
+        this.mailService = new MailService();
     }
 
 
-    // handleSubmit = e => {
-    //     e.preventDefault()
-    //     this.mailService.sendMail(this.state)
-    //         .then((response) => {
-    //             if (response.data.status === 'success') {
-    //                 alert("Message Sent.");
-    //                 this.resetForm()
-    //             } else if (response.data.status === 'fail') {
-    //                 alert("Message failed to send.")
-    //             }
-    //         })
-    // }
+    handleSubmit = e => {
+        e.preventDefault()
+        this.mailService
+            .sendMail(this.state)
+            // .then((response) => { alert('Mensaje enviado') })
+            .catch(err => console.log(err))
+
+    }
 
     resetForm() {
         this.setState({ name: '', contactEmail: '', message: '' })

@@ -57,7 +57,11 @@ class UserDetails extends Component {
                             </Row>
                         </>
                         :
-                        <Spinner animation="border" />
+                        <Row className="text-center">
+                            <Col>
+                                <Spinner animation="border" style={{ marginTop: '20px' }} />
+                            </Col>
+                        </Row>
                     }
 
                 </Container>

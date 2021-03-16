@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ServicesService from './../../../services/services.service'
-import UsersService from './../../../services/users.service'
+// import UsersService from './../../../services/users.service'
 import ContactForm from './Contact-form'
 
 
@@ -17,10 +17,10 @@ class ServiceDetails extends Component {
         this.state = {
             service: undefined,
             user: undefined,
-            favs: []
+            // favs: []
         }
         this.servicesService = new ServicesService()
-        this.usersService = new UsersService()
+        // this.usersService = new UsersService()
     }
 
     componentDidMount = () => {
@@ -32,12 +32,12 @@ class ServiceDetails extends Component {
             .then(res => this.setState({ service: res.data }))
             .catch(err => console.log(err))
 
-        const user_id = this.props.match.params.user_id
+        // const user_id = this.props.match.params.user_id
 
-        this.usersService
-            .getUser(user_id)
-            .then(res => this.setState({ user: res.data }))
-            .catch(err => console.log(err))
+        // this.usersService
+        //     .getUser(user_id)
+        //     .then(res => this.setState({ user: res.data }))
+        //     .catch(err => console.log(err))
     }
 
 
@@ -121,7 +121,11 @@ class ServiceDetails extends Component {
                             </Row> */}
                         </>
                         :
-                        <Spinner animation="border" />
+                        <Row className="text-center">
+                            <Col>
+                                <Spinner animation="border" style={{ marginTop: '20px' }}/>
+                            </Col>
+                        </Row>
                     }
 
                 </Container>

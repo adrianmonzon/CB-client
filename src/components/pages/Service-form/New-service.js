@@ -80,7 +80,7 @@ class CreateService extends Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="title">
                             <Form.Label>¿Qué necesita?</Form.Label>
-                        {/* <Dictaphone transcript={<input value={this.state.service.name}></input>}/> */}
+                        {/* <Dictaphone /> */}
                             <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
                         </Form.Group>
                         <Form.Group controlId="description">
