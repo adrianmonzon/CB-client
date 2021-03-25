@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap'
+import { Col, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import video from './../index/video-mezclado3.mp4'
 
@@ -8,7 +8,6 @@ const Home = () => {
 
     return (
         <Container>
-            {/* <Row> */}
             <section className="text-center Home">
                 <Col md={{ span: 6 }}>
                     <video autoPlay muted loop id="video">
@@ -26,7 +25,6 @@ const Home = () => {
                     </article>
                 </Col >
             </section>
-            {/* </Row> */}
         </Container>
     )
 }

@@ -9,7 +9,7 @@ import ServiceForm from './Service-form'
 import './Services-list.css'
 import { Link } from 'react-router-dom'
 import Filter from './Filter'
-import SituationFilter from './SituationFilter'
+// import SituationFilter from './SituationFilter'
 
 
 class ServicesList extends Component {

@@ -16,6 +16,7 @@ class EditService extends Component {
                 reward: "",
                 rewardImage: "",
                 situation: "",
+                assistant: '',
                 owner: this.props.loggedUser._id,
             },
             uploadingActive: false,
@@ -105,7 +106,13 @@ class EditService extends Component {
                                         <option value="En conversaciones">En conversaciones</option>
                                         <option value="Ayuda recibida">Ayuda recibida</option>
                                     </Form.Control>
-                                </Form.Group>
+                                    </Form.Group>
+                                    {this.state.service.situation === 'Ayuda recibida' &&
+                                        <Form.Group controlId="description">
+                                            <Form.Label>Ayuda recibida por:</Form.Label>
+                                            <Form.Control required type="text" placeholder='Introduzca el nombre del usuario que le ha ayudado' name="assistant" value={this.state.service.assistant} onChange={this.handleInputChange} />
+                                        </Form.Group>
+                                    }
                                 <Form.Group controlId="reward">
                                     <Form.Label>Recompensa</Form.Label>
                                     <Form.Control required type="text" name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />

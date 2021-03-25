@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Col, Button, Row } from 'react-bootstrap'
+import { Form, Col, Button } from 'react-bootstrap'
 import MailService from './../../../services/mail.service'
 import swal from 'sweetalert'
 // import { useHistory } from 'react-router-dom'
@@ -7,7 +7,7 @@ import swal from 'sweetalert'
 class ContactForm extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             contactEmail: this.props.contactUser.email,
             contactName: this.props.contactUser.name,
@@ -15,7 +15,7 @@ class ContactForm extends Component {
             subject: `${this.props.loggedUser.name} quiere ayudarle con: ${this.props.serviceName}`,
             message: ''
         }
-        this.mailService = new MailService();
+        this.mailService = new MailService()
     }
 
 
@@ -23,8 +23,8 @@ class ContactForm extends Component {
         e.preventDefault()
         this.mailService
             .sendMail(this.state)
-            // .then((response) => { alert('Mensaje enviado') })
-            .catch(err => console.log(err))
+            .then((response) => { alert('Mensaje enviado') })
+            .catch(err => console.log(`Email no enviado`, err))
 
     }
 

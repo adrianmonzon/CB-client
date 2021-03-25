@@ -3,10 +3,11 @@ import ServicesService from './../../../services/services.service'
 // import UsersService from './../../../services/users.service'
 import ContactForm from './Contact-form'
 
+import Alert from './../../../components/shared/Alert/Alert'
 
 import './Service-details.css'
 
-import { Container, Row, Col, Spinner, Accordion, Button } from 'react-bootstrap'
+import { Container, Row, Col, Spinner, Accordion, Button, Form } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
@@ -15,89 +16,81 @@ class ServiceDetails extends Component {
     constructor() {
         super()
         this.state = {
-            service: undefined,
-            user: undefined,
-            // favs: []
+            service: {
+                name: "",
+                description: "",
+                reward: "",
+                rewardImage: "",
+                situation: "",
+                assistant: '',
+                owner: "",
+                rating: ""
+            },
+            uploadingActive: false,
+            showToast: false,
+            toastText: "",
         }
+    
         this.servicesService = new ServicesService()
-        // this.usersService = new UsersService()
     }
 
-    componentDidMount = () => {
+componentDidMount = () => {
 
-        const service_id = this.props.match.params.service_id
+    const service_id = this.props.match.params.service_id
 
-        this.servicesService
-            .getService(service_id)
-            .then(res => this.setState({ service: res.data }))
-            .catch(err => console.log(err))
+    this.servicesService
+        .getService(service_id)
+        .then(res => this.setState({ service: res.data }))
+        .catch(err => console.log(err))
+}
 
-        // const user_id = this.props.match.params.user_id
+handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
-        // this.usersService
-        //     .getUser(user_id)
-        //     .then(res => this.setState({ user: res.data }))
-        //     .catch(err => console.log(err))
-    }
+handleSubmit = e => {
 
+    e.preventDefault()
 
+    this.servicesService
+        .updateService(this.state.service._id, this.state.service)
+        .then(res => {
+            this.handleToast(true, '¡Valoración enviada!')
+            // this.props.history.push(`/mis-servicios/${res.data._id}`)
+        })
+        .catch(err => console.log(err))
+}
 
-    render() {
+handleInputChange = e => this.setState({ service: { ...this.state.service, [e.target.name]: e.target.value } })
 
-        return (
-            <section className="details-bg">
-                <Container className="service-details">
-                    {this.state.service
-                        ?
-                        <>
-                            {/* <Row>
-                                <Col className="text-center">
-                                    <h1>{this.state.service.name}</h1>
-                                    <p><small>Por:</small> {<Link to={`/usuarios/${this.state.service.owner._id}`}>{this.state.service.owner.name}</Link>}</p>
-                                    <hr />
-                                    <Col md={6}>
-                                      
-                                       
-                                    </Col>
-                                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info edit-button" style={{ marginLeft: '10px' }}>Contactar con {this.state.service.owner.name}</Link>}
-                                    {
-                                        this.props.loggedUser &&
-                                        <Button className="btn btn-sm edit-button" style={{ marginLeft: '10px' }}>
-                                            <>
-                                                <Accordion>
-                                                    <Accordion.Toggle as={Link} variant="link" eventKey="0" style={{ textDecoration: 'none', color: 'white' }}>
-                                                        Contactar con {this.state.service.owner.name}
-                                                    </Accordion.Toggle>
-                                                    <Accordion.Collapse eventKey="0" style={{ marginTop: '10px' }}>
-                                                        <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service.owner} serviceName={this.state.service.name} />
-                                                    </Accordion.Collapse>
-                                                </Accordion>
-                                            </>
-                                        </Button>
-                                    }
-                                </Col>
-                            </Row> */}
-                            <Row className="text-center">
-                                <Col md={12}>
-                                    <h1>{this.state.service.name}</h1>
-                                    <p><small>Por:</small> {<Link to={`/usuarios/${this.state.service.owner._id}`}>{this.state.service.owner.name}</Link>}</p>
-                                    <hr />
-                                </Col>
-                                <Col className="text-center" md={6}>
-                                    <h3 className="details-h3">Descripción</h3>
-                                    <p className="descript-box">{this.state.service.description}</p>
-                                    {/* <Link to="/servicios" className="btn btn-sm btn-info edit-button">Volver</Link> */}
-                                </Col>
-                                <Col className="text-center" md={6}>
-                                    <h3 className="details-h3">Recompensa</h3>
-                                    <img className="detailsImage" alt="Imagen de la recompensa" src={this.state.service.rewardImage}></img>
-                                    <p>{this.state.service.reward}</p>
-                                </Col>
+render() {
 
-                                <Col md={12}>
-                                    {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info edit-button" style={{ marginLeft: '10px' }}>Contactar con {this.state.service.owner.name}</Link>}
-                                    {
-                                        this.props.loggedUser &&
+    return (
+        <section className="details-bg">
+            <Container className="service-details">
+                {this.state.service
+                    ?
+                    <>
+                        <Row className="text-center">
+                            <Col md={12}>
+                                <h1>{this.state.service.name}</h1>
+                                <p><small>Por:</small> {<Link to={`/usuarios/${this.state.service.owner._id}`}>{this.state.service.owner.name}</Link>}</p>
+                                <hr />
+                            </Col>
+                            <Col className="text-center" md={6}>
+                                <h3 className="details-h3">Descripción</h3>
+                                <p className="descript-box">{this.state.service.description}</p>
+                                {/* <Link to="/servicios" className="btn btn-sm btn-info edit-button">Volver</Link> */}
+                            </Col>
+                            <Col className="text-center" md={6}>
+                                <h3 className="details-h3">Recompensa</h3>
+                                <img className="detailsImage" alt="Imagen de la recompensa" src={this.state.service.rewardImage}></img>
+                                <p>{this.state.service.reward}</p>
+                            </Col>
+
+                            <Col md={12}>
+                                {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn btn-sm btn-info edit-button" style={{ marginLeft: '10px' }}>Contactar con {this.state.service.owner.name}</Link>}
+                                {
+                                    this.props.loggedUser && this.props.loggedUser.username !== this.state.service.assistant
+                                        ?
                                         <Button className="btn btn-sm edit-button" style={{ marginTop: '30px' }}>
                                             <>
                                                 <Accordion>
@@ -110,28 +103,76 @@ class ServiceDetails extends Component {
                                                 </Accordion>
                                             </>
                                         </Button>
-                                    }
-                                </Col>
-                            </Row>
+                                        :
+                                        this.props.loggedUser && this.props.loggedUser.username === this.state.service.assistant
+                                            ?
+                                            <>
+                                                <h3>Valore a {this.state.service.owner.name}</h3>
+                                                <Form onSubmit={this.handleSubmit}>
+                                                    <Form.Control
+                                                        as="select"
+                                                        name="rating"
+                                                        value={this.state.service.rating}
+                                                        onChange={this.handleInputChange}
+                                                        size="sm"
+                                                        style={{ fontSize: '20px' }}
+                                                    >
+                                                        <option value="">Seleccionar</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </Form.Control>
+                                                <Button className="btn btn-sm edit-button" type="submit" disabled={this.state.uploadingActive} style={{ marginTop: '30px' }}>Enviar puntuación</Button>
+                                                </Form>
 
-                            {/* <Row className="map-row">
-                                <Col md={{ span: 6, offset: 3 }}>
-                                    <UserMap user={this.state.service} />
-                                </Col>
-                            </Row> */}
-                        </>
-                        :
-                        <Row className="text-center">
-                            <Col>
-                                <Spinner animation="border" style={{ marginTop: '20px' }}/>
+                                                {/* <Button className="btn btn-sm edit-button" style={{ marginTop: '30px' }}>
+                                                <Accordion>
+                                                    <Accordion.Toggle as={Link} variant="link" eventKey="0" style={{ textDecoration: 'none', color: 'white' }}>
+                                                        Valorar servicio
+                                                        </Accordion.Toggle>
+                                                    <Accordion.Collapse eventKey="0" style={{ marginTop: '10px' }}>
+                                                        <Form inline>
+                                                            <Form.Control
+                                                                as="select"
+                                                                className="my-1 mr-sm-2"
+                                                                id="inlineFormCustomSelectPref"
+                                                                custom
+                                                                size="sm"
+                                                                style={{ fontSize: '20px' }}
+                                                            >
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </Form.Control>
+                                                        </Form>
+                                                    </Accordion.Collapse>
+                                                </Accordion>
+                                                </Button> */}
+                                            </>
+                                            :
+                                            null
+                                }
+
                             </Col>
                         </Row>
-                    }
+                    </>
+                    :
+                    <Row className="text-center">
+                        <Col>
+                            <Spinner animation="border" style={{ marginTop: '20px' }} />
+                        </Col>
+                    </Row>
+                }
 
-                </Container>
-            </section>
-        )
-    }
+            </Container>
+            <Alert show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
+        </section>
+    )
+}
 }
 
 export default ServiceDetails

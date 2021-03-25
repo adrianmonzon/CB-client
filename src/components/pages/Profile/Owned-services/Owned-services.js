@@ -41,7 +41,7 @@ class OwnedServices extends Component {
                                 ?
                                 <Row>
                                     <Col>
-                                        {this.state.owned.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)} {/*<Button onClick={this.confirmDelete()}>Eliminar</Button>*/}
+                                        {this.state.owned.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)}
                                     </Col>
                                 </Row>
                                 :

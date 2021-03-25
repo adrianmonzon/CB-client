@@ -1,7 +1,9 @@
-.user-details img {
+.user-img {
     height: 350px;
     width: 100%;
     object-fit: cover;
+    border: 2px solid;
+    padding: 5px;
 }
 
 .user-details {

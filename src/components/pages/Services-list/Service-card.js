@@ -13,7 +13,7 @@ import bin from './eliminar.png'
 import trophy from './trophy.png'
 
 
-const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshPage, classCard }) => {
+const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshPage, classCard, assistant }) => {
 
     const servicesService = new ServicesService();
     const usersService = new UsersService()
@@ -158,16 +158,27 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
                                     :
                                     <div className="button-position">
                                         {
-                                            situation === "Ayuda recibida"
+                                            loggedUser && loggedUser.username === assistant
                                                 ?
-                                                null
-                                                :
                                                 <Link className="btn btn-light btn-sm card-button" to={`/servicios/${_id}`}>
                                                     <img
                                                         alt="Imagen de usuario"
                                                         src={arrow}
                                                         className="arrow-button"
-                                                    /></Link>
+                                                    />
+                                                </Link>
+                                                :
+                                                situation === "Ayuda recibida"
+                                                    ?
+                                                    null
+                                                    :
+                                                    <Link className="btn btn-light btn-sm card-button" to={`/servicios/${_id}`}>
+                                                        <img
+                                                            alt="Imagen de usuario"
+                                                            src={arrow}
+                                                            className="arrow-button"
+                                                        />
+                                                    </Link>
                                         }
                                     </div>
                             }

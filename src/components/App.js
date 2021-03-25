@@ -53,7 +53,7 @@ class App extends Component {
           <Route path="/usuarios/:user_id" render={props => <UserDetails {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/editar-perfil" render={props => this.state.loggedInUser ? <EditForm {...props} storeUser={this.setTheUser} user={this.state.loggedInUser} /> : <Redirect to="/editar-perfil" />} />
           <Route path="/mis-servicios" render={props => this.state.loggedInUser ? <OwnedServices loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/mis-servicios" />} />
-          <Route path="/editar-servicio/:service_id" render={props => this.state.loggedInUser ? <EditService loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="//editar-servicio/:service_id" />} />
+          <Route path="/editar-servicio/:service_id" render={props => this.state.loggedInUser ? <EditService loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/editar-servicio/:service_id" />} />
         
         </Switch>
         <FooterPagePro location={this.pathname}/>
