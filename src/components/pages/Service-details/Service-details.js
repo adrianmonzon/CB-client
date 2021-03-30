@@ -112,7 +112,7 @@ render() {
                                                     <Form.Control
                                                         as="select"
                                                         name="rating"
-                                                        value={this.state.service.rating}
+                                                        value={this.state.service.rating} //assistantRating
                                                         onChange={this.handleInputChange}
                                                         size="sm"
                                                         style={{ fontSize: '20px' }}
@@ -126,32 +126,6 @@ render() {
                                                     </Form.Control>
                                                 <Button className="btn btn-sm edit-button" type="submit" disabled={this.state.uploadingActive} style={{ marginTop: '30px' }}>Enviar puntuación</Button>
                                                 </Form>
-
-                                                {/* <Button className="btn btn-sm edit-button" style={{ marginTop: '30px' }}>
-                                                <Accordion>
-                                                    <Accordion.Toggle as={Link} variant="link" eventKey="0" style={{ textDecoration: 'none', color: 'white' }}>
-                                                        Valorar servicio
-                                                        </Accordion.Toggle>
-                                                    <Accordion.Collapse eventKey="0" style={{ marginTop: '10px' }}>
-                                                        <Form inline>
-                                                            <Form.Control
-                                                                as="select"
-                                                                className="my-1 mr-sm-2"
-                                                                id="inlineFormCustomSelectPref"
-                                                                custom
-                                                                size="sm"
-                                                                style={{ fontSize: '20px' }}
-                                                            >
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                            </Form.Control>
-                                                        </Form>
-                                                    </Accordion.Collapse>
-                                                </Accordion>
-                                                </Button> */}
                                             </>
                                             :
                                             null

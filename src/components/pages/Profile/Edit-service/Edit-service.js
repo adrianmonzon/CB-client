@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import ServicesService from "./../../../../services/services.service"
 import FilesService from "./../../../../services/upload.service"
+import UsersService from "./../../../../services/users.service"
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap"
 import Alert from './../../../shared/Alert/Alert'
 import './Edit-service.css'
@@ -16,9 +17,12 @@ class EditService extends Component {
                 reward: "",
                 rewardImage: "",
                 situation: "",
-                assistant: '',
+                assistant: 'carlos',
                 owner: this.props.loggedUser._id,
             },
+            selectedUser: {},
+            isThereSelectedUser: false,
+            users: [],
             uploadingActive: false,
             showToast: false,
             toastText: "",
@@ -26,6 +30,7 @@ class EditService extends Component {
 
         this.serviceService = new ServicesService()
         this.filesService = new FilesService()
+        this.usersService = new UsersService()
 
     }
     componentDidMount() {
@@ -33,6 +38,14 @@ class EditService extends Component {
         this.serviceService
             .getService(service_id)
             .then(res => this.setState({ service: res.data }))
+            .catch(err => console.log(err))
+
+        this.usersService
+            .getUsers()
+            .then(res => {
+                // console.log(res)
+                this.setState({ users: res.data })
+            })
             .catch(err => console.log(err))
     }
 
@@ -47,9 +60,21 @@ class EditService extends Component {
                 // this.props.history.push(`/mis-servicios/${res.data._id}`)
             })
             .catch(err => console.log(err))
+
+        this.usersService
+            .updateUser(this.state.selectedUser._id, this.state.selectedUser)
+            .then(() => {
+                console.log(`El usuario valorado ha sido ${this.state.selectedUser.username} y su nuevo rating es ${this.state.selectedUser.userRating}`)
+                // this.props.history.push("/editar-perfil");
+                this.handleToast(true, '¡Cambios guardados!')
+            })
+            .catch((err) => console.log("Error", err));
     }
 
     handleInputChange = e => this.setState({ service: { ...this.state.service, [e.target.name]: e.target.value } })
+
+    handleSelectedUserRating = e => this.setState({ selectedUser: { ...this.state.selectedUser, [e.target.name]: e.target.value } })
+
 
     handleImageUpload = (e) => {
         const uploadData = new FormData();
@@ -71,9 +96,20 @@ class EditService extends Component {
             .catch((err) => console.log("ERRORRR!", err));
     };
 
-    // handleImagePosition = () => {
-    //     <p></p>
-    // }
+
+    handleAssistantData = e => {
+
+        this.handleInputChange(e)
+
+        setTimeout(() => {
+            const user = this.state.users.find(elm => elm.username === this.state.service.assistant)
+            this.setState({ selectedUser: user, isThereSelectedUser: true })
+            console.log('Este es el state', this.state)
+            console.log('El assistant al ejecutar la función es ', this.state.service.assistant)
+        }, 0)
+
+    }
+
 
     render() {
 
@@ -106,13 +142,42 @@ class EditService extends Component {
                                         <option value="En conversaciones">En conversaciones</option>
                                         <option value="Ayuda recibida">Ayuda recibida</option>
                                     </Form.Control>
-                                    </Form.Group>
-                                    {this.state.service.situation === 'Ayuda recibida' &&
-                                        <Form.Group controlId="description">
+                                </Form.Group>
+                                {
+                                    this.state.service.situation === 'Ayuda recibida' &&
+                                    <>
+                                        <Form.Group controlId="assistant">
                                             <Form.Label>Ayuda recibida por:</Form.Label>
-                                            <Form.Control required type="text" placeholder='Introduzca el nombre del usuario que le ha ayudado' name="assistant" value={this.state.service.assistant} onChange={this.handleInputChange} />
+                                            {this.state.service.assistant === this.props.loggedUser.username && <p className="username-message">El nombre de usuario introducido no puede ser el propio</p>}
+                                            <Form.Control required type="text" placeholder='Introduzca el nombre del usuario que le ha ayudado' name="assistant" value={this.state.service.assistant} onChange={/*e => { this.handleInputChange(e); this.getSelectedUser(e)*/this.handleAssistantData} />
                                         </Form.Group>
-                                    }
+                                        {
+                                            this.state.users.map((elm) => elm.username).includes(this.state.service.assistant) && this.state.selectedUser !== undefined && this.state.service.assistant !== this.props.loggedUser.username
+                                                ?
+                                                <>
+                                                    {/* <button onClick={() => this.getSelectedUser()}>Confirmar usuario</button> */}
+                                                    <Form.Group controlId="userRating">
+                                                        <Form.Label>Valore la ayuda recibida por el usuario</Form.Label>
+                                                        <Form.Control
+                                                            as="select"
+                                                            name="userRating"
+                                                            value={this.state.selectedUser.userRating} //aquí se valora el rating del usuario que te ha ayudado
+                                                            onChange={this.handleSelectedUserRating}
+                                                        >
+                                                            <option value="">Seleccionar</option>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </Form.Control>
+                                                    </Form.Group>
+                                                </>
+                                                :
+                                                <div className="username-message"><span>Asegúrese de que el nombre de usuario introducido sea correcto</span></div>
+                                        }
+                                    </>
+                                }
                                 <Form.Group controlId="reward">
                                     <Form.Label>Recompensa</Form.Label>
                                     <Form.Control required type="text" name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
@@ -120,7 +185,7 @@ class EditService extends Component {
                                 <Form.Group>
                                     <Form.Label>
                                         Imagen de la recompensa {this.state.uploadingActive && <Spinner />} <br />
-                                        <img src={this.state.service.rewardImage} alt="Imagen de la recompensa" className="edit-img"/>
+                                        <img src={this.state.service.rewardImage} alt="Imagen de la recompensa" className="edit-img" />
                                     </Form.Label>
                                     {/* <div>
                                         <p>Posición de la imagen</p>
@@ -131,7 +196,7 @@ class EditService extends Component {
                                     </div> */}
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
-                                <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Guardar cambios'}</Button>
+                                <Button className="edit-button" size="sm" type="submit" disabled={this.state.service.assistant === this.props.loggedUser.username || this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Guardar cambios'}</Button>
                             </Form>
                         </Col>
                     </Row>

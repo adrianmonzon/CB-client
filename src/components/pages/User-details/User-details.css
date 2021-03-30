@@ -10,18 +10,20 @@
     padding-top: 30px;
 }
 
-/* .details-bg {
-    background-image: url("./details-bg.jpeg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.details-bg {
+   background-color: snow;
     min-height: 100vh;
-    color: white;
-} */
+    color: black;
+}
 
 /* .hr {
     border: 1px groove white;
 } */
+
+.stars-img {
+   width: 120px;
+   margin-bottom: 6px;
+}
 
 .contact-row {
     margin-top: 30px;

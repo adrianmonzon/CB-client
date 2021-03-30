@@ -2,12 +2,7 @@ import React, { Component } from "react"
 import UsersService from "../../../../services/users.service"
 import Alert from './../../../shared/Alert/Alert'
 import FilesService from "./../../../../services/upload.service"
-import LocationSearchInput from "./../../Signup/Autocomplete";
-
-
-
 import "./Edit-profile.css";
-
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 
 class EditForm extends Component {
