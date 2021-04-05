@@ -46,14 +46,12 @@ class UserDetails extends Component {
 
     getUserRating = () => {
 
-        //media como anfitrión (media del rating de sus servicios creados)
-        const userServicesRatingAverage = Math.round(this.state.owned.map(elm => elm.rating).reduce((a, b) => a + b, 0) / this.state.owned.length)
+        const userServicesRatingAverage = this.state.owned.map(elm => elm.rating).reduce((a, b) => a + b, 0) / this.state.owned.length
+        const userRatingsAverage = this.state.user.userRatings.reduce((a, b) => a + b, 0) / this.state.user.userRatings.length
+        const finalUserRatingAverage = Math.round((userServicesRatingAverage + userRatingsAverage) / 2)
+        console.log(userServicesRatingAverage, userRatingsAverage, finalUserRatingAverage)
 
-        //aquí iría la media como asistente (media del rating del propio usuario como ayudante)
-
-        //aquí iría la media final, la suma de ambas entre 2, que es la que se usaría en el switch
-
-        switch (userServicesRatingAverage) {
+        switch (finalUserRatingAverage) {
             case 1:
                 return <span>1/5  <img src={oneStar} alt='1/5' className="stars-img" /></span>;
             case 2:

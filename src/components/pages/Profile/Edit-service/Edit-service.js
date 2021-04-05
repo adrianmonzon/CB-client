@@ -17,7 +17,8 @@ class EditService extends Component {
                 reward: "",
                 rewardImage: "",
                 situation: "",
-                assistant: 'carlos',
+                assistant: "",
+                serviceState: "",
                 owner: this.props.loggedUser._id,
             },
             selectedUser: {},
@@ -26,6 +27,8 @@ class EditService extends Component {
             uploadingActive: false,
             showToast: false,
             toastText: "",
+            // validationDone: false,
+            // serviceClosed: false
         }
 
         this.serviceService = new ServicesService()
@@ -42,14 +45,13 @@ class EditService extends Component {
 
         this.usersService
             .getUsers()
-            .then(res => {
-                // console.log(res)
-                this.setState({ users: res.data })
-            })
+            .then(res => this.setState({ users: res.data }))
             .catch(err => console.log(err))
     }
 
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
+
+    handleServiceClosed = e => this.setState({ service: { ...this.state.service, serviceState: 'closed' } })
 
     handleSubmit = e => {
         e.preventDefault()
@@ -64,16 +66,27 @@ class EditService extends Component {
         this.usersService
             .updateUser(this.state.selectedUser._id, this.state.selectedUser)
             .then(() => {
-                console.log(`El usuario valorado ha sido ${this.state.selectedUser.username} y su nuevo rating es ${this.state.selectedUser.userRating}`)
+                console.log(`El usuario valorado ha sido ${this.state.selectedUser.username} y su nuevo rating es ${this.state.selectedUser.userRatings}`)
                 // this.props.history.push("/editar-perfil");
                 this.handleToast(true, '¡Cambios guardados!')
             })
             .catch((err) => console.log("Error", err));
+
     }
 
     handleInputChange = e => this.setState({ service: { ...this.state.service, [e.target.name]: e.target.value } })
 
-    handleSelectedUserRating = e => this.setState({ selectedUser: { ...this.state.selectedUser, [e.target.name]: e.target.value } })
+    handleSelectedUserRating = e => {
+
+        const inputValueConvertedToNumber = parseInt(e.target.value, 10)
+        const updatedRatingsArray = this.state.selectedUser.userRatings.concat(inputValueConvertedToNumber);
+        this.setState({ selectedUser: { ...this.state.selectedUser, [e.target.name]: updatedRatingsArray }, validationDone: true })
+        console.log(`El rating que tenía ${this.state.selectedUser.username} es ${this.state.selectedUser.userRatings}`)
+        console.log('La nueva valoración añadida al array userRatings es', inputValueConvertedToNumber)
+        console.log('El nuevo array va a ser', updatedRatingsArray)
+        this.handleServiceClosed()
+
+    }
 
 
     handleImageUpload = (e) => {
@@ -104,8 +117,8 @@ class EditService extends Component {
         setTimeout(() => {
             const user = this.state.users.find(elm => elm.username === this.state.service.assistant)
             this.setState({ selectedUser: user, isThereSelectedUser: true })
-            console.log('Este es el state', this.state)
-            console.log('El assistant al ejecutar la función es ', this.state.service.assistant)
+            // console.log('Este es el state', this.state)
+            // console.log('El assistant al ejecutar la función es ', this.state.service.assistant)
         }, 0)
 
     }
@@ -151,30 +164,36 @@ class EditService extends Component {
                                             {this.state.service.assistant === this.props.loggedUser.username && <p className="username-message">El nombre de usuario introducido no puede ser el propio</p>}
                                             <Form.Control required type="text" placeholder='Introduzca el nombre del usuario que le ha ayudado' name="assistant" value={this.state.service.assistant} onChange={/*e => { this.handleInputChange(e); this.getSelectedUser(e)*/this.handleAssistantData} />
                                         </Form.Group>
+
                                         {
-                                            this.state.users.map((elm) => elm.username).includes(this.state.service.assistant) && this.state.selectedUser !== undefined && this.state.service.assistant !== this.props.loggedUser.username
+                                            this.state.service.assistant && this.state.service.serviceState === 'closed'
                                                 ?
-                                                <>
-                                                    {/* <button onClick={() => this.getSelectedUser()}>Confirmar usuario</button> */}
-                                                    <Form.Group controlId="userRating">
-                                                        <Form.Label>Valore la ayuda recibida por el usuario</Form.Label>
-                                                        <Form.Control
-                                                            as="select"
-                                                            name="userRating"
-                                                            value={this.state.selectedUser.userRating} //aquí se valora el rating del usuario que te ha ayudado
-                                                            onChange={this.handleSelectedUserRating}
-                                                        >
-                                                            <option value="">Seleccionar</option>
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                        </Form.Control>
-                                                    </Form.Group>
-                                                </>
+                                                <div className='validation-message'><span>Valoración registrada, haga click en 'Guardar cambios' para finalizar</span></div>
                                                 :
-                                                <div className="username-message"><span>Asegúrese de que el nombre de usuario introducido sea correcto</span></div>
+                                                this.state.users.map((elm) => elm.username).includes(this.state.service.assistant) && this.state.selectedUser !== undefined && this.state.service.assistant !== this.props.loggedUser.username
+                                                    ?
+                                                    <>
+                                                        <Form.Group controlId="userRating">
+                                                            <Form.Label>Valore la ayuda recibida por el usuario</Form.Label>
+                                                            <Form.Control
+                                                                as="select"
+                                                                name="userRatings"
+                                                                value={this.state.selectedUser.userRatings}
+                                                                onChange={this.handleSelectedUserRating}
+                                                            >
+                                                                <option value="">Seleccionar</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </Form.Control>
+                                                        </Form.Group>
+                                                        {/* <div className={this.state.validationDone ? 'validation-message' : 'hide-validation'}><span>Valoración registrada, guarde cambios para finalizar</span></div> */}
+
+                                                    </>
+                                                    :
+                                                    <div className="username-message"><span>Asegúrese de que el nombre de usuario introducido sea correcto</span></div>
                                         }
                                     </>
                                 }
