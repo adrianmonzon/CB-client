@@ -1,4 +1,4 @@
-import { Col, Container } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import video from './../index/video-mezclado3.mp4'
 
@@ -8,8 +8,9 @@ const Home = () => {
 
     return (
         <Container>
-            <section className="text-center Home">
-                <Col md={{ span: 6 }}>
+            <section className="Home">
+                <Row>
+                <Col md={8}>
                     <video autoPlay muted loop id="video">
                         <source src={video} />
                     </video>
@@ -17,13 +18,14 @@ const Home = () => {
                         <p>Pida lo que necesite...</p>
                     </article>
                     <article id="secondMessage">
-                        <p>...y alguien acudirá en su ayuda</p>
+                        <p>...y alguien acudirá en su ayuda.</p>
                     </article>
-                    <article id="thirdMessage">
+                    <article id="thirdMessage" className="align-items-center">
                         <p>Comenzar</p>
                         <Link className="btn btn-outline-light btn-lg home-button" to={`/servicios`}>Acceder</Link>
                     </article>
-                </Col >
+                </Col> 
+                </Row>
             </section>
         </Container>
     )

@@ -8,7 +8,6 @@ import Alert from './../../shared/Alert/Alert'
 import './New-service.css'
 import unknownReward from './unknown-reward.png'
 import oldWoman from './old-woman2.jpeg'
-import waveVector from './wave-vector1.png'
 
 
 class CreateService extends Component {

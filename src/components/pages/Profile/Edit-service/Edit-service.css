@@ -36,3 +36,8 @@
     margin-bottom: 15px;
     text-align: center;
 }
+
+.edit-service-vector {
+    width: 100%;
+    min-height: 100vh;
+}

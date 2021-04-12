@@ -40,7 +40,7 @@ class Login extends Component {
                 }
 
             })
-            .catch(err => this.setState({ credentialsError: err.response.data.message }))
+            .catch(err => this.setState({ credentialsError: err.response.data.message === 'Missing credentials' ? 'Rellene todos los campos' : err.response.data.message }))
     }
 
     render() {
@@ -57,12 +57,12 @@ class Login extends Component {
                             <hr className="login-hr" />
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group  controlId="username" /*className="w-50"*/>
-                                    <Form.Label>Nombre de usuario</Form.Label>
-                                    <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
+                                    {/* <Form.Label>Nombre de usuario</Form.Label> */}
+                                    <Form.Control type="text" placeholder="Nombre de usuario" name="username" value={this.state.username} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group controlId="password">
-                                    <Form.Label>Contraseña</Form.Label>
-                                    <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
+                                    {/* <Form.Label>Contraseña</Form.Label> */}
+                                    <Form.Control type="password" placeholder="Contraseña" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 {
                                     this.state.credentialsError

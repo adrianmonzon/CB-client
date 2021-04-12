@@ -10,7 +10,7 @@ class ContactForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactEmail: console.log('El contactEmail es', this.props.contactUser.email),
+            contactEmail: this.props.contactUser.email,
             // contactName: this.props.contactUser.name,
             name: this.props.loggedUser.name,
             subject: `${this.props.loggedUser.name} (${this.props.loggedUser.email}) quiere ayudarle con: ${this.props.serviceName}`,
@@ -81,7 +81,7 @@ class ContactForm extends Component {
 
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Para</Form.Label>
-                            <Form.Control type="text" placeholder="Introducir email de destino" name="contactEmail" readOnly={this.state.contactEmail !== undefined ? true : false} value={this.state.contactEmail} />
+                            <Form.Control type="text" placeholder="Introducir email de destino" name="contactEmail" readOnly /*readOnly={this.state.contactEmail !== undefined ? true : false}*/ value={this.state.contactEmail} />
                         </Form.Group>
                     </Form.Row>
 

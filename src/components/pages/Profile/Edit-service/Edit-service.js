@@ -5,6 +5,7 @@ import UsersService from "./../../../../services/users.service"
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap"
 import Alert from './../../../shared/Alert/Alert'
 import './Edit-service.css'
+import waveVector from './wave-vector.png'
 // import Autocomplete from "./../Autocomplete-form/Autocomplete-form"
 
 class EditService extends Component {
@@ -130,7 +131,7 @@ class EditService extends Component {
             <>
                 <Container className="edit-service-bg">
                     <Row>
-                        <Col md={{ span: 6, offset: 3 }}>
+                        <Col md={{ span: 7, offset: 2 }}>
                             <h1>Editar publicación</h1>
                             <hr />
                             <Form onSubmit={this.handleSubmit}>
@@ -217,6 +218,9 @@ class EditService extends Component {
                                 </Form.Group>
                                 <Button className="edit-button" size="sm" type="submit" disabled={this.state.service.assistant === this.props.loggedUser.username || this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Guardar cambios'}</Button>
                             </Form>
+                        </Col>
+                        <Col md={3}>
+                            <img src={waveVector} alt="ola" className="edit-service-vector" />
                         </Col>
                     </Row>
                 </Container>

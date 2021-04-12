@@ -4,6 +4,9 @@ import Alert from './../../../shared/Alert/Alert'
 import FilesService from "./../../../../services/upload.service"
 import "./Edit-profile.css";
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
+import waveVector from './wave-vector.png'
+import waveVectorLeft from './wave-vector-left.png'
+
 
 class EditForm extends Component {
     constructor(props) {
@@ -72,7 +75,10 @@ class EditForm extends Component {
             <section className="edit-profile-bg">
                 <Container>
                     <Row>
-                        <Col md={{ span: 6, offset: 3 }}>
+                        {/* <Col md={3}>
+                            <img src={waveVectorLeft} alt="ola" className="edit-user-vector" />
+                        </Col> */}
+                        <Col md={{span: 7, offset: 2}}>
                             <h1>Editar perfil</h1>
                             <hr />
                             <Form onSubmit={this.handleSubmit}>
@@ -203,6 +209,9 @@ class EditForm extends Component {
                                     {this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : "Guardar cambios"}
                                 </Button>
                             </Form>
+                        </Col>
+                        <Col md={3}>
+                        <img src={waveVector} alt="ola" className="edit-user-vector" />
                         </Col>
                     </Row>
                 </Container>
