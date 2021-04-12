@@ -101,7 +101,7 @@ class ServicesList extends Component {
                             <Col className="text-center">
                                 {this.state.services.length === 0 && this.state.isServiceLoaded ? <Col md={{ span: 5, offset: 4 }}><p style={{ marginTop: '20px', color: 'black', border: '1px solid', backgroundColor: 'white', borderRadius: '5px' }}>No hay resultados para esta búsqueda</p></Col>
                                     :
-                                    <Spinner animation="border" variant="light" style={{ marginTop: '20px' }} />
+                                    <Spinner animation="border" variant="dark" style={{ marginTop: '20px' }} />
                                 }
                             </Col>
                         </Row>
