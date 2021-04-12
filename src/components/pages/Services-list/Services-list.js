@@ -9,7 +9,7 @@ import ServiceForm from './Service-form'
 import './Services-list.css'
 import { Link } from 'react-router-dom'
 import Filter from './Filter'
-// import SituationFilter from './SituationFilter'
+import SituationFilter from './SituationFilter'
 
 
 class ServicesList extends Component {
@@ -73,26 +73,22 @@ class ServicesList extends Component {
     render() {
         return (
             <section className="services-list">
-                {/* <Parallax strength={300}>
-                    <Background className="custom-bg">
-                        <img src={bgImage} alt="fill murray" />
-                    </Background>
-                </Parallax> */}
+                <h1 className="text-center">Personas que necesitan ayuda</h1>
                 <Container className="list-container">
                     <Col className="text-center">
 
-                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn main-button btn-light list-button">Pedir ayuda</Link>}
-                        {this.props.loggedUser && <Button className="main-button btn-light list-button" onClick={() => this.handleModal(true)} >Pedir ayuda</Button>}
+                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn edit-button list-button" style={{color: 'white'}}>Pedir ayuda</Link>}
+                        {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} >Pedir ayuda</Button>}
                         <Accordion className="filter-button">
-                            <Accordion.Toggle as={Button} className="main-button btn-light list-button" eventKey="0">
+                            <Accordion.Toggle as={Button} className="edit-button list-button" eventKey="0">
                                 Filtro
                                 </Accordion.Toggle>
                             <AccordionCollapse eventKey="0">
                                 <Filter filterByOwnerProvince={this.filterByProvince} />
                             </AccordionCollapse>
-                            {/* <AccordionCollapse eventKey="0">
+                            <AccordionCollapse eventKey="0">
                                 <SituationFilter filterBySituation={this.filterBySituation} />
-                            </AccordionCollapse> */}
+                            </AccordionCollapse>
                         </Accordion>
                     </Col>
                     {this.state.services.length > 0

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AuthService from "./../../../services/auth.service";
 import FilesService from "./../../../services/upload.service"
 import Alert from './../../shared/Alert/Alert'
-
+import personLaptop from './woman-laptop.jpeg'
 import "./Signup.css";
 
 import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
@@ -25,7 +25,8 @@ class Signup extends Component {
             },
             uploadingActive: false,
             showToast: false,
-            toastText: ''
+            toastText: '',
+            isSigningUp: false,
         };
         this.authService = new AuthService();
         this.filesService = new FilesService();
@@ -42,10 +43,13 @@ class Signup extends Component {
         this.authService
             .signup(this.state.user)
             .then((theLoggedInUser) => {
+                this.setState({ isSigningUp: true })
+                debugger
                 this.props.storeUser(theLoggedInUser.data);
                 this.props.history.push("/servicios");
             })
             .catch((err) => this.setState({ showToast: true, toastText: err.response.data.message }))
+
     };
 
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
@@ -77,9 +81,12 @@ class Signup extends Component {
     render() {
         return (
             <section className="signup">
-                <Container>
+                <Container className="list-container">
                     <Row>
-                        <Col md={{ span: 6, offset: 3 }}>
+                        <Col md={4} className="my-auto">
+                            <img src={personLaptop} alt="persona-con-ordenador" className="signup-img"></img>
+                        </Col>
+                        <Col md={6}>
                             <h1>Registro de usuario</h1>
                             <hr />
                             <Form onSubmit={this.handleSubmit}>
@@ -125,18 +132,6 @@ class Signup extends Component {
                                     />
                                     <small>Debe contener al menos 5 caracteres</small>
                                 </Form.Group>
-                                {/* <Form.Group controlId="description">
-                                    <Form.Label>Descripción</Form.Label>
-                                    <Form.Control
-                                        as="textarea"
-                                        rows={3}
-                                        type="text"
-                                        name="description"
-                                        value={this.state.description}
-                                        onChange={this.handleInputChange}
-                                        required
-                                    />
-                                </Form.Group> */}
                                 <Form.Group controlId="age">
                                     <Form.Label>Edad</Form.Label>
                                     <Form.Control
@@ -222,7 +217,19 @@ class Signup extends Component {
                                     </Form.Label>
                                     <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
-                                <Button className="edit-button" type="submit" disabled={this.state.uploadingActive}> {this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : "Registrarme"}</Button>
+                                <Button className="edit-button" type="submit" disabled={this.state.uploadingActive}>
+                                    {
+                                        this.state.uploadingActive
+                                            ?
+                                            <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </>
+                                            :
+                                            !this.state.isSigningUp
+                                                ?
+                                                "Registrarme"
+                                                :
+                                                <p style={{ margin: '0 auto' }}>Completando registro...  <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '4px' }} /></p>
+                                    }
+                                </Button>
                             </Form>
                         </Col>
                     </Row>

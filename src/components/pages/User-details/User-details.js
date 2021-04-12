@@ -78,15 +78,16 @@ class UserDetails extends Component {
                         <>
                             <Row>
                                 <Col md={{ span: 6, offset: 3 }} >
-                                    <img className="user-img" src={this.state.user.image} alt={this.state.user.username} />
+                                    <img className="user-img" src={this.state.user.image} alt={'Foto de ', this.state.user.username} />
                                 </Col>
                                 <Col md={4}>
                                     <h3 className="text-center">Información</h3>
                                     <hr className="hr" />
-                                    <p>Nombre: {this.state.user.name}</p>
-                                    <p>Ubicación: {this.state.user.province}</p>
-                                    <p>Edad: {this.state.user.age} años</p>
-                                    <p>Valoración: {this.getUserRating()}</p>
+                                    <p><b className='rewardWord'>Nombre:</b> {this.state.user.name}</p>
+                                    <p><b className='rewardWord'>Ubicación:</b>  {this.state.user.province}</p>
+                                    <p><b className='rewardWord'>Edad:</b>  {this.state.user.age} años</p>
+                                    <p><b className='rewardWord'>Email:</b>  {this.state.user.email}</p>
+                                    <p><b className='rewardWord'>Valoración:</b>  {this.getUserRating()}</p>
                                 </Col>
 
                                 <Col md={8}>

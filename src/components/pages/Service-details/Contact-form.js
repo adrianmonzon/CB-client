@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Col, Button } from 'react-bootstrap'
 import MailService from './../../../services/mail.service'
+import ServicesService from './../../../services/services.service'
 import swal from 'sweetalert'
 // import { useHistory } from 'react-router-dom'
 
@@ -9,14 +10,31 @@ class ContactForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            contactEmail: this.props.contactUser.email,
-            contactName: this.props.contactUser.name,
+            contactEmail: console.log('El contactEmail es', this.props.contactUser.email),
+            // contactName: this.props.contactUser.name,
             name: this.props.loggedUser.name,
-            subject: `${this.props.loggedUser.name} quiere ayudarle con: ${this.props.serviceName}`,
-            message: ''
+            subject: `${this.props.loggedUser.name} (${this.props.loggedUser.email}) quiere ayudarle con: ${this.props.serviceName}`,
+            message: '',
+            // service: this.props.service
         }
         this.mailService = new MailService()
+        this.servicesService = new ServicesService()
+
     }
+
+    // componentDidMount = () => {
+
+    //     const service_id = this.props.serviceId
+
+    //     this.servicesService
+    //         .getService(service_id)
+    //         .then(res => {
+    //             this.setState( { ...this.state.service, service: res.data })
+    //             console.log(res.data)
+    //             console.log('El correo del owner es', this.props.service.owner.email)
+    //         })
+    //         .catch(err => console.log(err))
+    // }
 
 
     handleSubmit = e => {
@@ -58,18 +76,18 @@ class ContactForm extends Component {
                     <Form.Row>
                         <Form.Group as={Col} controlId="formGridName">
                             <Form.Label>De</Form.Label>
-                            <Form.Control type="text" placeholder="Enter name" name="name" readOnly value={this.state.name} />
+                            <Form.Control type="text" placeholder="Introduce tu nombre" name="name" readOnly value={this.state.name} />
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Para</Form.Label>
-                            <Form.Control type="text" placeholder="Enter email" name="contactEmail" readOnly value={this.state.contactEmail} />
+                            <Form.Control type="text" placeholder="Introducir email de destino" name="contactEmail" readOnly={this.state.contactEmail !== undefined ? true : false} value={this.state.contactEmail} />
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Group controlId="formGridSubject">
                         <Form.Label>Asunto</Form.Label>
-                        <Form.Control type="text" name="subject" value={this.state.subject} onChange={this.handleInputChange} />
+                        <Form.Control as="textarea" name="subject" rows={2} value={this.state.subject} onChange={this.handleInputChange} />
                     </Form.Group>
 
                     <Form.Group controlId="formGridAddress2">

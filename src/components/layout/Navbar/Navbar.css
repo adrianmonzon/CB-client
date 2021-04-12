@@ -15,24 +15,38 @@
 }
 
 .second-nav {
-    background-color: white /*#EAECEC*/;
+    background-color: white /*#f4f9f4*/;
     border-bottom: 1px solid black;
     /* position: sticky;
     top: 0; */
 }
 
-.navbar-item {
-    /* color: white !important; */
-    font-size: 20px;
+.second-nav .navbar-button a:hover {
+    text-decoration: underline;
 }
 
-.navbar-button /*esto lo tengo para que las flechitas del dropdown se vean*/
+.navbar-button {
+    text-decoration: none;
+}
 
+.navbar-button a:hover {
+    /* background-color: red !important; */
+    text-decoration: underline;
+}
 
-#collasible-nav-dropdown {
+/* #collasible-nav-dropdown {
     color: white !important;
-}
+} */
 
 .dropdown-item {
     font-size: 20px;
+}
+
+.nav-dropdown a {
+    text-decoration: none;
+    background-color: #fff;
+}
+
+.nav-dropdown a:hover {
+    text-decoration: underline;
 }

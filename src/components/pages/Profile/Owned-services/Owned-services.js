@@ -30,12 +30,12 @@ class OwnedServices extends Component {
 
     render() {
         return (
-            <Container className="owned-bg">
+            <Container className="owned-bg owned-container">
                 <Row>
                     {/* <Col md={{ span: 8, offset: 2 }}> */}
-                    <Col md={12}>
+                    <Col md={6}>
 
-                        <h2 className="owned-title text-center">Mis publicaciones creadas</h2>
+                        <h1 className="owned-title text-center">Mis publicaciones creadas</h1>
                         {
                             this.state.owned.length > 0
                                 ?
@@ -54,8 +54,8 @@ class OwnedServices extends Component {
                         <hr />
                     </Col>
 
-                    <Col md={12}>
-                        <h2 className="owned-title text-center">Mis favoritas</h2>
+                    <Col md={6}>
+                        <h1 className="owned-title text-center">Publicaciones favoritas</h1>
                         {
                             this.state.favs.length > 0
                                 ?

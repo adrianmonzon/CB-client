@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import blackLogo from "./caixabank.png"
 import swal from 'sweetalert'
 import { withRouter } from 'react-router-dom'
+import { useState } from 'react'
 import whiteLogo from './logo.png'
 
 import AuthService from "../../../services/auth.service";
@@ -17,6 +18,21 @@ const Navigation = (props) => {
     const userService = new UserService();
     const history = useHistory()
 
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+
+    const showDropdown1 = (e) => {
+        setShow1(!show1);
+    }
+    const showDropdown2 = (e) => {
+        setShow2(!show2);
+    }
+    const hideDropdown1 = e => {
+        setShow1(false);
+    }
+    const hideDropdown2 = e => {
+        setShow2(false);
+    }
 
     const logOut = () => {
         authService
@@ -62,7 +78,7 @@ const Navigation = (props) => {
     }
 
     return (
-        <Navbar variant={props.location.pathname !== "/" ? "light" : "dark"} expand="md" /*sticky="top"*/ className={props.location.pathname !== "/" ? "second-nav" : "nav-menu navbar-item"} >
+        <Navbar variant={props.location.pathname !== "/" ? "light" : "dark"} expand="md" /*sticky="top"*/ className={props.location.pathname !== "/" ? "second-nav" : "nav-menu"} >
             <Link to="/">
                 <Navbar.Brand>
                     <img
@@ -75,71 +91,66 @@ const Navigation = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                    <Link style={{ textDecoration: 'none' }} to="/servicios">
-                        <Nav.Link className="navbar-item" as="div" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Inicio</Nav.Link>
+                    <Link to="/servicios" className="navbar-button">
+                        <Nav.Link as="a" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Inicio</Nav.Link>
                     </Link>
-                    {/* <Link style={{ textDecoration: 'none' }} to="/servicios">
-                        <Nav.Link className="navbar-item" as="div">Servicios</Nav.Link>
-                    </Link> */}
-                    <NavDropdown className="navbar-item" title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>¿Qué necesita?</span>} id="collasible-nav-dropdown" >
-                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white', color: props.location.pathname !== "/" ? 'black': 'white' }}>
+                    <NavDropdown show={show1} onMouseEnter={showDropdown1} onMouseLeave={hideDropdown1} title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>¿Qué necesita?</span>} id="collasible-nav-dropdown" >
+                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white', color: props.location.pathname !== "/" ? 'black' : 'white' }}>
                             {props.loggedUser ?
-                                <Link to="/crear-servicio" style={{ textDecoration: "none", color: "black" }}>
+                                <Link to="/crear-servicio" style={{ color: "black" }}>
                                     Pedir ayuda
                                 </Link>
                                 :
-                                <Link to="/iniciar-sesion" onClick={() => redirectToCreateService()} style={{ textDecoration: "none", color: "black" }}>
+                                <Link to="/iniciar-sesion" onClick={() => redirectToCreateService()} style={{ color: "black" }}>
                                     Pedir ayuda
                                 </Link>
                             }
                         </NavDropdown.Item>
-                        <NavDropdown.Item style={{ backgroundColor: 'white' }}>
-                            <Link to="/servicios" style={{ textDecoration: "none", color: "black" }}>
+                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white' }}>
+                            <Link to="/servicios" style={{ color: "black" }} className="item-dropdown">
                                 Vengo a ayudar
                                 </Link>
                         </NavDropdown.Item>
                     </NavDropdown>
                     {props.loggedUser ? (
-                        <NavDropdown alignRight title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Hola, {props.loggedUser.username}</span>} id="collasible-nav-dropdown">
-                            <NavDropdown.Item style={{ backgroundColor: 'white' }} >
-                                <Link to="/mis-servicios" style={{ textDecoration: "none", color: "black", outline: 'none' }}>
+                        <NavDropdown alignRight show={show2} onMouseEnter={showDropdown2} onMouseLeave={hideDropdown2} title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Hola, {props.loggedUser.username}</span>} id="collasible-nav-dropdown">
+                            <NavDropdown.Item className="nav-dropdown" style={{ backgroundColor: 'white' }} >
+                                <Link to="/mis-servicios" style={{ color: "black", outline: 'none' }}>
                                     Mis publicaciones
                                 </Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item style={{ backgroundColor: 'white' }} >
-                                <Link to="/editar-perfil" style={{ textDecoration: "none", color: "black" }}>
+                            <NavDropdown.Item className="nav-dropdown" style={{ backgroundColor: 'white' }} /*para que al pulsar se quede el color de fondo blanco, no azul*/ >
+                                <Link to="/editar-perfil" style={{ color: "black" }}>
                                     Editar perfil
                                 </Link>
                             </NavDropdown.Item>
-                            <Link className="navbar-item" to="/" style={{ textDecoration: "none" }}>
-                                <NavDropdown.Item
-                                    style={{ backgroundColor: 'white' }}
-                                    className="nav-dropdown"
-                                    onClick={logOut}
-                                >
+                            <NavDropdown.Item className="nav-dropdown" style={{ backgroundColor: 'white' }} onClick={logOut}>
+                                <Link to="/" style={{ color: "black" }}>
                                     Cerrar sesión
-                        </NavDropdown.Item>
-                            </Link>
+                                </Link>
+                            </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item
                                 className="nav-dropdown"
                                 onClick={confirmDelete}
-                                style={{ textDecoration: "none", backgroundColor: 'white' }}
+                                style={{ backgroundColor: 'white' }}
                             >
-                                Eliminar perfil
-                        </NavDropdown.Item>
+                                <Link style={{ color: "black" }}>
+                                    Eliminar perfil
+                                </Link>
+                            </NavDropdown.Item>
                         </NavDropdown>
                     ) : (
-                            <>
-                                <Link style={{ textDecoration: 'none' }} to="/registro">
-                                    <Nav.Link className="navbar-item" as="div" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Registro</Nav.Link>
-                                </Link>
-                                <Link style={{ textDecoration: 'none' }} className="text-nowrap" to="/iniciar-sesion">
-                                    <Nav.Link className="navbar-item navbar-button" as="div" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Iniciar sesión</Nav.Link>
-                                </Link>
+                        <>
+                            <Link to="/registro" className="navbar-button">
+                                <Nav.Link as="a" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Registro</Nav.Link>
+                            </Link>
+                            <Link className="navbar-button" to="/iniciar-sesion">
+                                <Nav.Link as="a" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Iniciar sesión</Nav.Link>
+                            </Link>
 
-                            </>
-                        )}
+                        </>
+                    )}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

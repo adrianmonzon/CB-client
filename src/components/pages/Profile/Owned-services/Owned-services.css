@@ -1,7 +1,29 @@
-.owned-title {
+/* .owned-title {
     margin-top: 20px;
-}
+} */
 
 .owned-bg {
     min-height: 100vh;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 1200px)
+  {
+.owned-container {
+    max-width: 1800px;
+}
+  }
+
+@media (min-width: 768px)
+  {
+.owned-container .col-md-8 {
+    max-width: 100%;
+}
+.owned-container .offset-md-2 {
+    margin-left: 0%;
+}
+/* .owned-title {
+    margin-left: 120px;
+} */
+
 }

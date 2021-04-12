@@ -3,10 +3,12 @@ import ServicesService from '../../../services/services.service'
 import FilesService from './../../../services/upload.service'
 import Dictaphone from './../../shared/Dictaphone/Dictaphone'
 // import { useHistory } from 'react-router-dom'
-import { Form, Button, Container, Spinner } from 'react-bootstrap'
+import { Form, Button, Container, Spinner, Row, Col } from 'react-bootstrap'
 import Alert from './../../shared/Alert/Alert'
 import './New-service.css'
 import unknownReward from './unknown-reward.png'
+import oldWoman from './old-woman2.jpeg'
+import waveVector from './wave-vector1.png'
 
 
 class CreateService extends Component {
@@ -73,33 +75,49 @@ class CreateService extends Component {
     render() {
 
         return (
-            <section className="newService-bg">
-                <Container>
-                    <h2>Pedir ayuda</h2>
-                    <hr />
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="title">
-                            <Form.Label>¿Qué necesita?</Form.Label>
-                        {/* <Dictaphone /> */}
-                            <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
-                        </Form.Group>
-                        <Form.Group controlId="description">
-                            <Form.Label>Descripción</Form.Label>
-                            <Form.Control as="textarea" required rows={3} type="text" placeholder="Ej.: No puedo cargar peso y las bolsas pesan demasiado para mí." name="description" value={this.state.service.description} onChange={this.handleInputChange} />
-                        </Form.Group>
-                        <Form.Group controlId="reward">
-                            <Form.Label>Recompensa</Form.Label>
-                            <Form.Control required type="text" placeholder="Ej.: Pastel casero." name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Imagen de la recompensa {this.state.uploadingActive && <Spinner />}</Form.Label>
-                            <Form.Control type="file" onChange={this.handleImageUpload} />
-                        </Form.Group>
-                        <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Publicar'}</Button>
-                    </Form>
-                    <Alert className="service-added" show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
-                </Container>
-            </section>
+            <>
+                <section className="newService-bg">
+                    <Container className="newService-container">
+                        <h1 className="text-center">Pedir ayuda</h1>
+                        <hr />
+                        <Row>
+                            <Col md={4}>
+                                <img src={oldWoman} alt="Señora mayor con un móvil" className="newService-img" />
+                            </Col>
+                            <Col md={8} >
+                                <Form onSubmit={this.handleSubmit}>
+                                    <Form.Group controlId="title">
+                                        <Form.Label>¿Qué necesita?</Form.Label>
+                                        {/* <Dictaphone /> */}
+                                        <Form.Control required type="text" placeholder="Ej.: Necesito que me traigan la compra a casa, gracias." name="name" value={this.state.service.name} onChange={this.handleInputChange} />
+                                    </Form.Group>
+                                    <Form.Group controlId="description">
+                                        <Form.Label>Descripción</Form.Label>
+                                        <Form.Control as="textarea" required rows={3} type="text" placeholder="Ej.: No puedo cargar peso y las bolsas pesan demasiado para mí." name="description" value={this.state.service.description} onChange={this.handleInputChange} />
+                                    </Form.Group>
+                                    <Form.Group controlId="reward">
+                                        <Form.Label>Recompensa</Form.Label>
+                                        <Form.Control required type="text" placeholder="Ej.: Pastel casero." name="reward" value={this.state.service.reward} onChange={this.handleInputChange} />
+                                    </Form.Group>
+                                    <Form.Group>
+                                        <Form.Label>Imagen de la recompensa {this.state.uploadingActive && <Spinner />}</Form.Label>
+                                        <Form.Control type="file" onChange={this.handleImageUpload} />
+                                    </Form.Group>
+                                    <Button className="edit-button" size="sm" type="submit" disabled={this.state.uploadingActive}>{this.state.uploadingActive ? <><p style={{ margin: '0 auto' }}>Subiendo imagen <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '2px' }} /></p> </> : 'Publicar'}</Button>
+                                </Form>
+                                <Alert className="service-added" show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />
+                            </Col>
+                        </Row>
+                        {/* <Row>
+                            <Col md={12}>
+                            <img src={waveVector} alt="wave-vector" className="newService-img2"/>
+                            </Col>
+                        </Row> */}
+                    </Container>
+                </section>
+
+            </>
+
         )
     }
 }
