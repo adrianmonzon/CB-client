@@ -73,36 +73,37 @@ class UserDetails extends Component {
         return (
             <section className="details-bg">
                 <Container className="user-details">
-                    {this.state.user
-                        ?
-                        <>
-                            <Row>
-                                <Col md={{ span: 6, offset: 3 }} >
-                                    <img className="user-img" src={this.state.user.image} alt={'Foto de ', this.state.user.username} />
-                                </Col>
-                                <Col md={4}>
-                                    <h3 className="text-center">Información</h3>
-                                    <hr className="hr" />
-                                    <p><b className='rewardWord'>Nombre:</b> {this.state.user.name}</p>
-                                    <p><b className='rewardWord'>Ubicación:</b>  {this.state.user.province}</p>
-                                    <p><b className='rewardWord'>Edad:</b>  {this.state.user.age} años</p>
-                                    <p><b className='rewardWord'>Email:</b>  {this.state.user.email}</p>
-                                    <p><b className='rewardWord'>Valoración:</b>  {this.getUserRating()}</p>
-                                </Col>
+                    {
+                        this.state.user
+                            ?
+                            <>
+                                <Row>
+                                    <Col md={{ span: 6, offset: 3 }} >
+                                        <img className="user-img" src={this.state.user.image} alt={'Foto de ', this.state.user.username} />
+                                    </Col>
+                                    <Col md={4}>
+                                        <h3 className="text-center">Información</h3>
+                                        <hr className="hr" />
+                                        <p><b className='rewardWord'>Nombre:</b> {this.state.user.name}</p>
+                                        <p><b className='rewardWord'>Ubicación:</b>  {this.state.user.province}</p>
+                                        <p><b className='rewardWord'>Edad:</b>  {this.state.user.age} años</p>
+                                        <p><b className='rewardWord'>Email:</b>  {this.state.user.email}</p>
+                                        <p><b className='rewardWord'>Valoración:</b>  {this.getUserRating()}</p>
+                                    </Col>
 
-                                <Col md={8}>
-                                    <h3 className="text-center">Mapa</h3>
-                                    <hr className="hr" />
-                                    <UserMap user={this.state.user} />
+                                    <Col md={8}>
+                                        <h3 className="text-center">Mapa</h3>
+                                        <hr className="hr" />
+                                        <UserMap user={this.state.user} />
+                                    </Col>
+                                </Row>
+                            </>
+                            :
+                            <Row className="text-center">
+                                <Col>
+                                    <p>Cargando usuario... <Spinner animation="border" style={{ marginTop: '20px', marginBottom: '4px', height: '25px', width: '25px' }} /></p>
                                 </Col>
                             </Row>
-                        </>
-                        :
-                        <Row className="text-center">
-                            <Col>
-                                <Spinner animation="border" style={{ marginTop: '20px' }} />
-                            </Col>
-                        </Row>
                     }
 
                 </Container>

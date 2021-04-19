@@ -14,6 +14,7 @@ import EditService from './pages/Profile/Edit-service/Edit-service'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthServices from './../services/auth.service'
 import FooterPagePro from './layout/Footer/Footer';
+import TopArrow from './shared/TopArrow/TopArrow'
 
 
 import './App.css'
@@ -57,6 +58,7 @@ class App extends Component {
         
         </Switch>
         <FooterPagePro location={this.pathname}/>
+        <TopArrow />
       </>
     )
   }

@@ -19,6 +19,7 @@
     "react-rating": "^2.0.5",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-scroll-up-button": "^1.6.4",
     "react-speech-recognition": "^3.6.0",
     "sweetalert": "^2.1.2",
     "web-vitals": "^0.2.4"

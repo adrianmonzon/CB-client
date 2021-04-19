@@ -82,7 +82,13 @@ class ServiceDetails extends Component {
                                 </Col>
                                 <Col className="text-center" md={6}>
                                     <h3 className="details-h3">Recompensa</h3>
-                                    <img className="detailsImage" alt="Imagen de la recompensa" src={this.state.service.rewardImage}></img>
+                                    {
+                                        this.state.service.rewardImage
+                                            ?
+                                            <img className="detailsImage" alt="Imagen de la recompensa" src={this.state.service.rewardImage}></img>
+                                            :
+                                            <p>Cargando imagen... <Spinner animation="border" style={{ marginBottom: '4px', height: '25px', width: '25px' }} /></p>
+                                    }
                                     <p>{this.state.service.reward}</p>
                                 </Col>
 
