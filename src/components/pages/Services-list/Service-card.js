@@ -1,5 +1,5 @@
 import { Col, Card, Button, Accordion, Row } from 'react-bootstrap'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './Service-card.css'
 import { Link, useHistory } from 'react-router-dom'
 import arrow from './proximo.png'
@@ -17,17 +17,18 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
 
     const servicesService = new ServicesService();
     const usersService = new UsersService()
-    const history = useHistory()
+
+    const [favs, setFavs] = useState(loggedUser && loggedUser.savedServices);
+
+
+
 
 
     const deleteTheService = () => {
 
         servicesService
             .deleteService(_id)
-            .then(() => {
-                // history.push('/servicios')
-                setTimeout(function () { history.go() }, 800) //history.go() refreshes the current page
-            })
+            .then(() => refreshPage())
             .catch(err => console.log(err))
     }
 
@@ -50,53 +51,48 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
             })
     }
 
-    // const [services, setServices] = useState({$services: []})
 
-    // const refreshServices = () => {
-    //     servicesService
-    //         .getServices()
-    //         .then(res => {
-    //             console.log(res)
-    //             setServices( {`${services}`: res.data} )
-    //         })
-    //         .catch(err => console.log(err))
-    // }
-
-    const saveService = (/*props*/) => {
+    const saveService = (arr, item) => {
 
         const user_id = loggedUser._id
 
+        arr.push(item)
+
         usersService
             .saveService(_id, user_id)
-            // .then(() => props.refreshPage())
-            .then(() => history.go())
+            .then(res => refreshPage())
+            // .then(() => history.push(location.pathname === '/servicios' && '/servicios' || location.pathname === '/mis-servicios' && '/mis-servicios'))
             .catch(err => console.log(err))
     }
 
-    const removeService = (/*props*/) => {
+
+    const removeService = (arr, item) => {
+
+        var i = arr.indexOf(item);
+
+        if (i !== -1) {
+            arr.splice(i, 1);
+        }
 
         const user_id = loggedUser._id
 
         usersService
             .removeService(_id, user_id)
-            // .then(() => props.refreshPage())
-            .then(() => history.go())
+            .then(res => refreshPage())
             .catch(err => console.log(err))
     }
 
 
     const deleteServiceWithoutOwner = () => {
+
         servicesService
             .deleteService(_id)
-            .then((res) => {
-                history.go()
-            })
+            .then(() => refreshPage())
     }
-    // const saveRemove = () => {
-    //     removeService()
-    //     setisAdded(!isAdded)
-    //     console.log(isAdded)
-    // }
+
+
+    const saveRemove = () => !loggedUser.savedServices.includes(_id) ? saveService(favs, _id) : removeService(favs, _id)
+
 
     return (
         <Col className={classCard} md={{ span: 8, offset: 2 }}>
@@ -124,18 +120,17 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
                                     loggedUser && loggedUser._id === owner._id
                                         ?
                                         <>
-                                            <Link /*className="btn btn-info btn-sm card-edit-button"*/ style={{ float: 'left' }} to={`/editar-servicio/${_id}`}><img
+                                            <Link style={{ float: 'left' }} to={`/editar-servicio/${_id}`}><img
                                                 alt="Icono de editar publicación"
                                                 src={pencil}
                                                 style={{ height: '25px', width: '25px' }}
                                                 className="button-card-img"
                                             /></Link>
 
-                                            <Link /*className="btn btn-info btn-sm card-delete-button"*/ style={{ float: 'right' }} onClick={() => confirmDelete()}><img
+                                            <Link style={{ float: 'right' }} onClick={() => confirmDelete()}><img
                                                 alt="Icono de eliminar publicación"
                                                 src={bin}
                                                 style={{ height: '25px', width: '25px' }}
-                                            // className="button-card-img"
                                             /></Link>
                                         </>
                                         :
@@ -143,8 +138,9 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
                                             ?
                                             null
                                             :
-                                            <Link className="fav-button" onClick={!loggedUser.savedServices.includes(_id) ? () => saveService() : () => removeService()}/*isAdded ? () => removeService() : () => saveService()} /*className={!loggedUser.savedServices.includes(_id)? "white-button" : "red-button"}*/ style={{ float: 'left' }} size="sm">
-                                                {!loggedUser.savedServices.includes(_id) ? /*"Añadir a favs"*/ <img src={heart} alt="Añadir a favs" style={{ height: '25px', width: '25px' }} /> : /*"Quitar de favs"*/ < img src={redHeart} alt="Quitar de favs" style={{ height: '25px', width: '25px' }} />}
+                                            <Link className="fav-button" onClick={saveRemove} style={{ float: 'left' }} size="sm">
+                                                {!loggedUser.savedServices.includes(_id) ? <img src={heart} alt="Añadir a favs" style={{ height: '25px', width: '25px' }} /> : < img src={redHeart} alt="Quitar de favs" style={{ height: '25px', width: '25px' }} />}
+
                                             </Link>
                                 }
                             </h3>
@@ -152,7 +148,6 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
                             {
                                 loggedUser && loggedUser._id === owner._id
                                     ?
-                                    // <Link className="btn btn-dark btn-block btn-sm" to="/editar-perfil">Editar</Link>
                                     <>
                                     </>
                                     :

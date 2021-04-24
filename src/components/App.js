@@ -46,7 +46,7 @@ class App extends Component {
         <Switch>
 
           <Route path="/" exact render={() => <Home />} />
-          <Route path="/servicios" exact render={() => <ServicesList loggedUser={this.state.loggedInUser} />} />
+          <Route path="/servicios" exact render={() => <ServicesList loggedUser={this.state.loggedInUser} location={this.pathname} />} />
           <Route path="/servicios/:service_id" render={props => <ServiceDetails {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/crear-servicio" render={props => <CreateService {...props} loggedUser={this.state.loggedInUser} />} />
           <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />

@@ -94,7 +94,7 @@ class ServicesList extends Component {
                     {this.state.services.length > 0
                         ?
                         <Row>
-                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard}/*refreshPage={this.refreshServices}*/ />)}
+                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard} refreshPage={this.refreshServices} location={this.props.location} />)}
                         </Row>
                         :
                         <Row>

@@ -21,8 +21,9 @@ class OwnedServices extends Component {
         this.servicesService
             .getAllServicesFromUser(this.props.loggedUser._id)
             .then(res => {
-                console.log(res)
+                // console.log('Console.log en owned services', res)
                 this.setState({ owned: res.data.owned, favs: res.data.favs })
+                console.log('Los favs son estos', this.state.favs)
             })
             .catch(err => console.log(err))
     }
@@ -41,7 +42,7 @@ class OwnedServices extends Component {
                                 ?
                                 <Row>
                                     <Col>
-                                        {this.state.owned.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)}
+                                        {this.state.owned.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} refreshPage={this.componentDidMount} />)}
                                     </Col>
                                 </Row>
                                 :
@@ -61,7 +62,7 @@ class OwnedServices extends Component {
                                 ?
                                 <Row>
                                     <Col>
-                                        {this.state.favs.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)}
+                                        {this.state.favs.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} refreshPage={this.componentDidMount} />)}
                                     </Col>
                                 </Row>
                                 :
