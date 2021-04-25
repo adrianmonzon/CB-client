@@ -20,26 +20,11 @@ class ContactForm extends Component {
 
     }
 
-    // componentDidMount = () => {
-
-    //     const service_id = this.props.serviceId
-
-    //     this.servicesService
-    //         .getService(service_id)
-    //         .then(res => {
-    //             this.setState( { ...this.state.service, service: res.data })
-    //             console.log(res.data)
-    //             console.log('El correo del owner es', this.props.service.owner.email)
-    //         })
-    //         .catch(err => console.log(err))
-    // }
-
-
     handleSubmit = e => {
         e.preventDefault()
         this.mailService
             .sendMail(this.state)
-            .then((response) => { alert('Mensaje enviado') })
+            // .then(() => { alert('Mensaje enviado') })
             .catch(err => console.log(`Email no enviado`, err))
 
     }
@@ -82,7 +67,6 @@ class ContactForm extends Component {
                             <Form.Control type="email" /*placeholder="Introducir email de destino"*/ name="contactEmail" readOnly /*readOnly={this.state.contactEmail !== undefined ? true : false}*/ value={this.state.contactEmail} />
                         </Form.Group>
                     </Form.Row>
-
                     <Form.Group controlId="formGridSubject">
                         <Form.Label>Asunto</Form.Label>
                         <Form.Control as="textarea" name="subject" rows={2} value={this.state.subject} onChange={this.handleInputChange} />

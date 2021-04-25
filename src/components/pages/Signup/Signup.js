@@ -44,7 +44,6 @@ class Signup extends Component {
             .signup(this.state.user)
             .then((theLoggedInUser) => {
                 this.setState({ isSigningUp: true })
-                debugger
                 this.props.storeUser(theLoggedInUser.data);
                 this.props.history.push("/servicios");
             })

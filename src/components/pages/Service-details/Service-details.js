@@ -29,6 +29,7 @@ class ServiceDetails extends Component {
             uploadingActive: false,
             showToast: false,
             toastText: "",
+            isComponentLoaded: false
         }
 
         this.servicesService = new ServicesService()
@@ -40,7 +41,9 @@ class ServiceDetails extends Component {
 
         this.servicesService
             .getService(service_id)
-            .then(res => this.setState({ service: res.data }))
+            .then(res => {
+                this.setState({ service: res.data, isComponentLoaded: true })
+            })
             .catch(err => console.log(err))
     }
 
@@ -60,10 +63,6 @@ class ServiceDetails extends Component {
     }
 
     handleInputChange = e => this.setState({ service: { ...this.state.service, [e.target.name]: e.target.value } })
-
-    // getOwner = () => setTimeout(() => {
-    //     return this.state.service.owner.email
-    // }, 3000);
 
     render() {
 
@@ -108,7 +107,16 @@ class ServiceDetails extends Component {
                                                             Contactar con {this.state.service.owner.name}
                                                         </Accordion.Toggle>
                                                         <Accordion.Collapse eventKey="0" style={{ marginTop: '10px' }}>
-                                                            <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service.owner} serviceName={this.state.service.name} />
+
+                                                            {
+                                                                this.state.isComponentLoaded
+                                                                    ?
+                                                                    <>
+                                                                        <ContactForm loggedUser={this.props.loggedUser} contactUser={this.state.service.owner} serviceName={this.state.service.name} />
+                                                                    </>
+                                                                    :
+                                                                    <Spinner animation="border" />
+                                                            }
                                                         </Accordion.Collapse>
                                                     </Accordion>
                                                 </>

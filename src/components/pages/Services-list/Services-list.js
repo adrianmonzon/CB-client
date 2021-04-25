@@ -24,7 +24,6 @@ class ServicesList extends Component {
             classCard: /*'hidden'*/ 'card-div'
         };
         this.servicesService = new ServicesService();
-        // this.usersService = new UsersService();
     }
 
     componentDidMount = () => {
@@ -35,10 +34,7 @@ class ServicesList extends Component {
     refreshServices = () => {
         this.servicesService
             .getServices()
-            .then(res => {
-                // console.log(res)
-                this.setState({ services: res.data })
-            })
+            .then(res => this.setState({ services: res.data }))
             .catch(err => console.log(err))
     }
 
@@ -64,87 +60,23 @@ class ServicesList extends Component {
                 .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
                 .catch((err) => console.log(err))
         }
-    };
+    }
 
     // bothFilters = (situation, province) => {
 
-    //     if (situation !== 'all' && province === 'all') {
-
-    //         this.servicesServices
-    //             .filterBySituation(situation)
-    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-    //             .catch((err) => console.log(err))
-
-    //     } if (situation === 'all' && province !== 'all') {
-
+    //     if (situation === 'all' && province === 'all') this.refreshServices()
+    //     else {
     //         this.servicesService
-    //             .filterByProvince(province)
+    //             .filterBySituationProvince(situation, province)
     //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
     //             .catch((err) => console.log(err))
-
-    //     } else if (situation !== 'all' && province !== 'all') {
-
-    //         this.servicesService
-    //             .filterBySituation(situation)
-    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-    //             .catch((err) => console.log(err))
-    //         this.servicesService
-    //             .filterByProvince(province)
-    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-    //             .catch((err) => console.log(err))
-
-    //     } else {
-
-    //         this.refreshServices()
     //     }
     // }
 
-    bothFilters = (situation, province) => {
-
-        switch (situation, province) {
-            case (situation !== 'all' && province === 'all'):
-
-                this.servicesService
-                    .filterBySituation(situation)
-                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-                    .catch((err) => console.log(err))
-                break;
-
-            case (situation === 'all' && province !== 'all'):
-
-                this.servicesService
-                    .filterByProvince(province)
-                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-                    .catch((err) => console.log(err))
-                break;
-
-            case (situation !== 'all' && province !== 'all'):
-
-                this.servicesService
-                    .filterBySituation(situation)
-                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-                    .catch((err) => console.log(err))
-                this.servicesService
-                    .filterByProvince(province)
-                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
-                    .catch((err) => console.log(err))
-                break;
-
-            case (situation === 'all' && province === 'all'):
-                this.refreshServices()
-                break;
-
-            default:
-                // alert('Algo ha ido mal')
-                this.refreshServices()
-
-        }
-    }
-
     handleAnimation = () => {
         if (document.documentElement.scrollTop > 50) {
-            this.setState({ classCard: 'card-div' });
-        };
+            this.setState({ classCard: 'card-div' })
+        }
     }
 
     render() {
