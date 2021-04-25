@@ -61,6 +61,10 @@ class ServiceDetails extends Component {
 
     handleInputChange = e => this.setState({ service: { ...this.state.service, [e.target.name]: e.target.value } })
 
+    // getOwner = () => setTimeout(() => {
+    //     return this.state.service.owner.email
+    // }, 3000);
+
     render() {
 
         return (

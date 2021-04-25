@@ -31,6 +31,7 @@ class ServicesList extends Component {
         this.refreshServices()
         window.onscroll = () => this.handleAnimation();
     }
+
     refreshServices = () => {
         this.servicesService
             .getServices()
@@ -42,6 +43,7 @@ class ServicesList extends Component {
     }
 
     handleModal = visible => this.setState({ showModal: visible })
+
     handleToast = (visible, text) => this.setState({ showToast: visible, toastText: text })
 
     filterByProvince = (province) => {
@@ -64,6 +66,81 @@ class ServicesList extends Component {
         }
     };
 
+    // bothFilters = (situation, province) => {
+
+    //     if (situation !== 'all' && province === 'all') {
+
+    //         this.servicesServices
+    //             .filterBySituation(situation)
+    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+    //             .catch((err) => console.log(err))
+
+    //     } if (situation === 'all' && province !== 'all') {
+
+    //         this.servicesService
+    //             .filterByProvince(province)
+    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+    //             .catch((err) => console.log(err))
+
+    //     } else if (situation !== 'all' && province !== 'all') {
+
+    //         this.servicesService
+    //             .filterBySituation(situation)
+    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+    //             .catch((err) => console.log(err))
+    //         this.servicesService
+    //             .filterByProvince(province)
+    //             .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+    //             .catch((err) => console.log(err))
+
+    //     } else {
+
+    //         this.refreshServices()
+    //     }
+    // }
+
+    bothFilters = (situation, province) => {
+
+        switch (situation, province) {
+            case (situation !== 'all' && province === 'all'):
+
+                this.servicesService
+                    .filterBySituation(situation)
+                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+                    .catch((err) => console.log(err))
+                break;
+
+            case (situation === 'all' && province !== 'all'):
+
+                this.servicesService
+                    .filterByProvince(province)
+                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+                    .catch((err) => console.log(err))
+                break;
+
+            case (situation !== 'all' && province !== 'all'):
+
+                this.servicesService
+                    .filterBySituation(situation)
+                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+                    .catch((err) => console.log(err))
+                this.servicesService
+                    .filterByProvince(province)
+                    .then((res) => this.setState({ services: res.data, isServiceLoaded: true }))
+                    .catch((err) => console.log(err))
+                break;
+
+            case (situation === 'all' && province === 'all'):
+                this.refreshServices()
+                break;
+
+            default:
+                // alert('Algo ha ido mal')
+                this.refreshServices()
+
+        }
+    }
+
     handleAnimation = () => {
         if (document.documentElement.scrollTop > 50) {
             this.setState({ classCard: 'card-div' });
@@ -77,7 +154,7 @@ class ServicesList extends Component {
                 <Container className="list-container">
                     <Col className="text-center">
 
-                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn edit-button list-button" style={{color: 'white'}}>Pedir ayuda</Link>}
+                        {!this.props.loggedUser && <Link to="/iniciar-sesion" className="btn edit-button list-button" style={{ color: 'white' }}>Pedir ayuda</Link>}
                         {this.props.loggedUser && <Button className="edit-button list-button" onClick={() => this.handleModal(true)} >Pedir ayuda</Button>}
                         <Accordion className="filter-button">
                             <Accordion.Toggle as={Button} className="edit-button list-button" eventKey="0">
@@ -94,7 +171,7 @@ class ServicesList extends Component {
                     {this.state.services.length > 0
                         ?
                         <Row>
-                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard} refreshPage={this.refreshServices} location={this.props.location} />)}
+                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard} refreshPage={this.refreshServices} handleToast={this.handleToast} />)}
                         </Row>
                         :
                         <Row>

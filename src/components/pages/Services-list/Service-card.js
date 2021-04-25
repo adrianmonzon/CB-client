@@ -13,7 +13,7 @@ import bin from './eliminar.png'
 import trophy from './trophy.png'
 
 
-const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshPage, classCard, assistant }) => {
+const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshPage, handleToast, classCard, assistant }) => {
 
     const servicesService = new ServicesService();
     const usersService = new UsersService()
@@ -60,8 +60,10 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
 
         usersService
             .saveService(_id, user_id)
-            .then(res => refreshPage())
-            // .then(() => history.push(location.pathname === '/servicios' && '/servicios' || location.pathname === '/mis-servicios' && '/mis-servicios'))
+            .then(res => {
+                refreshPage()
+                handleToast(true, '¡Añadido a favoritos!')
+            })
             .catch(err => console.log(err))
     }
 
@@ -78,7 +80,10 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
 
         usersService
             .removeService(_id, user_id)
-            .then(res => refreshPage())
+            .then(res => {
+                refreshPage()
+                handleToast(true, '¡Retirado de favoritos!')
+            })
             .catch(err => console.log(err))
     }
 
