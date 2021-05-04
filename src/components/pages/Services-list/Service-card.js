@@ -61,8 +61,8 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
         usersService
             .saveService(_id, user_id)
             .then(res => {
-                refreshPage()
                 handleToast(true, '¡Añadido a favoritos!')
+                refreshPage()
             })
             .catch(err => console.log(err))
     }
@@ -81,8 +81,8 @@ const ServiceCard = ({ name, _id, reward, owner, situation, loggedUser, refreshP
         usersService
             .removeService(_id, user_id)
             .then(res => {
-                refreshPage()
                 handleToast(true, '¡Retirado de favoritos!')
+                refreshPage()
             })
             .catch(err => console.log(err))
     }

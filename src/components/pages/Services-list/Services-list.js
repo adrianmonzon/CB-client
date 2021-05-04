@@ -62,6 +62,14 @@ class ServicesList extends Component {
         }
     }
 
+    refreshServicesAfterFav = () => {
+        this.servicesService
+            .getServices()
+            .filterByProvince()
+            .then(res => this.setState({ services: res.data }))
+            .catch(err => console.log(err))
+    }
+
     // bothFilters = (situation, province) => {
 
     //     if (situation === 'all' && province === 'all') this.refreshServices()
@@ -103,7 +111,7 @@ class ServicesList extends Component {
                     {this.state.services.length > 0
                         ?
                         <Row>
-                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard} refreshPage={this.refreshServices} handleToast={this.handleToast} />)}
+                            {this.state.services.map((elm) => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} {...this.props} classCard={this.state.classCard} refreshPage={this.refreshServicesAfterFav} handleToast={this.handleToast} />)}
                         </Row>
                         :
                         <Row>
