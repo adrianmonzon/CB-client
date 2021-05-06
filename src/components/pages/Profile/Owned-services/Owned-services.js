@@ -71,7 +71,7 @@ class OwnedServices extends Component {
                                 ?
                                 <Row>
                                     <Col>
-                                        {this.state.favs.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} refreshPage={this.componentDidMount} handleToast={this.handleToast} />)}
+                                        {this.state.favs.map(elm => <ServiceCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} refreshPageAfterFav={this.componentDidMount} handleToast={this.handleToast} />)}
                                     </Col>
                                 </Row>
                                 :
