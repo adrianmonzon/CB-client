@@ -89,53 +89,53 @@ const Navigation = (props) => {
                 </Navbar.Brand>
             </Link>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
+            <Navbar.Collapse id="basic-navbar-nav" >
+                <Nav className="ml-auto" >
                     <Link to="/servicios" className="navbar-button">
                         <Nav.Link as="a" style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Inicio</Nav.Link>
                     </Link>
                     <NavDropdown show={show1} onMouseEnter={showDropdown1} onMouseLeave={hideDropdown1} title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>¿Qué necesita?</span>} id="collasible-nav-dropdown" >
-                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white', color: props.location.pathname !== "/" ? 'black' : 'white' }}>
+                        <NavDropdown.Item className={props.location.pathname !== '/' && 'white-item'} style={{ color: props.location.pathname !== "/" ? 'white' : 'black' }}>
                             {props.loggedUser ?
-                                <Link to="/crear-servicio" style={{ color: "black" }}>
+                                <Link to="/crear-servicio" style={{ color: props.location.pathname !== '/' ? "black" : 'white' }}>
                                     Pedir ayuda
                                 </Link>
                                 :
-                                <Link to="/iniciar-sesion" onClick={() => redirectToCreateService()} style={{ color: "black" }}>
+                                <Link to="/iniciar-sesion" onClick={() => redirectToCreateService()} style={{ color: props.location.pathname === '/' ? "white" : 'black' }}>
                                     Pedir ayuda
                                 </Link>
                             }
                         </NavDropdown.Item>
-                        <NavDropdown.Item className="navbar-button" style={{ backgroundColor: 'white' }}>
-                            <Link to="/servicios" style={{ color: "black" }} className="item-dropdown">
+                        <NavDropdown.Item className={props.location.pathname !== '/' && 'white-item'}>
+                            <Link to="/servicios" style={{ color: props.location.pathname === '/' ? "white" : 'black' }} className="item-dropdown">
                                 Vengo a ayudar
                                 </Link>
                         </NavDropdown.Item>
                     </NavDropdown>
                     {props.loggedUser ? (
                         <NavDropdown alignRight show={show2} onMouseEnter={showDropdown2} onMouseLeave={hideDropdown2} title={<span style={{ color: props.location.pathname !== "/" ? 'black' : 'white' }}>Hola, {props.loggedUser.username}</span>} id="collasible-nav-dropdown">
-                            <NavDropdown.Item className="nav-dropdown" style={{ backgroundColor: 'white' }} >
-                                <Link to="/mis-servicios" style={{ color: "black", outline: 'none' }}>
+                            <NavDropdown.Item className={props.location.pathname !== '/' && 'white-item'} >
+                                <Link to="/mis-servicios" style={{ color: props.location.pathname === '/' ? "white" : 'black' }}/*style={{ color: "black", outline: 'none' }}*/>
                                     Mis publicaciones
                                 </Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item className="nav-dropdown" style={{ backgroundColor: 'white' }} /*para que al pulsar se quede el color de fondo blanco, no azul*/ >
-                                <Link to="/editar-perfil" style={{ color: "black" }}>
+                            <NavDropdown.Item className={props.location.pathname !== '/' && 'white-item'}  /* style={{ backgroundColor: 'white' }}para que al pulsar se quede el color de fondo blanco, no azul*/ >
+                                <Link to="/editar-perfil" style={{ color: props.location.pathname === '/' ? "white" : 'black' }}>
                                     Editar perfil
                                 </Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item className="nav-dropdown" style={{ backgroundColor: 'white' }} onClick={logOut}>
-                                <Link to="/" style={{ color: "black" }}>
+                            <NavDropdown.Item className={props.location.pathname !== '/' && 'white-item'}  onClick={logOut} style={{ color: props.location.pathname === '/' ? "white" : 'black' }}>
+                                <Link to="/" style={{ color: props.location.pathname === '/' ? "white" : 'black' }}>
                                     Cerrar sesión
                                 </Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Divider />
+                            {/* <NavDropdown.Divider /> */}
                             <NavDropdown.Item
-                                className="nav-dropdown"
+                                className={props.location.pathname !== '/' && 'white-item'}
                                 onClick={confirmDelete}
-                                style={{ backgroundColor: 'white' }}
+                                style={{ color: props.location.pathname === '/' ? "white" : 'black' }}
                             >
-                                <Link style={{ color: "black" }}>
+                                <Link style={{ color: props.location.pathname === '/' ? "white" : 'black' }}>
                                     Eliminar perfil
                                 </Link>
                             </NavDropdown.Item>

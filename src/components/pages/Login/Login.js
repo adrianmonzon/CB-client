@@ -40,7 +40,9 @@ class Login extends Component {
                 }
 
             })
+            // .catch(err => this.setState({ credentialsError: err.response.data.message === 'Missing credentials' ? 'Rellene todos los campos' : err.response.data.message }))
             .catch(err => this.setState({ credentialsError: err.response.data.message === 'Missing credentials' ? 'Rellene todos los campos' : err.response.data.message }))
+
     }
 
     render() {
@@ -56,7 +58,7 @@ class Login extends Component {
                             <h1>Iniciar sesión</h1>
                             <hr className="login-hr" />
                             <Form onSubmit={this.handleSubmit}>
-                                <Form.Group  controlId="username" /*className="w-50"*/>
+                                <Form.Group controlId="username" /*className="w-50"*/>
                                     {/* <Form.Label>Nombre de usuario</Form.Label> */}
                                     <Form.Control type="text" placeholder="Nombre de usuario" name="username" value={this.state.username} onChange={this.handleInputChange} />
                                 </Form.Group>
@@ -71,14 +73,14 @@ class Login extends Component {
                                         :
                                         null
                                 }
-                                <Button className="edit-button" type="submit">{!this.state.isLoggingIn ? 'Iniciar sesión' : <><p style={{ margin: '0 auto' }}>Iniciando sesión...  <Spinner variant="light" size="sm" animation="border" style={{marginBottom: '4px'}}/></p> </>}</Button>
+                                <Button className="edit-button" type="submit">{!this.state.isLoggingIn ? 'Iniciar sesión' : <><p style={{ margin: '0 auto' }}>Iniciando sesión...  <Spinner variant="light" size="sm" animation="border" style={{ marginBottom: '4px' }} /></p> </>}</Button>
                             </Form>
                             <small>¿No registrad@? Hágalo <Link to="/registro" className="login-link">AQUÍ</Link></small>
                         </Col>
                     </Row>
                     <Row className="text-center">
                         {/* <Col md={4}></Col> */}
-                        <Col md={{span: 8, offset: 2}}>
+                        <Col md={{ span: 8, offset: 2 }}>
                             <img src={hello} alt="Saludo" className="login-img" />
                         </Col>
                         {/* <Col md={4}></Col> */}

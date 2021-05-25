@@ -86,6 +86,7 @@ class OwnedServices extends Component {
                                 </Row>
 
                         }
+                        <hr />
                     </Col>
                 </Row>
                 <Alert className="service-added" show={this.state.showToast} handleToast={this.handleToast} toastText={this.state.toastText} />

@@ -29,22 +29,42 @@
     text-decoration: none;
 }
 
-.navbar-button a:hover {
-    /* background-color: red !important; */
+/* .navbar-button a:hover {
     text-decoration: underline;
-}
+} */
 
 /* #collasible-nav-dropdown {
     color: white !important;
 } */
+.dropdown-menu {
+    background-color: transparent;
+}
+
+.white-item {
+    background-color: white;
+}
+
+.white-item:hover {
+    background-color: white !important;
+}
+
+.navbar-button .dropdown-item {
+    background-color: transparent;
+} 
 
 .dropdown-item {
     font-size: 20px;
+    /* background-color: blue; */
+}
+
+.dropdown-item:hover {
+    background-color: transparent;
 }
 
 .nav-dropdown a {
     text-decoration: none;
-    background-color: #fff;
+    /* background-color: #fff; */
+    color: white;
 }
 
 .nav-dropdown a:hover {
