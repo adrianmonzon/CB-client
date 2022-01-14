@@ -15,6 +15,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import AuthServices from './../services/auth.service'
 import FooterPagePro from './layout/Footer/Footer';
 import TopArrow from './shared/TopArrow/TopArrow'
+import Contact from './pages/Contact/Contact'
 
 
 import './App.css'
@@ -55,6 +56,7 @@ class App extends Component {
           <Route path="/editar-perfil" render={props => this.state.loggedInUser ? <EditForm {...props} storeUser={this.setTheUser} user={this.state.loggedInUser} /> : <Redirect to="/editar-perfil" />} />
           <Route path="/mis-servicios" render={props => this.state.loggedInUser ? <OwnedServices loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/mis-servicios" />} />
           <Route path="/editar-servicio/:service_id" render={props => this.state.loggedInUser ? <EditService loggedUser={this.state.loggedInUser} {...props} /> : <Redirect to="/editar-servicio/:service_id" />} />
+          <Route path="/contacto" render={() => <Contact />} />
         
         </Switch>
         <FooterPagePro location={this.pathname}/>

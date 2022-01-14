@@ -8,7 +8,7 @@ const FooterPagePro = (props) => {
         <MDBFooter className={props.location.pathname === "/" ? "index-footer" : "footer"}>
             <div className="footer-copyright text-center py-1">
                 <MDBContainer fluid>
-                    &copy; {new Date().getFullYear()} Copyright: Adrián Monzón
+                    <a className="footer" href="/contacto">Contacto</a>  &copy; {new Date().getFullYear()} Copyright: Adrián Monzón 
                 </MDBContainer>
             </div>
         </MDBFooter>

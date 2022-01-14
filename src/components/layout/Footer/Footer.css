@@ -7,6 +7,10 @@
     right: 0px;
 }
 
+.footer:hover {
+    color: #C7C3BA;
+}
+
 .index-footer {
     background-color: black;
     color: #C7C3BA;

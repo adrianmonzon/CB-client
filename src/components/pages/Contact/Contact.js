@@ -10,10 +10,9 @@ class ContactForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            sender: `"Caixabank Acción Social (No responder a este correo) " <${process.env.REACT_APP_HELP_EMAIL}>`, //pendiente crear correo Caixabank para dejar de usar ese
-            contactEmail: this.props.contactUser.email,
-            name: this.props.loggedUser.name,
-            subject: `${this.props.loggedUser.name} (${this.props.loggedUser.email}) quiere ayudarle con: ${this.props.serviceName}`,
+            contactEmail: process.env.REACT_APP_HELP_EMAIL, //a quién va dirigido el correo, en este caso a la misma cuenta de empresa ya que el correo es para nosotros mismos de parte de los usuarios que preguntan
+            sender: '',
+            subject: '',
             message: '',
         }
         this.mailService = new MailService()
@@ -58,20 +57,20 @@ class ContactForm extends Component {
                 </Row> */}
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formGridName">
-                            <Form.Label>De</Form.Label>
-                            <Form.Control type="text" placeholder="Introduce tu nombre" name="name" readOnly value={this.state.name} />
+                        <Form.Group as={Col} controlId="formGridSender">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="email" placeholder="Introduce tu email" name="sender" value={this.state.sender} onChange={this.handleInputChange}  />
                         </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridEmail">
-                            <Form.Label>Para</Form.Label>
-                            <Form.Control type="email" /*placeholder="Introducir email de destino"*/ name="contactEmail" readOnly /*readOnly={this.state.contactEmail !== undefined ? true : false}*/ value={this.state.contactEmail} />
-                        </Form.Group>
+                        {/* <Form.Group controlId="formGridName">
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type="text" name="name" placeholder="Introduce tu email" value={this.state.name} onChange={this.handleInputChange} />
+                        </Form.Group> */}
                     </Form.Row>
                     <Form.Group controlId="formGridSubject">
                         <Form.Label>Asunto</Form.Label>
-                        <Form.Control as="textarea" name="subject" rows={2} value={this.state.subject} onChange={this.handleInputChange} />
+                        <Form.Control as="textarea" name="subject" rows={1} value={this.state.subject} onChange={this.handleInputChange} />
                     </Form.Group>
+
                     <Form.Group controlId="formGridAddress2">
                         <Form.Label>Mensaje</Form.Label>
                         <Form.Control as="textarea" rows={3} name="message" value={this.state.message} onChange={this.handleInputChange} />
