@@ -6,7 +6,7 @@ body {
     font-family: 'Manrope', sans-serif;
     /* font-family: 'Noto Sans SC', sans-serif; */
     font-weight: 200;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 body:not(.Home) {

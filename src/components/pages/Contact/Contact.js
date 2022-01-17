@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Col, Button } from 'react-bootstrap'
+import { Form, Col, Button, Row } from 'react-bootstrap'
 import MailService from './../../../services/mail.service'
 import ServicesService from './../../../services/services.service'
 import swal from 'sweetalert'
+import './Contact.css'
 // import { useHistory } from 'react-router-dom'
 
 class ContactForm extends Component {
@@ -49,34 +50,37 @@ class ContactForm extends Component {
 
     render() {
         return (
-            <section>
-                {/* <Row>
+            <section className='container contact-bg'>
+                <Row>
                     <Col md={{ span: 6, offset: 3 }}>
-                        <h3>Contacta con {this.state.contactName}</h3>
-                    </Col>
-                </Row> */}
-                <Form onSubmit={this.handleSubmit}>
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridSender">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control type="email" placeholder="Introduce tu email" name="sender" value={this.state.sender} onChange={this.handleInputChange}  />
-                        </Form.Group>
-                        {/* <Form.Group controlId="formGridName">
+                        <div className="title">
+                            <h1>Contacta con nosotros</h1>
+                            <hr />
+                        </div>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Row>
+                                <Form.Group as={Col} controlId="formGridSender">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="email" placeholder="Introduce tu email" name="sender" value={this.state.sender} onChange={this.handleInputChange} />
+                                </Form.Group>
+                                {/* <Form.Group controlId="formGridName">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type="text" name="name" placeholder="Introduce tu email" value={this.state.name} onChange={this.handleInputChange} />
                         </Form.Group> */}
-                    </Form.Row>
-                    <Form.Group controlId="formGridSubject">
-                        <Form.Label>Asunto</Form.Label>
-                        <Form.Control as="textarea" name="subject" rows={1} value={this.state.subject} onChange={this.handleInputChange} />
-                    </Form.Group>
+                            </Form.Row>
+                            <Form.Group controlId="formGridSubject">
+                                <Form.Label>Asunto</Form.Label>
+                                <Form.Control as="textarea" name="subject" rows={1} value={this.state.subject} onChange={this.handleInputChange} />
+                            </Form.Group>
 
-                    <Form.Group controlId="formGridAddress2">
-                        <Form.Label>Mensaje</Form.Label>
-                        <Form.Control as="textarea" rows={3} name="message" value={this.state.message} onChange={this.handleInputChange} />
-                    </Form.Group>
-                    <Button className="main-button btn-light" type="submit" onClick={this.confirmMessage}>Contactar</Button>
-                </Form>
+                            <Form.Group controlId="formGridAddress2">
+                                <Form.Label>Mensaje</Form.Label>
+                                <Form.Control as="textarea" rows={3} name="message" value={this.state.message} onChange={this.handleInputChange} />
+                            </Form.Group>
+                            <Button className="main-button btn-light" type="submit" onClick={this.confirmMessage}>Contactar</Button>
+                        </Form>
+                    </Col>
+                </Row>
             </section>
         )
     }
